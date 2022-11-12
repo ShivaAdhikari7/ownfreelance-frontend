@@ -1,5 +1,7 @@
+import Signup from 'pages/Signup/Signup';
+
 const App = () => {
-  return <div>OwnFreelance</div>;
+  return <Signup />;
 };
 
 export default App;
