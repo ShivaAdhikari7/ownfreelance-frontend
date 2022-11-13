@@ -1,0 +1,54 @@
+.navbar-style {
+  padding: 2rem 1rem;
+  box-shadow: 0 0.1rem 0rem $primary-tint-6;
+}
+.navbar-text {
+  color: $primary-color;
+  font-size: 3rem;
+}
+.section-choice {
+  width: 90rem;
+  padding: 2rem 1.8rem;
+  margin: 6rem auto;
+  border: 0.5px solid black;
+  height: 70vh;
+  border-radius: 1rem;
+}
+.main-heading {
+  font-size: 3.6rem;
+  margin: 1rem auto;
+  text-align: center;
+}
+.choice {
+  width: 40rem;
+  margin: 10rem auto 5rem auto;
+  border: 0.5px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  cursor: pointer;
+  border-radius: 0.5rem;
+}
+.client-img {
+  width: 12rem;
+}
+.freelancer-img {
+  width: 20rem;
+}
+.choice-img__description {
+  margin-top: 3.2rem;
+  font-size: 2rem;
+  font-weight: $font-weight-bold;
+}
+.choice-btn {
+  background-color: $primary-color;
+  width: 40%;
+  margin: 0 auto;
+  border-radius: 100rem;
+}
+.btn-round {
+  color: white;
+  font-size: 2rem;
+  padding: 1.6rem 2rem;
+}
