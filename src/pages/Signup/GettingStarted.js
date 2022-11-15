@@ -1,19 +1,29 @@
-import { useState } from "react";
-import Button from "components/Button/Button";
+import { useNavigate } from 'react-router-dom';
 
-import freeLancerImg from "assets/images/freelancer.png";
+import Button from 'components/Button/Button';
+import Navbar from 'components/Navbar/Navbar';
 
-import clientImg from "assets/images/client.png";
-import RegistrationNavbar from "components/Navbar/RegistrationNavbar";
-
+import freeLancerImg from 'assets/images/freelancer.png';
+import clientImg from 'assets/images/client.png';
 const GettingStarted = () => {
+  const navigate = useNavigate();
+
+  const navigateToSignup = () => {
+    navigate('/add/title');
+  };
+
   return (
-    <div>
-      <RegistrationNavbar />
-      <div className="container overflow-hidden section-choice choice-container">
+    <>
+      <Navbar />
+      <div className="container overflow-hidden section-choice">
         <h1 className="main-heading">Join as a client or Freelancer</h1>
         <div className="row text-center row-cols-1 row-cols-md-1 row-cols-lg-2 gx-5 gy-5">
-          <div className="col-sm-4 choice-client choice">
+          <div
+            role="button"
+            onClick={navigateToSignup}
+            tabIndex={0}
+            className="choice-client choice"
+          >
             <img
               className="client-img choice-img"
               src={clientImg}
@@ -23,7 +33,12 @@ const GettingStarted = () => {
               I'm a client, Hiring for a project
             </p>
           </div>
-          <div className="col-sm-4 choice-freelancer choice">
+          <div
+            role="button"
+            onClick={navigateToSignup}
+            tabIndex={0}
+            className="choice-freelancer choice"
+          >
             <img
               className="freelancer-img choice-img"
               src={freeLancerImg}
@@ -48,7 +63,7 @@ const GettingStarted = () => {
           </a>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

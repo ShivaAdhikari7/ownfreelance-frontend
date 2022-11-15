@@ -1,0 +1,9 @@
+.experience-form{
+  gap: 2.4rem;
+  .location-input-container,.date-input-container{
+    gap: 4.8rem;
+    .input-container{
+      flex-grow:1;
+    }
+  }
+}

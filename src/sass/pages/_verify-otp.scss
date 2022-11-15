@@ -1,0 +1,55 @@
+.verify-otp-container {
+  padding: 9.6rem 2.4rem;
+  .verify-otp-title {
+    font-size: 2.4rem;
+    letter-spacing: -0.05rem;
+  }
+
+  .verify-otp-description {
+    font-size: 1.8rem;
+    margin-bottom: 5.2rem;
+  }
+
+  .otp-input {
+    margin: 0rem auto 3.2rem auto;
+  }
+
+  .otp-input-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6.4rem;
+    margin-bottom: 4.8rem;
+
+    input {
+      font-size: 2.4rem;
+      color: $black-tint-2;
+
+      &::-webkit-inner-spin-button {
+        display: none;
+      }
+
+      @include size(6.4rem);
+      text-align: center;
+    }
+  }
+
+  .btn-validate-otp {
+    background-color: $primary-color;
+    padding: 2rem 4.8rem;
+    color: $white;
+    font-size: 2rem;
+
+    &:hover {
+      background-color: $primary-tint-1;
+    }
+  }
+
+  .otp-not-received-text {
+    font-size: 1.6rem;
+
+    a:hover {
+      color: $black-tint-1;
+    }
+  }
+}

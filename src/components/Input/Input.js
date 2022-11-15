@@ -9,6 +9,7 @@ const Input = ({
   value,
   onChange,
   className,
+  disabled,
 }) => {
   return (
     <div className="input-container d-flex flex-column">
@@ -23,6 +24,7 @@ const Input = ({
         value={value}
         onChange={onChange}
         className={`d-inline-block ${className && className}`}
+        disabled={disabled && disabled}
       />
     </div>
   );

@@ -1,0 +1,24 @@
+.otp-success-page {
+    gap: 2.4rem;
+    margin:8rem auto 4.8rem auto;
+
+    img{
+        max-width: 20%;
+    }
+
+    .success-text{
+        font-size: 3rem;
+        font-weight: $font-weight-bold;
+        letter-spacing: -0.05rem;
+    }
+
+    .btn-getstarted{
+        background-color: $grey2-900;
+        color: $white;
+        font-size: 1.8rem;
+
+        &:hover{
+            background-color: $grey2-800;
+        }
+    }
+}
