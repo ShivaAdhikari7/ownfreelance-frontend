@@ -1,5 +1,34 @@
+import { Routes, Route } from 'react-router-dom';
+
+import Signup from 'pages/Signup/Signup';
+
+import GettingStarted from 'pages/Signup/GettingStarted';
+import EducationForm from 'pages/FreelancerRegistration/EducationForm';
+import FreelancerPreferences from 'pages/FreelancerRegistration/FreelancerPreferences';
+import WorkExperience from 'pages/FreelancerRegistration/WorkExperienceForm';
+import VerifyOtp from 'pages/OTP/VerifyOtp';
+import SuccessfulOtp from 'pages/OTP/SuccessfulOtp';
+import TitleAdd from 'pages/FreelancerRegistration/TitleAdd';
+import SkillsAdd from 'pages/FreelancerRegistration/SkillsAdd';
+import BioAdd from 'pages/FreelancerRegistration/BioAdd';
+import HourlyRateAdd from 'pages/FreelancerRegistration/HourlyRateAdd';
+
 const App = () => {
-  return <div>OwnFreelance</div>;
+  return (
+    <Routes>
+      <Route path="/otp/success" element={<SuccessfulOtp />} />
+      <Route path="/otp/verify" element={<VerifyOtp />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/getstarted" element={<GettingStarted />} />
+      <Route path="/add/title" element={<TitleAdd />} />
+      <Route path="/add/work/experience" element={<WorkExperience />} />
+      <Route path="/add/education/qualification" element={<EducationForm />} />
+      <Route path="/add/skills" element={<SkillsAdd />} />
+      <Route path="/add/bio" element={<BioAdd />} />
+      <Route path="/add/rate" element={<HourlyRateAdd />} />
+      <Route path="/add/preferences" element={<FreelancerPreferences />} />
+    </Routes>
+  );
 };
 
 export default App;

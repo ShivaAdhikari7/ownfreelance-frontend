@@ -1,0 +1,20 @@
+.input-container {
+  gap: 0.8rem;
+  label {
+    font-size: 1.6rem;
+    font-weight: $font-weight-bold;
+    letter-spacing: -0.025rem;
+  }
+
+  input {
+    padding: 1.2rem;
+    font-size: 1.4rem;
+    border-radius: 1.2rem;
+    border: 0.1rem solid $grey2-400;
+
+    &:focus {
+      outline: none;
+      border: 0.1rem solid transparent;
+    }
+  }
+}
