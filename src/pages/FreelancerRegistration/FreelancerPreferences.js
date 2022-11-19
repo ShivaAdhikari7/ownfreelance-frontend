@@ -1,4 +1,6 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 import Navbar from 'components/Navbar/Navbar';
 import Input from 'components/Input/Input';
@@ -14,20 +16,54 @@ const FreelancerPreferences = () => {
     educationQualifications,
     skills,
     hourlyRate,
-    preferences,
+    setProfileUrl,
   } = useContext(FreelancerRegistrationContext);
+  const navigate = useNavigate();
 
-  const preferencesFormSubmitHandler = e => {
+  const [language, setLanguage] = useState('');
+  const [phoneNo, setPhoneNo] = useState('');
+  const [profileImg, setProfileImg] = useState();
+
+  const languageChangeHandler = e => {
+    setLanguage(e.target.value);
+  };
+
+  const phoneNoChangeHandler = e => {
+    setPhoneNo(e.target.value);
+  };
+
+  const profileImgChangeHandler = e => {
+    setProfileImg(e.target.files[0]);
+    setProfileUrl(URL.createObjectURL(e.target.files[0]));
+  };
+
+  const preferencesFormSubmitHandler = async e => {
     e.preventDefault();
-    console.log({
-      bio,
-      title,
-      workExperiences,
-      educationQualifications,
-      skills,
-      hourlyRate,
-      preferences,
+
+    const data = new FormData();
+
+    data.append('userType', 'Freelancer');
+    data.append('jobTitle', title);
+    data.append('workExperiences', JSON.stringify(workExperiences));
+    data.append('educationDetails', JSON.stringify(educationQualifications));
+    data.append('skills', JSON.stringify(skills));
+    data.append('bio', bio);
+    data.append('hourlyRate', hourlyRate);
+    data.append(
+      'preferences',
+      JSON.stringify({ language, phoneNumber: phoneNo })
+    );
+    data.append('img', profileImg);
+
+    const res = await axios.post('http://localhost:90/freelancer/add', data, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('__token__')}`,
+      },
     });
+
+    if (res.status === 200) {
+      navigate('/profile/submit');
+    }
   };
 
   return (
@@ -50,6 +86,7 @@ const FreelancerPreferences = () => {
               type="text"
               placeholder="Ex: English"
               name="language"
+              onChange={languageChangeHandler}
             />
 
             <Input
@@ -57,7 +94,8 @@ const FreelancerPreferences = () => {
               label="Your phone Number:"
               type="text"
               placeholder="Ex: 98......."
-              name="service"
+              name="number"
+              onChange={phoneNoChangeHandler}
             />
 
             <Input
@@ -66,6 +104,7 @@ const FreelancerPreferences = () => {
               label="Add your profile photo:"
               type="file"
               name="picture"
+              onChange={profileImgChangeHandler}
             />
           </div>
 

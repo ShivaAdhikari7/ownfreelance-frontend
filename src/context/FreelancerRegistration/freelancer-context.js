@@ -15,6 +15,8 @@ const FreelancerRegistrationContext = createContext({
   setHourlyRate: rate => {},
   preferences: {},
   setPreferences: preferences => {},
+  profileUrl: '',
+  setProfileUrl: url => {},
 });
 
 export const FreelancerRegistrationProvider = ({ children }) => {
@@ -25,6 +27,7 @@ export const FreelancerRegistrationProvider = ({ children }) => {
   const [bio, setBio] = useState([]);
   const [hourlyRate, setHourlyRate] = useState('');
   const [preferences, setPreferences] = useState({});
+  const [profileUrl, setProfileUrl] = useState('');
 
   const contextValues = {
     title,
@@ -41,6 +44,8 @@ export const FreelancerRegistrationProvider = ({ children }) => {
     setHourlyRate,
     preferences,
     setPreferences,
+    profileUrl,
+    setProfileUrl,
   };
 
   return (
