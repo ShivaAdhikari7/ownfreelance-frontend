@@ -12,13 +12,16 @@ import TitleAdd from 'pages/FreelancerRegistration/TitleAdd';
 import SkillsAdd from 'pages/FreelancerRegistration/SkillsAdd';
 import BioAdd from 'pages/FreelancerRegistration/BioAdd';
 import HourlyRateAdd from 'pages/FreelancerRegistration/HourlyRateAdd';
+import Headline from 'pages/ClientRegistration/HeadlineAdd';
+import Skills from 'pages/ClientRegistration/SkillsAdd';
+import Scope from 'pages/ClientRegistration/ScopeAdd';
 
 const App = () => {
   return (
     <Routes>
       <Route path="/otp/success" element={<SuccessfulOtp />} />
       <Route path="/otp/verify" element={<VerifyOtp />} />
-      <Route path="/signup" element={<Signup />} />
+      <Route path="" element={<Signup />} />
       <Route path="/getstarted" element={<GettingStarted />} />
       <Route path="/add/title" element={<TitleAdd />} />
       <Route path="/add/work/experience" element={<WorkExperience />} />
@@ -27,6 +30,12 @@ const App = () => {
       <Route path="/add/bio" element={<BioAdd />} />
       <Route path="/add/rate" element={<HourlyRateAdd />} />
       <Route path="/add/preferences" element={<FreelancerPreferences />} />
+      <Route path="/add/headlines" element={<Headline />} />
+      <Route path="/add/client/skills" element={<Skills />} />
+      <Route path="/add/scopes" element={<Scope />} />
+
+
+
     </Routes>
   );
 };

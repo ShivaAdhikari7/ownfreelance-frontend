@@ -1,0 +1,16 @@
+#headline-flex{
+    width: 60rem;
+    margin: 10rem auto 5rem auto;
+    //border: 0.5px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+    border-radius: 0.5rem;
+
+}
+
+.headline-color{
+    color:$primary-color;
+}
