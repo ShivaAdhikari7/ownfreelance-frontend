@@ -1,7 +1,13 @@
 import Input from "components/Input/Input";
 import Button from "components/Button/Button";
 import Navbar from "components/Navbar/Navbar";
+import { useNavigate } from "react-router-dom";
 const Skills = () => {
+  const navigate = useNavigate();
+
+  const navigateToScope = () => {
+    navigate('/add/client/scopes');
+  };
   return (
     <>
       <Navbar />
@@ -16,7 +22,7 @@ const Skills = () => {
         </p>
         <form >
           <Input
-            
+              
             className="mb-5"
             type="text"
             placeholder="Web Designer | React developer"
@@ -35,6 +41,7 @@ const Skills = () => {
         </form>
         <div className="text-end">
           <Button
+          onClick={navigateToScope}
             className="btn btn-registration btn-round"
             label="Next"
           />
