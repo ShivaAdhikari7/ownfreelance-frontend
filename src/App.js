@@ -15,6 +15,7 @@ import HourlyRateAdd from 'pages/FreelancerRegistration/HourlyRateAdd';
 import Headline from 'pages/ClientRegistration/HeadlineAdd';
 import Skills from 'pages/ClientRegistration/SkillsAdd';
 import Scope from 'pages/ClientRegistration/ScopeAdd';
+import Login from 'pages/UserLogin/login';
 
 const App = () => {
   return (
@@ -33,6 +34,9 @@ const App = () => {
       <Route path="/add/headlines" element={<Headline />} />
       <Route path="/add/client/skills" element={<Skills />} />
       <Route path="/add/client/scopes" element={<Scope />} />
+
+      <Route path="/user/login" element={<Login />} />
+
 
 
 
