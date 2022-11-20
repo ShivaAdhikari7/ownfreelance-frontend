@@ -15,7 +15,9 @@ import HourlyRateAdd from 'pages/FreelancerRegistration/HourlyRateAdd';
 import Headline from 'pages/ClientRegistration/HeadlineAdd';
 import Skills from 'pages/ClientRegistration/SkillsAdd';
 import Scope from 'pages/ClientRegistration/ScopeAdd';
-import Login from 'pages/UserLogin/login';
+import BudgetAdd from 'pages/ClientRegistration/BudgetAdd';
+import Budget from 'pages/ClientRegistration/BudgetAdd';
+import Description from 'pages/ClientRegistration/DescriptionAdd';
 
 const App = () => {
   return (
@@ -31,11 +33,15 @@ const App = () => {
       <Route path="/add/bio" element={<BioAdd />} />
       <Route path="/add/rate" element={<HourlyRateAdd />} />
       <Route path="/add/preferences" element={<FreelancerPreferences />} />
-      <Route path="/add/headlines" element={<Headline />} />
+      <Route path="/add/client/headlines" element={<Headline />} />
       <Route path="/add/client/skills" element={<Skills />} />
       <Route path="/add/client/scopes" element={<Scope />} />
+      <Route path="/add/client/budget" element={<Budget/>} />
+      <Route path="/add/client/description" element={<Description/>} />
 
-      <Route path="/user/login" element={<Login />} />
+
+
+      {/* <Route path="/user/login" element={<Login />} /> */}
 
 
 
