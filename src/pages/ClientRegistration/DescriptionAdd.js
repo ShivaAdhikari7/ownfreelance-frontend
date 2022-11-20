@@ -21,17 +21,28 @@ const Description = () => {
         <form >
         <Input
             label="Add a title"
-            className="mb-5"
+            placeholder="UI/UX designer"
+            className="mb-3"
             type="text"           
           />
 
          <TextArea
          label={"Describe your job"}
-         className="mb-5"
+         placeholder="Already have a job description? place it here!"
+
+         className="mb-3"
          type="text"
          />
          
         </form>
+        <div>
+                <input type="file"
+                className="fs-3 mt-3"
+                //  onChange={this.onFileChange}
+                 />
+                 <h5 className="mt-3">Max file size: 100 MB</h5>
+           
+            </div>
         <div className="text-end">
           <Button
             className="btn btn-registration btn-round"
