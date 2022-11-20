@@ -21,30 +21,80 @@ const Scope = () => {
         <p className="page-description mb-5">
         Consider the size of your project and the time it will take.
         </p>
-        <div>       
+        <div>  
+        <div className="mt-5">
+      <h4>What is the size of your project?</h4>
+     </div>     
       <div class="form-check mt-4">
   <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
- <label class="form-check-label" for="flexRadioDefault1">
+ <h5 class="form-check-label" for="flexRadioDefault1">
    Large
- </label>
- <h5>Longer term or complex initiatives (ex. design and build a full website)</h5>
+ </h5>
+ <label>Longer term or complex initiatives (ex. design and build a full website)</label>
   </div>
 <div class="form-check mt-4">
   <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked/>
-  <label class="form-check-label" for="flexRadioDefault2">
+  <h5 class="form-check-label" for="flexRadioDefault2">
          Medium
-  </label>
-   <h5>Well-defined projects (ex. a landing page)</h5>  
+  </h5>
+   <label>Well-defined projects (ex. a landing page)</label>  
  </div>
  <div class="form-check mt-4">
    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked/>
-  <label class="form-check-label" for="flexRadioDefault2">
+  <h5 class="form-check-label" for="flexRadioDefault2">
      Small
-   </label>
-  <h5>Quick and straightforward tasks (ex. update text and images on a webpage)</h5>
-   </div>
-                      
+   </h5>
+  <label>Quick and straightforward tasks (ex. update text and images on a webpage)</label>
+   </div>              
      </div>
+     <div className="mt-5">
+      <h4>How long will your work take?</h4>
+     </div>
+           
+      <div class="form-check mt-4">
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+ <h5 class="form-check-label" for="flexRadioDefault1">
+   more than 6 months
+ </h5>
+  </div>
+<div class="form-check mt-4">
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked/>
+  <h5 class="form-check-label" for="flexRadioDefault2">
+         3 to 6 months
+  </h5>
+ </div>
+ <div class="form-check mt-4">
+   <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked/>
+  <h5 class="form-check-label" for="flexRadioDefault2">
+     1 to 3 months
+   </h5>
+   </div>  
+
+   <div className="mt-5">
+      <h4>What level of experience will it need?</h4>
+     </div>
+        
+      <div class="form-check mt-4">
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+ <h5 class="form-check-label" for="flexRadioDefault1">
+   Entry level
+ </h5>
+ <label>Looking for someone relatively new to this field</label>
+  </div>
+<div class="form-check mt-4">
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked/>
+  <h5 class="form-check-label" for="flexRadioDefault2">
+         Intermediate level
+  </h5>
+   <label>Looking for substantial experience in this field</label>  
+ </div>
+ <div class="form-check mt-4">
+   <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked/>
+  <h5 class="form-check-label" for="flexRadioDefault2">
+     Expert level
+   </h5>
+  <label>Looking for comprehensive and deep expertise in this field</label>
+   </div>      
 
         <div className="text-end">
           <Button
