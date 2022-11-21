@@ -18,6 +18,7 @@ import Scope from 'pages/ClientRegistration/ScopeAdd';
 import BudgetAdd from 'pages/ClientRegistration/BudgetAdd';
 import Budget from 'pages/ClientRegistration/BudgetAdd';
 import Description from 'pages/ClientRegistration/DescriptionAdd';
+import Login from 'pages/UserLogin/UserLogin';
 
 const App = () => {
   return (
@@ -25,6 +26,9 @@ const App = () => {
       <Route path="/otp/success" element={<SuccessfulOtp />} />
       <Route path="/otp/verify" element={<VerifyOtp />} />
       <Route path="" element={<Signup />} />
+      <Route path="user/login" element={<Login />} />
+
+
       <Route path="/getstarted" element={<GettingStarted />} />
       <Route path="/add/title" element={<TitleAdd />} />
       <Route path="/add/work/experience" element={<WorkExperience />} />

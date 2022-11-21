@@ -1,0 +1,37 @@
+#text-login{
+    text-align: center;
+}
+
+#flex-login{
+  margin-left: 300rem;
+}
+
+.btn-apple{
+    background-color: gray;
+    color: $white;
+    padding: 1.0rem 1.0rem;
+    font-size: 1.6rem;
+    margin-top: 1.0rem;
+    width: 75%;
+
+    &:hover {
+      background-color: white;
+      color: black;
+      border-color: antiquewhite;
+    }
+}
+
+.btn-google{
+    background-color: rgb(64, 156, 182);
+    color: $white;
+    padding: 1.0rem 1.0rem;
+    font-size: 1.6rem;
+    margin-top: 1.0rem;
+    width: 75%;
+
+    &:hover {
+      background-color: white;
+      color: black;
+      border-color: antiquewhite;
+    }
+}
