@@ -10,6 +10,7 @@ const Input = ({
   onChange,
   className,
   disabled,
+  autoComplete,
 }) => {
   return (
     <div className="input-container d-flex flex-column">
@@ -23,8 +24,9 @@ const Input = ({
         max={max && max}
         value={value}
         onChange={onChange}
-        className={`d-inline-block ${className && className}`}
+        className={`d-inline-block ${className ? className : ''}`}
         disabled={disabled && disabled}
+        autoComplete={autoComplete ? autoComplete : 'off'}
       />
     </div>
   );

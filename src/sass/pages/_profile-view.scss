@@ -1,0 +1,113 @@
+.profile-view-section {
+  margin: 4.8rem 0 4.8rem 9.6rem !important;
+  gap: 3.2rem;
+}
+
+.preview-description {
+  width: 50%;
+
+  .preview-user-greet {
+    font-size: 2rem;
+    font-weight: $font-weight-bold;
+  }
+
+  .preview-user-msg {
+    font-size: 1.4rem;
+    margin-bottom: 3.2rem;
+  }
+
+  .btn-profile-submit {
+    font-size: 1.6rem;
+  }
+}
+
+.preview-image {
+  width: 32%;
+}
+
+/* Professional detail section */
+.personal-detail {
+  gap: 1.6rem;
+
+  .profile-image {
+    img {
+      @include size(16rem);
+
+      border-radius: 50%;
+    }
+  }
+
+  .user-name {
+    font-size: 2rem;
+  }
+
+  .user-location {
+    font-size: 1.4rem;
+  }
+}
+
+.profession-detail {
+  .profession-title {
+    font-size: 2rem;
+  }
+
+  .profession-description {
+    font-size: 1.4rem;
+    line-height: 1.5;
+  }
+
+  .freelance-rate {
+    font-size: 1.8rem;
+    font-weight: $font-weight-bold;
+  }
+}
+
+.skill {
+  background-color: #ccc;
+  font-size: 1.6rem;
+  border-radius: 10rem;
+}
+
+.work-details {
+  .work-detail {
+    font-size: 2rem;
+    font-weight: $font-weight-bold;
+  }
+
+  .work-duration {
+    font-size: 1.4rem;
+  }
+
+  .work-description {
+    font-size: 1.6rem;
+    line-height: 1.5;
+  }
+}
+
+.education-details {
+  .college-name {
+    font-size: 2rem;
+  }
+
+  .field-type {
+    font-size: 1.4rem;
+  }
+
+  .education-description {
+    font-size: 1.6rem;
+    line-height: 1.5;
+  }
+}
+
+.preview-section {
+  box-shadow: 0 0 0 0.12rem rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.profile-view-heading {
+  font-size: 2.4rem;
+  padding: 1.2rem 2.4rem;
+  border-bottom: 0.1rem solid $grey1-500;
+  background-color: $grey1-600;
+}

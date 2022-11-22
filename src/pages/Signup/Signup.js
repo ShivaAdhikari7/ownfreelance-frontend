@@ -42,6 +42,7 @@ const Signup = () => {
     e.preventDefault();
 
     if (password !== confirmPassword) return;
+    if (!isPrivacyChecked) return;
 
     const data = {
       firstName,
@@ -54,11 +55,13 @@ const Signup = () => {
     const res = await axios.post('http://localhost:90/user/register', data);
     localStorage.setItem('__token__', res.data.token);
 
-    await axios.post('http://localhost:90/otp/send', null, {
+    const response = await axios.post('http://localhost:90/otp/send', null, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('__token__')}`,
       },
     });
+
+    console.log(response);
 
     navigate('/otp/verify', { state: { email } });
   };
@@ -116,6 +119,7 @@ const Signup = () => {
                   placeholder="Enter Password"
                   name="password"
                   onChange={passwordChangeHandler}
+                  autoComplete="on"
                 />
 
                 <Input
@@ -125,6 +129,7 @@ const Signup = () => {
                   placeholder="Enter your password again"
                   name="confirmPassword"
                   onChange={confirmPasswordChangeHandler}
+                  autoComplete="on"
                 />
 
                 <Input
