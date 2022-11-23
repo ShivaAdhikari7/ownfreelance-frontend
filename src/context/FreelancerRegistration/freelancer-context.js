@@ -1,6 +1,8 @@
 import { createContext, useState } from 'react';
 
 const FreelancerRegistrationContext = createContext({
+  userType: '',
+  setUserType: type => {},
   title: '',
   setTitle: title => {},
   workExperiences: [],
@@ -20,6 +22,7 @@ const FreelancerRegistrationContext = createContext({
 });
 
 export const FreelancerRegistrationProvider = ({ children }) => {
+  const [userType, setUserType] = useState('');
   const [title, setTitle] = useState('');
   const [workExperiences, setWorkExperiences] = useState([]);
   const [educationQualifications, setEducationQualifications] = useState([]);
@@ -30,6 +33,8 @@ export const FreelancerRegistrationProvider = ({ children }) => {
   const [profileUrl, setProfileUrl] = useState('');
 
   const contextValues = {
+    userType,
+    setUserType,
     title,
     setTitle,
     workExperiences,

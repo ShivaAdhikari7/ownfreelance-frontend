@@ -17,6 +17,7 @@ const FreelancerPreferences = () => {
     skills,
     hourlyRate,
     setProfileUrl,
+    
   } = useContext(FreelancerRegistrationContext);
   const navigate = useNavigate();
 

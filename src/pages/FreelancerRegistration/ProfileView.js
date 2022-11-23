@@ -1,4 +1,6 @@
 import { useContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import axios from 'axios';
 
 import Navbar from 'components/Navbar/Navbar';
@@ -9,6 +11,7 @@ import profileCompleteImg from 'assets/images/profile_complete.png';
 
 const ProfileView = () => {
   const [profileDetail, setProfileDetail] = useState({});
+  const navigate = useNavigate();
 
   const freelancerCtx = useContext(FreelancerRegistrationContext);
   const {
@@ -36,7 +39,12 @@ const ProfileView = () => {
   });
 
   const submitProfile = () => {
-    console.log(skills);
+    navigate('/verification_successful', {
+      state: {
+        dashboard: { label: 'Visit my dashboard' },
+        search: { label: 'Search for projects' },
+      },
+    });
   };
 
   return (
