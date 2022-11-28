@@ -1,23 +1,24 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route } from "react-router-dom";
 
-import Signup from 'pages/Signup/Signup';
+import Signup from "pages/Signup/Signup";
 
-import GettingStarted from 'pages/Signup/GettingStarted';
-import EducationForm from 'pages/FreelancerRegistration/EducationForm';
-import FreelancerPreferences from 'pages/FreelancerRegistration/FreelancerPreferences';
-import WorkExperience from 'pages/FreelancerRegistration/WorkExperienceForm';
-import VerifyOtp from 'pages/OTP/VerifyOtp';
-import SuccessfulOtp from 'pages/OTP/SuccessfulOtp';
-import TitleAdd from 'pages/FreelancerRegistration/TitleAdd';
-import SkillsAdd from 'pages/FreelancerRegistration/SkillsAdd';
-import BioAdd from 'pages/FreelancerRegistration/BioAdd';
-import HourlyRateAdd from 'pages/FreelancerRegistration/HourlyRateAdd';
-import Headline from 'pages/ClientRegistration/HeadlineAdd';
-import Skills from 'pages/ClientRegistration/SkillsAdd';
-import Scope from 'pages/ClientRegistration/ScopeAdd';
-import BudgetAdd from 'pages/ClientRegistration/BudgetAdd';
-import Budget from 'pages/ClientRegistration/BudgetAdd';
-import Description from 'pages/ClientRegistration/DescriptionAdd';
+import HomePage from "pages/HomePage/HomePage";
+import GettingStarted from "pages/Signup/GettingStarted";
+import EducationForm from "pages/FreelancerRegistration/EducationForm";
+import FreelancerPreferences from "pages/FreelancerRegistration/FreelancerPreferences";
+import WorkExperience from "pages/FreelancerRegistration/WorkExperienceForm";
+import VerifyOtp from "pages/OTP/VerifyOtp";
+import SuccessfulOtp from "pages/OTP/SuccessfulOtp";
+import TitleAdd from "pages/FreelancerRegistration/TitleAdd";
+import SkillsAdd from "pages/FreelancerRegistration/SkillsAdd";
+import BioAdd from "pages/FreelancerRegistration/BioAdd";
+import HourlyRateAdd from "pages/FreelancerRegistration/HourlyRateAdd";
+import Headline from "pages/ClientRegistration/HeadlineAdd";
+import Skills from "pages/ClientRegistration/SkillsAdd";
+import Scope from "pages/ClientRegistration/ScopeAdd";
+import BudgetAdd from "pages/ClientRegistration/BudgetAdd";
+import Budget from "pages/ClientRegistration/BudgetAdd";
+import Description from "pages/ClientRegistration/DescriptionAdd";
 
 const App = () => {
   return (
@@ -36,16 +37,11 @@ const App = () => {
       <Route path="/add/client/headlines" element={<Headline />} />
       <Route path="/add/client/skills" element={<Skills />} />
       <Route path="/add/client/scopes" element={<Scope />} />
-      <Route path="/add/client/budget" element={<Budget/>} />
-      <Route path="/add/client/description" element={<Description/>} />
-
-
+      <Route path="/add/client/budget" element={<Budget />} />
+      <Route path="/add/client/description" element={<Description />} />
+      <Route path="/homepage" element={<HomePage />} />
 
       {/* <Route path="/user/login" element={<Login />} /> */}
-
-
-
-
     </Routes>
   );
 };
