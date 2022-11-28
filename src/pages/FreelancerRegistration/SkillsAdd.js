@@ -15,7 +15,12 @@ const SkillsAdd = () => {
   const [skill, setSkill] = useState('');
   const [skills, setSkills] = useState([]);
 
+  const [skillHasError, setSkillHasError] = useState(false);
+
+  const formIsInvalid = skill.trim().length === 0;
+
   const skillChangeHandler = e => {
+    setSkillHasError(e.target.value.trim().length === 0);
     setSkill(e.target.value);
   };
 
@@ -28,6 +33,10 @@ const SkillsAdd = () => {
   };
 
   const skillsAddHandler = () => {
+    if (skill.trim().length === 0) setSkillHasError(true);
+
+    if (formIsInvalid) return;
+
     freelancerCtx.setSkills(skills);
     navigate('/add/bio');
   };
@@ -44,12 +53,17 @@ const SkillsAdd = () => {
           So, add the skills you have.
         </p>
         <form onSubmit={skillFormSubmitHandler}>
-          <Input
-            onChange={skillChangeHandler}
-            className="mb-5"
-            type="text"
-            placeholder="Example: Full stack developer | React developer"
-          />
+          <div>
+            <Input
+              onChange={skillChangeHandler}
+              className="mb-5"
+              type="text"
+              placeholder="Example: Full stack developer | React developer"
+            />
+            {skillHasError && (
+              <p className="mt-3 error-msg">Skills must be added.</p>
+            )}
+          </div>
           <div className="skills-container d-flex align-item-center mb-5">
             {skills.map(skill => (
               <div

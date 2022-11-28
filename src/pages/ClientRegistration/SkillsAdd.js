@@ -15,12 +15,21 @@ const Skills = () => {
   const [skillId, setSkillId] = useState(1);
   const [skills, setSkills] = useState([]);
 
+  const [skillHasError, setSkillHasError] = useState(false);
+
+  const formIsInvalid = skill.trim().length === 0;
+
   const skillChangeHandler = e => {
+    setSkillHasError(e.target.value.trim().length === 0);
     setSkill(e.target.value);
   };
 
   const skillSubmitHandler = e => {
     e.preventDefault();
+
+    if (skill.trim().length === 0) setSkillHasError(true);
+
+    if (formIsInvalid) return;
 
     setSkills(prevSkills => [...prevSkills, { skillId, label: skill }]);
     setSkillId(prevId => ++prevId);
@@ -28,6 +37,8 @@ const Skills = () => {
 
   const navigateToScope = () => {
     clientCtx.setSkills(skills);
+
+    if (formIsInvalid) return;
 
     console.log(clientCtx.headline);
     navigate('/add/client/scopes');
@@ -46,12 +57,17 @@ const Skills = () => {
           Add skills needed for your project
         </p>
         <form onSubmit={skillSubmitHandler}>
-          <Input
-            className="mb-5"
-            type="text"
-            placeholder="Web Designer | React developer"
-            onChange={skillChangeHandler}
-          />
+          <div>
+            <Input
+              className="mb-5"
+              type="text"
+              placeholder="Web Designer | React developer"
+              onChange={skillChangeHandler}
+            />
+            {skillHasError && (
+              <p className="mt-3 error-msg">Skill can not be empty.</p>
+            )}
+          </div>
           <div className="skills-container d-flex align-item-center mb-5">
             {skills.map(skill => {
               return (

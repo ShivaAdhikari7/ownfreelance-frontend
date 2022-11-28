@@ -21,20 +21,38 @@ const Description = () => {
   const [description, setDescription] = useState('');
   const [projectFile, setProjectFile] = useState(null);
 
+  const [titleHasError, setTitleHasError] = useState(false);
+  const [descriptionHasError, setDescriptionHasError] = useState(false);
+  const [projectFileHasError, setProjectFileHasError] = useState(false);
+
+  const formIsInvalid =
+    title.trim().length === 0 ||
+    description.trim().length === 0 ||
+    projectFile === null;
+
   const titleChangeHandler = e => {
+    setTitleHasError(e.target.value.trim().length === 0);
     setTitle(e.target.value);
   };
 
   const descriptionChangeHandler = e => {
+    setDescriptionHasError(e.target.value.trim().length === 0);
     setDescription(e.target.value);
   };
 
   const projectFileChangeHandler = e => {
+    setProjectFileHasError(e.target.files.length === 0);
     setProjectFile(e.target.files[0]);
   };
 
   const formSubmitHandler = async e => {
     e.preventDefault();
+
+    if (title.trim().length === 0) setTitleHasError(true);
+    if (description.trim().length === 0) setDescriptionHasError(true);
+    if (projectFile === null) setProjectFileHasError(true);
+
+    if (formIsInvalid) return;
 
     const data = new FormData();
 
@@ -92,21 +110,31 @@ const Description = () => {
           </li>
         </ul>
         <form className="mt-5" onSubmit={formSubmitHandler}>
-          <Input
-            label="Add a title"
-            placeholder="UI/UX designer"
-            className="mb-3"
-            type="text"
-            onChange={titleChangeHandler}
-          />
+          <div>
+            <Input
+              label="Add a title"
+              placeholder="UI/UX designer"
+              className="mb-3"
+              type="text"
+              onChange={titleChangeHandler}
+            />
+            {titleHasError && (
+              <p className="mt-3 error-msg">Title can not be empty.</p>
+            )}
+          </div>
 
-          <TextArea
-            label="Describe your job"
-            placeholder="Already have a job description? place it here!"
-            className="mb-3"
-            type="text"
-            onChange={descriptionChangeHandler}
-          />
+          <div>
+            <TextArea
+              label="Describe your job"
+              placeholder="Already have a job description? place it here!"
+              className="mb-3"
+              type="text"
+              onChange={descriptionChangeHandler}
+            />
+            {descriptionHasError && (
+              <p className="mt-3 error-msg">Description can not be empty.</p>
+            )}
+          </div>
 
           <div>
             <Input
@@ -115,6 +143,10 @@ const Description = () => {
               onChange={projectFileChangeHandler}
             />
             <h5 className="mt-3">Max file size: 100 MB</h5>
+
+            {projectFileHasError && (
+              <p className="mt-3 error-msg">Project file must be choose.</p>
+            )}
           </div>
           <div className="text-end">
             <Button

@@ -13,12 +13,23 @@ const Headline = () => {
 
   const [headline, setHeadline] = useState('');
 
+  const [headlineHasError, setHeadlineHasError] = useState(false);
+
+  const formIsInvalid = headline.trim().length === 0;
+
   const headlineChangeHandler = e => {
+    setHeadlineHasError(e.target.value.trim().length === 0);
     setHeadline(e.target.value);
   };
 
   const submitHeadline = e => {
     e.preventDefault();
+
+    if (headline.trim().length === 0) {
+      setHeadlineHasError(true);
+    }
+
+    if (formIsInvalid) return;
 
     clientCtx.setHeadline(headline);
     navigate('/add/client/skills');
@@ -35,13 +46,18 @@ const Headline = () => {
           first thing they'll see, so make it count!
         </p>
         <form onSubmit={submitHeadline}>
-          <Input
-            label="Write a headline for your job post:"
-            className="mb-5"
-            type="text"
-            placeholder="Write job headline"
-            onChange={headlineChangeHandler}
-          />
+          <div>
+            <Input
+              label="Write a headline for your job post:"
+              className={headlineHasError ? 'mb-3' : 'mb-5'}
+              type="text"
+              placeholder="Write job headline"
+              onChange={headlineChangeHandler}
+            />
+            {headlineHasError && (
+              <p className="error-msg mb-5">Headline can not be empty.</p>
+            )}
+          </div>
           <div>
             <h2>Example Titles</h2>
             <ul className="d-flex flex-column mt-3 example-titles-list p-0">

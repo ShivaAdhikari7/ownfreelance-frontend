@@ -13,15 +13,24 @@ const HourlyRateAdd = () => {
 
   const [hourlyRate, setHourlyRate] = useState('');
 
+  const [hourlyRateHasError, setHourlyRateHasError] = useState(false);
+
+  const formIsInvalid = hourlyRate.trim().length === 0;
+
   const serviceCharge = 0.2 * +hourlyRate;
   const netAmount = +hourlyRate - serviceCharge;
 
   const hourlyRateChangeHandler = e => {
+    setHourlyRateHasError(e.target.value.trim().length === 0);
     setHourlyRate(e.target.value);
   };
 
   const hourlyFormSubmitHandler = e => {
     e.preventDefault();
+
+    if (hourlyRate.trim().length === 0) setHourlyRateHasError(true);
+
+    if (formIsInvalid) return;
 
     freelancerCtx.setHourlyRate(hourlyRate);
 
@@ -47,12 +56,19 @@ const HourlyRateAdd = () => {
                 </p>
               </div>
 
-              <Input
-                onChange={hourlyRateChangeHandler}
-                className="text-end"
-                type="number"
-                placeholder="$0.00"
-              />
+              <div>
+                <Input
+                  onChange={hourlyRateChangeHandler}
+                  className="text-end"
+                  type="number"
+                  placeholder="$0.00"
+                />
+                {hourlyRateHasError && (
+                  <p className="mt-3 error-msg">
+                    Hourly rate can not be empty.
+                  </p>
+                )}
+              </div>
             </div>
 
             <div className="rate-info d-flex align-items-center justify-content-between">
