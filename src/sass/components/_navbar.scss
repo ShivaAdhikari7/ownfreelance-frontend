@@ -1,3 +1,12 @@
+.navbar-custom {
+  border-bottom: 0.1rem solid $grey2-100;
+}
+
+.logo-text {
+  font-size: 3.6rem;
+  color: $primary-color;
+}
+
 .navbar-style {
   padding: 2rem 1rem;
   box-shadow: 0 0.1rem 0rem $primary-tint-6;
@@ -6,4 +15,25 @@
 .navbar-text {
   color: $primary-color;
   font-size: 3rem;
+}
+
+.nav-link-login {
+  font-size: 1.8rem;
+  color: $grey2-800;
+}
+
+.nav-link-signup {
+  background-color: $grey2-900;
+  font-size: 1.8rem;
+  color: $white !important;
+  border-radius: 100rem;
+
+  &:hover {
+    color: $white;
+    background-color: $grey2-800;
+  }
+
+  &:active {
+    color: $white !important;
+  }
 }

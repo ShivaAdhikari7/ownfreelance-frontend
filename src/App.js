@@ -25,7 +25,7 @@ const App = () => {
     <Routes>
       <Route path="/otp/success" element={<SuccessfulOtp />} />
       <Route path="/otp/verify" element={<VerifyOtp />} />
-      <Route path="/" element={<Signup />} />
+      <Route path="/signup" element={<Signup />} />
       <Route path="/getstarted" element={<GettingStarted />} />
       <Route
         path="/verification_successful"
