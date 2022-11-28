@@ -22,9 +22,10 @@ const Login = () => {
             .then(response=>{
                 setMessage(response.data.message);
                 console.log(response.data.token)
+                console.log(response);
                 if(response.data.token){
                     //Login Access
-                    localStorage.setItem('token', response.data.token);
+                    localStorage.setItem('__token__', response.data.token);
                     //localStorage.setItem('userType', response.data.userType);
                   //<Redirect to="/dashboard"/>
                     setMessage(response?.data?.message)
@@ -46,8 +47,8 @@ const Login = () => {
     <>
       <Navbar />
       <div className="container overflow-hidden section-signup ">
-        <div className="row row-cols-1 row-cols-md-1 row-cols-lg-2 gx-5 gy-5">
-          <div className="signup-form m-5 align-items-center " id='flex-login'  >
+        <div className="row row-cols-1 row-cols-md-1 gx-5 gy-5">
+          <div className="signup-form m-5 align-items-center w-50 m-auto" id='flex-login'  >
             <div>
             <h1 className='page-title m-5' id='text-login'> Login to OwnFreelance!!</h1>
             <p style={{color:'red'}} className="m-5">{message}</p>
