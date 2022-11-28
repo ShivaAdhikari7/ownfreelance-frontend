@@ -13,8 +13,16 @@ const Budget = () => {
 
   const [budget, setBudget] = useState('');
 
+  const [budgetHasError, setBudgetHasError] = useState('');
+
+  const formIsInvalid = budget.trim().length === 0;
+
   const budgetSubmitHandler = e => {
     e.preventDefault();
+
+    if (budget.trim().length === 0) setBudgetHasError(true);
+
+    if (formIsInvalid) return;
 
     clientCtx.setBudget(budget);
 
@@ -22,6 +30,7 @@ const Budget = () => {
   };
 
   const budgetChangeHandler = e => {
+    setBudgetHasError(e.target.value.trim().length === 0);
     setBudget(e.target.value);
   };
 
@@ -35,13 +44,18 @@ const Budget = () => {
           This will help us match you to talent within your range.
         </h4>
         <form onSubmit={budgetSubmitHandler} className="mt-5">
-          <Input
-            label="Enter an hourly rate:"
-            className="mb-2"
-            type="text"
-            placeholder="$0.00"
-            onChange={budgetChangeHandler}
-          />
+          <div>
+            <Input
+              label="Enter an hourly rate:"
+              className="mb-2"
+              type="text"
+              placeholder="$0.00"
+              onChange={budgetChangeHandler}
+            />
+            {budgetHasError && (
+              <p className="mt-3 error-msg">Budget must be choose.</p>
+            )}
+          </div>
           <p className="my-3 client-msg">
             Professionals tend to charge $30 - $50/hour (USD) for projects like
             yours.

@@ -17,29 +17,54 @@ const FreelancerPreferences = () => {
     skills,
     hourlyRate,
     setProfileUrl,
-    
   } = useContext(FreelancerRegistrationContext);
   const navigate = useNavigate();
 
   const [language, setLanguage] = useState('');
   const [phoneNo, setPhoneNo] = useState('');
-  const [profileImg, setProfileImg] = useState();
+  const [profileImg, setProfileImg] = useState(null);
+
+  const [languageHasError, setLanguageHasError] = useState(false);
+  const [phoneNoHasError, setPhoneNoHasError] = useState(false);
+  const [profileImgHasError, setProfileImgHasError] = useState(false);
+
+  const formIsInvalid =
+    language.trim().length === 0 ||
+    phoneNo.trim().length === 0 ||
+    profileImg === null;
 
   const languageChangeHandler = e => {
+    setLanguageHasError(e.target.value.trim().length === 0);
     setLanguage(e.target.value);
   };
 
   const phoneNoChangeHandler = e => {
+    setPhoneNoHasError(e.target.value.trim().length === 0);
     setPhoneNo(e.target.value);
   };
 
   const profileImgChangeHandler = e => {
+    setProfileImgHasError(e.target.files.length === 0);
     setProfileImg(e.target.files[0]);
     setProfileUrl(URL.createObjectURL(e.target.files[0]));
   };
 
   const preferencesFormSubmitHandler = async e => {
     e.preventDefault();
+
+    if (language.trim().length === 0) {
+      setLanguageHasError(true);
+    }
+
+    if (phoneNo.trim().length === 0) {
+      setPhoneNoHasError(true);
+    }
+
+    if (profileImg === null) {
+      setProfileImgHasError(true);
+    }
+
+    if (formIsInvalid) return;
 
     const data = new FormData();
 
@@ -81,32 +106,49 @@ const FreelancerPreferences = () => {
           className="experience-form mb-5"
         >
           <div className="experience-form-controls d-flex flex-column">
-            <Input
-              id="language"
-              label="Add your Preferred language:"
-              type="text"
-              placeholder="Ex: English"
-              name="language"
-              onChange={languageChangeHandler}
-            />
+            <div>
+              <Input
+                id="language"
+                label="Add your Preferred language:"
+                type="text"
+                placeholder="Ex: English"
+                name="language"
+                onChange={languageChangeHandler}
+              />
+              {languageHasError && (
+                <p className="mt-3 error-msg">Language can not be empty.</p>
+              )}
+            </div>
 
-            <Input
-              id="number"
-              label="Your phone Number:"
-              type="text"
-              placeholder="Ex: 98......."
-              name="number"
-              onChange={phoneNoChangeHandler}
-            />
+            <div>
+              <Input
+                id="number"
+                label="Your phone Number:"
+                type="text"
+                placeholder="Ex: 98......."
+                name="number"
+                onChange={phoneNoChangeHandler}
+              />
+              {phoneNoHasError && (
+                <p className="mt-3 error-msg">Phone number can not be empty.</p>
+              )}
+            </div>
 
-            <Input
-              className="mb-4"
-              id="picture"
-              label="Add your profile photo:"
-              type="file"
-              name="picture"
-              onChange={profileImgChangeHandler}
-            />
+            <div>
+              <Input
+                className="mb-4"
+                id="picture"
+                label="Add your profile photo:"
+                type="file"
+                name="picture"
+                onChange={profileImgChangeHandler}
+              />
+              {profileImgHasError && (
+                <p className="mt-3 error-msg">
+                  Profile image must be uploaded.
+                </p>
+              )}
+            </div>
           </div>
 
           <div className="form-action text-center form-btn">

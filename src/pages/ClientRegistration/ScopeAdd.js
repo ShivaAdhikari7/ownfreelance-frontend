@@ -14,17 +14,44 @@ const Scope = () => {
   const [projectDuration, setProjectDuration] = useState('');
   const [projectExperienceLevel, setProjectExperienceLevel] = useState('');
 
+  const [projectSizeHasError, setProjectSizeHasError] = useState(false);
+  const [projectDurationHasError, setProjectDurationHasError] = useState(false);
+  const [projectExperienceLevelHasError, setProjectExperienceLevelHasError] =
+    useState(false);
+
+  const formIsInvalid =
+    projectSize.trim().length === 0 ||
+    projectDuration.trim().length === 0 ||
+    projectExperienceLevel.trim().length === 0;
+
   const projectSizeChooseHandler = e => {
+    setProjectSizeHasError(e.target.value.trim().length === 0);
     setProjectSize(e.target.value);
   };
   const projectDurationChooseHandler = e => {
+    setProjectDurationHasError(e.target.value.trim().length === 0);
     setProjectDuration(e.target.value);
   };
   const projectExperienceChooseHandler = e => {
+    setProjectExperienceLevelHasError(e.target.value.trim().length === 0);
     setProjectExperienceLevel(e.target.value);
   };
 
   const navigateToBudget = () => {
+    if (projectDuration.trim().length === 0) {
+      setProjectDurationHasError(true);
+    }
+
+    if (projectSize.trim().length === 0) {
+      setProjectSizeHasError(true);
+    }
+
+    if (projectExperienceLevel.trim().length === 0) {
+      setProjectExperienceLevelHasError(true);
+    }
+
+    if (formIsInvalid) return;
+
     const scope = {
       projectSize,
       projectDuration,
@@ -88,6 +115,9 @@ const Scope = () => {
               webpage)
             </label>
           </div>
+          {projectSizeHasError && (
+            <p className="error-msg mt-3">Project size must be choose.</p>
+          )}
         </div>
         <div onChange={projectDurationChooseHandler} className="mt-5">
           <h4>How long will your work take?</h4>
@@ -119,6 +149,9 @@ const Scope = () => {
             />
             <h5 className="form-check-label">1 to 3 months</h5>
           </div>
+          {projectDurationHasError && (
+            <p className="error-msg mt-3">Project duration must be choose.</p>
+          )}
         </div>
 
         <div onChange={projectExperienceChooseHandler} className="mt-5">
@@ -156,6 +189,10 @@ const Scope = () => {
               Looking for comprehensive and deep expertise in this field
             </label>
           </div>
+
+          {projectExperienceLevelHasError && (
+            <p className="error-msg mt-3">Project experience must be choose.</p>
+          )}
         </div>
 
         <div className="text-end">
