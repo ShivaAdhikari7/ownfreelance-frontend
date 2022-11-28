@@ -19,6 +19,7 @@ import BudgetAdd from 'pages/ClientRegistration/BudgetAdd';
 import Budget from 'pages/ClientRegistration/BudgetAdd';
 import Description from 'pages/ClientRegistration/DescriptionAdd';
 import Login from 'pages/UserLogin/UserLogin';
+import Dashboard from 'pages/Dashboard/Dashboard';
 
 const App = () => {
   return (
@@ -26,7 +27,9 @@ const App = () => {
       <Route path="/otp/success" element={<SuccessfulOtp />} />
       <Route path="/otp/verify" element={<VerifyOtp />} />
       <Route path="" element={<Signup />} />
-      <Route path="user/login" element={<Login />} />
+      <Route path="/user/login" element={<Login />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+
 
 
       <Route path="/getstarted" element={<GettingStarted />} />
