@@ -13,12 +13,21 @@ const BioAdd = () => {
 
   const [bio, setBio] = useState('');
 
+  const [bioHasError, setBioHasError] = useState(false);
+
+  const formIsInvalid = bio.trim().length === 0;
+
   const bioChangeHandler = e => {
+    setBioHasError(e.target.value.trim().length === 0);
     setBio(e.target.value);
   };
 
   const bioFormSubmitHandler = e => {
     e.preventDefault();
+
+    if (bio.trim().length === 0) setBioHasError(true);
+
+    if (formIsInvalid) return;
 
     freelancerCtx.setBio(bio);
 
@@ -37,12 +46,17 @@ const BioAdd = () => {
           achievements by writing the eye catching bio.
         </p>
         <form onSubmit={bioFormSubmitHandler}>
-          <TextArea
-            onChange={bioChangeHandler}
-            className="mb-5"
-            type="text"
-            placeholder="Describe your top skills, experiences and interests."
-          />
+          <div>
+            <TextArea
+              onChange={bioChangeHandler}
+              className="mb-5"
+              type="text"
+              placeholder="Describe your top skills, experiences and interests."
+            />
+            {bioHasError && (
+              <p className="mt-3 error-msg">Bio can not be empty.</p>
+            )}
+          </div>
           <div className="text-end">
             <Button
               type="submit"

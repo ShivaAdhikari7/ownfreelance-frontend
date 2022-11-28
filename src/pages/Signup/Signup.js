@@ -19,29 +19,87 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [country, setCountry] = useState('');
 
+  const [firstNameHasError, setFirstNameHasError] = useState(false);
+  const [lastNameHasError, setLastNameHasError] = useState(false);
+  const [emailHasError, setEmailHasError] = useState(false);
+  const [passwordHasError, setPasswordHasError] = useState(false);
+  const [confirmPasswordHasError, setConfirmPasswordHasError] = useState(false);
+  const [countryHasError, setCountryHasError] = useState(false);
+  const [passwordMatchHasError, setPasswordMatchHasError] = useState(false);
+
+  const formIsInvalid =
+    firstName.trim().length === 0 ||
+    lastName.trim().length === 0 ||
+    email.trim().length === 0 ||
+    password.trim().length === 0 ||
+    confirmPassword.trim().length === 0 ||
+    country.trim().length === 0 ||
+    !isPrivacyChecked ||
+    password !== confirmPassword;
+
   const firstNameChangeHandler = e => {
+    setFirstNameHasError(e.target.value.trim().length === 0);
     setFirstName(e.target.value);
   };
+
   const lastNameChangeHandler = e => {
+    setLastNameHasError(e.target.value.trim().length === 0);
     setLastName(e.target.value);
   };
+
   const emailChangeHandler = e => {
+    setEmailHasError(e.target.value.trim().length === 0);
     setEmail(e.target.value);
   };
+
   const passwordChangeHandler = e => {
+    setPasswordHasError(e.target.value.trim().length === 0);
     setPassword(e.target.value);
   };
+
   const confirmPasswordChangeHandler = e => {
+    setConfirmPasswordHasError(e.target.value.trim().length === 0);
+    setPasswordMatchHasError(e.target.value !== password);
     setConfirmPassword(e.target.value);
   };
+
   const countryChangeHandler = e => {
+    setCountryHasError(e.target.value.trim().length === 0);
     setCountry(e.target.value);
   };
 
   const formSubmitHandler = async e => {
     e.preventDefault();
 
-    if (password !== confirmPassword) return;
+    if (firstName.trim().length === 0) {
+      setFirstNameHasError(true);
+    }
+
+    if (lastName.trim().length === 0) {
+      setLastNameHasError(true);
+    }
+
+    if (email.trim().length === 0) {
+      setEmailHasError(true);
+    }
+
+    if (password.trim().length === 0) {
+      setPasswordHasError(true);
+    }
+
+    if (confirmPassword.trim().length === 0) {
+      setConfirmPasswordHasError(true);
+    }
+
+    if (password !== confirmPassword) {
+      setPasswordMatchHasError(true);
+    }
+
+    if (country.trim().length === 0) {
+      setCountryHasError(true);
+    }
+
+    if (formIsInvalid) return;
 
     const data = {
       firstName,
@@ -54,11 +112,13 @@ const Signup = () => {
     const res = await axios.post('http://localhost:90/user/register', data);
     localStorage.setItem('__token__', res.data.token);
 
-    await axios.post('http://localhost:90/otp/send', null, {
+    const response = await axios.post('http://localhost:90/otp/send', null, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('__token__')}`,
       },
     });
+
+    console.log(response);
 
     navigate('/otp/verify', { state: { email } });
   };
@@ -82,59 +142,104 @@ const Signup = () => {
           <div className="signup-form">
             <form onSubmit={formSubmitHandler}>
               <div className="signup-form-controls w-75 m-auto d-flex flex-column">
-                <Input
-                  id="firstName"
-                  label="First name"
-                  type="text"
-                  placeholder="Enter first name"
-                  name="firstName"
-                  onChange={firstNameChangeHandler}
-                />
+                <div>
+                  <Input
+                    id="firstName"
+                    label="First name"
+                    type="text"
+                    placeholder="Enter first name"
+                    name="firstName"
+                    onChange={firstNameChangeHandler}
+                  />
+                  {firstNameHasError && (
+                    <p className="error-msg mt-3">
+                      First Name can not be empty.
+                    </p>
+                  )}
+                </div>
 
-                <Input
-                  id="lastName"
-                  label="Last name"
-                  type="text"
-                  placeholder="Enter last name"
-                  name="lastName"
-                  onChange={lastNameChangeHandler}
-                />
+                <div>
+                  <Input
+                    id="lastName"
+                    label="Last name"
+                    type="text"
+                    placeholder="Enter last name"
+                    name="lastName"
+                    onChange={lastNameChangeHandler}
+                  />
+                  {lastNameHasError && (
+                    <p className="error-msg mt-3">
+                      Last Name can not be empty.
+                    </p>
+                  )}
+                </div>
 
-                <Input
-                  id="email"
-                  label="Email address"
-                  type="email"
-                  placeholder="Enter email address"
-                  name="email"
-                  onChange={emailChangeHandler}
-                />
+                <div>
+                  <Input
+                    id="email"
+                    label="Email address"
+                    type="email"
+                    placeholder="Enter email address"
+                    name="email"
+                    onChange={emailChangeHandler}
+                  />
+                  {emailHasError && (
+                    <p className="error-msg mt-3">Email can not be empty.</p>
+                  )}
+                </div>
 
-                <Input
-                  id="password"
-                  label="Password"
-                  type="password"
-                  placeholder="Enter Password"
-                  name="password"
-                  onChange={passwordChangeHandler}
-                />
+                <div>
+                  <Input
+                    id="password"
+                    label="Password"
+                    type="password"
+                    placeholder="Enter Password"
+                    name="password"
+                    onChange={passwordChangeHandler}
+                    autoComplete="on"
+                  />
+                  {passwordHasError && (
+                    <p className="error-msg mt-3">Password can not be empty.</p>
+                  )}
+                </div>
 
-                <Input
-                  id="confirmPassword"
-                  label="Confirm password"
-                  type="password"
-                  placeholder="Enter your password again"
-                  name="confirmPassword"
-                  onChange={confirmPasswordChangeHandler}
-                />
+                <div>
+                  <Input
+                    id="confirmPassword"
+                    label="Confirm password"
+                    type="password"
+                    placeholder="Enter your password again"
+                    name="confirmPassword"
+                    onChange={confirmPasswordChangeHandler}
+                    autoComplete="on"
+                  />
+                  {confirmPasswordHasError && (
+                    <p className="error-msg mt-3">
+                      Confirm Password can not be empty.
+                    </p>
+                  )}
+                  {passwordMatchHasError && (
+                    <p className="error-msg mt-3">
+                      Password and confirm password must be same.
+                    </p>
+                  )}
+                </div>
 
-                <Input
-                  id="country"
-                  label="Country"
-                  type="text"
-                  placeholder="Enter country name"
-                  name="country"
-                  onChange={countryChangeHandler}
-                />
+                <div>
+                  <Input
+                    id="country"
+                    label="Country"
+                    type="text"
+                    placeholder="Enter country name"
+                    name="country"
+                    onChange={countryChangeHandler}
+                  />
+                  {countryHasError && (
+                    <p className="error-msg mt-3">
+                      Country name can not be empty.
+                    </p>
+                  )}
+                </div>
               </div>
 
               <div className="privacy-terms-check w-75 m-auto d-flex align-items-start mt-5">

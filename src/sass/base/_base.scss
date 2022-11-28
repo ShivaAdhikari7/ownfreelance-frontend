@@ -12,15 +12,20 @@
   &-round {
     border-radius: 10rem;
   }
-  
-  &-registration{
+
+  &-registration {
     font-size: 1.8rem;
     background-color: $grey2-900;
     padding: 0.8rem 3.2rem;
     color: $white;
-    &:hover{
+    &:hover {
       background-color: $grey2-800;
       color: $white;
     }
   }
+}
+
+.error-msg {
+  font-size: 1.4rem;
+  color: #e03131;
 }

@@ -11,6 +11,8 @@ import { IoIosArrowForward } from "react-icons/io";
 import Button from "components/Button/Button";
 import Footer from "components/Footer/Footer";
 
+import Navbar from "components/Navbar/Navbar";
+
 import heroImage from "../../assets/images/hero-img.jpg";
 import darazLogo from "../../assets/images/daraz.png";
 import ncellLogo from "../../assets/images/ncell-logo.png";
@@ -75,6 +77,7 @@ const HomePage = () => {
   };
   return (
     <>
+      <Navbar />
       <div className="section-hero ">
         <div className="row">
           <div className="d-flex align-items-center justify-content-center hero">
