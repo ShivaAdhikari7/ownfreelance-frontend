@@ -13,12 +13,21 @@ const TitleAdd = () => {
 
   const [title, setTitle] = useState('');
 
+  const [titleHasError, setTitleHasError] = useState(false);
+
+  const formIsInvalid = title.trim().length === 0;
+
   const titleChangeHandler = e => {
+    setTitleHasError(e.target.value.trim().length === 0);
     setTitle(e.target.value);
   };
 
   const titleFormSubmitHandler = e => {
     e.preventDefault();
+
+    if (title.trim().length === 0) setTitleHasError(true);
+
+    if (formIsInvalid) return;
 
     freelancerCtx.setTitle(title);
 
@@ -37,12 +46,17 @@ const TitleAdd = () => {
           stand out in the eye of client.
         </p>
         <form onSubmit={titleFormSubmitHandler}>
-          <Input
-            onChange={titleChangeHandler}
-            className="mb-5"
-            type="text"
-            placeholder="Example: Full stack developer | React developer"
-          />
+          <div>
+            <Input
+              onChange={titleChangeHandler}
+              className="mb-5"
+              type="text"
+              placeholder="Example: Full stack developer | React developer"
+            />
+            {titleHasError && (
+              <p className="mt-3 error-msg">Title can not be empty.</p>
+            )}
+          </div>
           <div className="text-end">
             <Button
               type="submit"

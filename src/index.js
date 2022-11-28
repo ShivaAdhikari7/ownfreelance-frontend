@@ -7,14 +7,17 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import './sass/index.scss';
 
 import { FreelancerRegistrationProvider } from 'context/FreelancerRegistration/freelancer-context';
+import { ClientRegistrationProvider } from 'context/ClientRegistration/client-context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <FreelancerRegistrationProvider>
-    <React.StrictMode>
-      <Router>
-        <App />
-      </Router>
-    </React.StrictMode>
-  </FreelancerRegistrationProvider>
+  <ClientRegistrationProvider>
+    <FreelancerRegistrationProvider>
+      <React.StrictMode>
+        <Router>
+          <App />
+        </Router>
+      </React.StrictMode>
+    </FreelancerRegistrationProvider>
+  </ClientRegistrationProvider>
 );
