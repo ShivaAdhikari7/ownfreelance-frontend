@@ -21,6 +21,7 @@ import Login from "pages/UserLogin/UserLogin";
 import Dashboard from "pages/Dashboard/Dashboard";
 import VerificationSuccessful from "pages/Signup/VerificationSuccessful";
 import ProfileView from "pages/FreelancerRegistration/ProfileView";
+import HomePage from "pages/HomePage/HomePage";
 
 const App = () => {
   return (
