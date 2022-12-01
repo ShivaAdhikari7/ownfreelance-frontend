@@ -1,0 +1,27 @@
+.footer {
+  margin-bottom: 4rem;
+  .footer_links-container {
+    & h3 {
+      font-size: 3rem;
+      margin-bottom: 3rem;
+    }
+    .footer_links {
+      & li:not(:last-child) {
+        margin-bottom: 2rem;
+      }
+      & li a {
+        font-size: 1.8rem;
+        text-decoration: none;
+      }
+    }
+    .footer_about {
+      margin-left: 1.6rem;
+    }
+    .footer_support {
+      margin-left: 1.8rem;
+    }
+  }
+}
+.footer_text {
+  font-size: 1.6rem;
+}

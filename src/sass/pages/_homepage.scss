@@ -1,0 +1,239 @@
+//Section Hero:
+
+.section-hero {
+  width: 160rem;
+  margin: 4.8rem auto;
+  padding: 0rem 3.4rem;
+
+  .hero-description {
+    margin-left: 20rem;
+    width: 36%;
+
+    .hero-primary {
+      font-size: 4.4rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+    }
+    .hero-para {
+      font-size: 1.8rem;
+      line-height: 1.6;
+      margin-bottom: 5rem;
+    }
+  }
+
+  .hero-image {
+    margin: 4rem auto;
+    width: 50%;
+  }
+  .btn-container {
+    gap: 4rem;
+
+    .btn-get-started,
+    .btn-explore {
+      padding: 1.2rem 3.2rem;
+      font-weight: 500;
+      font-size: 1.6rem;
+      font-family: inherit;
+    }
+    .btn-get-started {
+      background-color: $primary-color;
+      color: $white;
+
+      &:hover {
+        background-color: $primary-shade-1;
+      }
+    }
+    .btn-explore {
+      background-color: $white;
+      color: $black;
+      border: 2px solid $primary-color;
+      &:hover {
+        background-color: $primary-color;
+        color: $white;
+      }
+    }
+  }
+}
+
+// Section Customer:
+.section-customers {
+  padding: 1.2rem 9.6rem;
+  background-color: $grey2-50;
+  margin-bottom: 4.8rem;
+
+  & h3 {
+    font-size: 2rem;
+    color: $black-tint-6;
+    padding-left: 4rem;
+  }
+
+  .customer-logo {
+    width: 10%;
+    filter: brightness(0);
+    opacity: 50%;
+  }
+}
+
+// Section Services:
+.section-services {
+  padding: 1.2rem 4.8rem;
+  margin-bottom: 4.8rem;
+
+  .service-cards {
+    padding: 1.2rem 4.8rem;
+    position: relative;
+    .service-card {
+      height: 34vh;
+      border-radius: 1rem;
+      width: 20%;
+      padding: 1.2rem 5px;
+      background-size: cover;
+      position: relative;
+      color: #fff;
+
+      &-1 {
+        background-image: linear-gradient(
+            to bottom,
+            rgba($black, 0.5) 30%,
+            rgba($black, 0.5)
+          ),
+          url("../../assets/images/web-development.jpg");
+      }
+      &-2 {
+        background-image: linear-gradient(
+            to bottom,
+            rgba($black, 0.5) 30%,
+            rgba($black, 0.5)
+          ),
+          url("../../assets/images/digital-marketing.jpg");
+      }
+      &-3 {
+        background-image: linear-gradient(
+            to bottom,
+            rgba($black, 0.5) 30%,
+            rgba($black, 0.5)
+          ),
+          url("../../assets/images/web-design.jpg");
+      }
+      &-4 {
+        background-image: linear-gradient(
+            to bottom,
+            rgba($black, 0.5) 30%,
+            rgba($black, 0.5)
+          ),
+          url("../../assets/images/data-entry.jpg");
+      }
+    }
+  }
+}
+
+// Section workflow:
+.section-workflow {
+  padding: 1.2rem 4.8rem;
+  margin-bottom: 4.8rem;
+  .workflow {
+    width: 20%;
+
+    &-icon svg {
+      font-size: 5rem;
+      background-color: $primary-color;
+      fill: $white;
+      padding: 1rem;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+    }
+    &-title {
+      font-size: 1.8rem;
+    }
+    &-description {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+// Section Testimonials:
+
+.section-testimonials {
+  padding: 1.2rem 4.8rem;
+  margin-bottom: 4.8rem;
+
+  .testimonial-container {
+    border-radius: 1rem;
+    background-color: $primary-shade-1;
+    padding: 2.4rem 3.6rem;
+    color: white;
+    gap: 3rem;
+    position: relative;
+    overflow: hidden;
+    height: 30vh;
+    .testimonial-image {
+      width: 25%;
+      border-radius: 1rem;
+    }
+    .testimonial-content {
+      gap: 2rem;
+      .testimonial-author {
+        font-size: 1.2rem;
+
+        & span {
+          font-size: 1.4rem;
+          font-weight: 500;
+        }
+      }
+      .testimonial {
+        font-size: 2.4rem;
+      }
+    }
+    .testimonial-arrow-left {
+      left: 0%;
+      color: $black;
+    }
+    .testimonial-arrow-right {
+      right: 0%;
+      color: $black;
+    }
+  }
+}
+// General classes:
+.heading-secondary {
+  font-size: 3.2rem;
+  color: $grey2-900;
+  margin-bottom: 5rem;
+}
+
+.arrow {
+  position: absolute;
+  border-radius: 50%;
+  font-size: 3rem;
+  top: 50%;
+  background-color: $white;
+  padding: 1rem;
+  box-shadow: 0 0.01rem 0.4rem $black;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+.arrow-right {
+  right: 4%;
+}
+.arrow-left {
+  left: 4%;
+}
+.activeSlide {
+  opacity: 1;
+  transform: translateX(0);
+}
+.lastSlide {
+  transform: translateX(-100%);
+}
+.nextSlide {
+  transform: translateX(100%);
+}
+article {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: all 0.3s linear;
+}
