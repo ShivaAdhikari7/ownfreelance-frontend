@@ -19,7 +19,7 @@ import ncellLogo from "../../assets/images/ncell-logo.png";
 import nabilBankLogo from "../../assets/images/nabil-bank.png";
 import imperialLogo from "../../assets/images/imperial-logo.png";
 import cgLogo from "../../assets/images/cg-logo.png";
-import testimonialImage1 from "../../assets/images/sneha.jpg";
+import testimonialImage1 from "../../assets/images/testimonial-1.jpg";
 
 const HomePage = () => {
   const data = [
@@ -78,9 +78,9 @@ const HomePage = () => {
   return (
     <>
       <Navbar />
-      <div className="section-hero ">
+      <div className="container">
         <div className="row">
-          <div className="d-flex align-items-center justify-content-center hero">
+          <div className="d-flex align-items-center justify-content-around section-hero">
             <div className="hero-description">
               <h1 className="hero-primary">
                 Hire the most trusted freelancers in the industry
@@ -111,8 +111,7 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div className="container">
+
         <div className="section-customers d-flex justify-content-between align-items-center">
           <h3 className="heading-tertiary">Trusted By:</h3>
           <img className="customer-logo" src={ncellLogo} alt="Logo of Ncell" />

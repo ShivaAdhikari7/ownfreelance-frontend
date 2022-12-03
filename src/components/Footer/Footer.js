@@ -61,7 +61,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className="footer_links-container">
-            <h3>Support</h3>
+            <h3>Programs</h3>
             <ul className="footer_links">
               <li>
                 <a href="#">Events</a>
