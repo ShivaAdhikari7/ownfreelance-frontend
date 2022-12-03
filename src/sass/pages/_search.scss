@@ -1,0 +1,95 @@
+.section-main {
+  padding: 1.2rem 4.8rem;
+  margin-bottom: 4.8rem;
+
+  .filter-section {
+    width: 20%;
+    border: 2px solid red;
+    height: auto;
+    padding: 1.2rem;
+  }
+  .search-section {
+    width: 75%;
+    border: 0.5px solid $grey2-600;
+    border-radius: 0.5rem;
+    padding: 1.2rem;
+
+    .search-box {
+      width: 80%;
+      padding: 1rem 1.2rem;
+      font-size: 1.6rem;
+      border: 1px solid $grey2-600;
+      border-radius: 10rem;
+      position: relative;
+      overflow: hidden;
+      border-right: none;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    .search-icon {
+      position: absolute;
+      font-size: 2rem;
+      top: 17.9%;
+      right: 23%;
+      color: $white;
+      background-color: $black;
+      padding: 0.9rem 1rem;
+      border-radius: 1rem;
+    }
+    .search-result {
+      margin-top: 2rem;
+      padding: 1.2rem 2.4rem;
+      border-radius: 1rem;
+      background-color: $grey1-200;
+      box-shadow: 0 2px 1rem rgba($black, 0.2);
+
+      .search-title {
+        justify-content: space-between;
+        margin-bottom: 2rem;
+
+        .search-link {
+          text-decoration: none;
+          font-size: 1.8rem;
+        }
+        .heart-icon {
+          border: 1px solid $black;
+          padding: 5px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 700;
+          border-radius: 50%;
+          cursor: pointer;
+          width: 4%;
+          height: 4%;
+        }
+      }
+      .search-subtitle {
+        font-size: 1.2rem;
+        gap: 3rem;
+        margin-bottom: 2rem;
+      }
+      .search-description {
+        font-size: 1.4rem;
+        line-height: 1.6;
+        text-align: justify;
+        margin-bottom: 2rem;
+      }
+      .search-skills {
+        gap: 2rem;
+
+        & span {
+          background-color: $grey2-200;
+          padding: 1.2rem 2.4rem;
+          border-radius: 10rem;
+          font-size: 1.2rem;
+          color: #555;
+        }
+      }
+    }
+  }
+}
+
+.profile-image {
+  width: 10%;
+}
