@@ -132,9 +132,10 @@ const Signup = () => {
     }
   };
 
-  return (
+  return isLoading ? (
+    <Spinner isVisible={isLoading} />
+  ) : (
     <>
-      <Spinner isVisible={isLoading} />
       <Navbar />
       <div className="container overflow-hidden section-signup">
         <div className="row row-cols-1 row-cols-md-1 row-cols-lg-2 gx-5 gy-5">

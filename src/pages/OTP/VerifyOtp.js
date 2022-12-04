@@ -71,9 +71,10 @@ const VerifyOtp = () => {
     }
   };
 
-  return (
+  return isLoading ? (
+    <Spinner />
+  ) : (
     <>
-      <Spinner isVisible={isLoading} />
       <Navbar />
       <div className="verify-otp-container text-center">
         <h3 className="verify-otp-title mb-3">

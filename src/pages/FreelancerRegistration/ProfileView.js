@@ -32,11 +32,11 @@ const ProfileView = () => {
         },
       });
 
-      setProfileDetail(res.data[0]);
+      setProfileDetail(res.data.user);
     };
 
     getProfileDetails();
-  });
+  }, []);
 
   const submitProfile = () => {
     navigate('/verification_successful', {
@@ -82,7 +82,7 @@ const ProfileView = () => {
             </div>
             <div className="profile-detail">
               <h3 className="user-name">{`${profileDetail?.userId.firstName} ${profileDetail?.userId.lastName}`}</h3>
-              <p className="user-location">{`Kathmandu, ${profileDetail?.country}`}</p>
+              <p className="user-location">{`Kathmandu, ${profileDetail?.userId.country}`}</p>
             </div>
           </div>
           <div className="profession-detail p-4">
