@@ -11,6 +11,7 @@ import Img2 from 'assets/images/cg-logo.png';
 const ClientProfile = () => {
 
   return <>
+  <Navbar/>
   <div className="container overflow-hidden main-page  d-flex flex-column">
 
         <h1>Your dashboard</h1>
@@ -30,9 +31,14 @@ const ClientProfile = () => {
   </div>
   <div className="container overflow-hidden main-page  d-flex flex-column border border-success rounded  mt-4">
     <h1>Your Postings</h1>
+    <h1>No active job posts</h1>
+    <br></br>
+    <br></br>
+    <h3>Post a job to the marketplace and let talent come to you.</h3>
+    <p className='profile-description'></p>
 
   </div>
-  <div className="container overflow-hidden main-page  d-flex flex-column border border-success rounded  mt-4">
+  <div className="container overflow-hidden main-page  d-flex flex-column border border-success rounded">
     <div className="container overflow-hidden main-page  d-flex flex-column border-bottom border-success rounded  mt-4">
     <h1 className='mt-3'>How to work with talent</h1>
     <h3 className='ps-5'>1. Post a job to the marketplace</h3>
@@ -53,16 +59,16 @@ const ClientProfile = () => {
     </div>
   </div>
   </div>
-<div className='me-5 ms-5 mt-5'>
+<div className='me-5 ms-5'>
     <div className='container overflow-hidden main-page  d-flex flex-column border border-success rounded mt-5'>
-    <h3 className='ps-5'>Getting started</h3>
-    <div className='container overflow-hidden main-page  d-flex flex-column border border-success rounded mt-5'>
+    <h3 className='ps-5 pt-4'>Getting started</h3>
+    <div className='container overflow-hidden main-page  d-flex flex-column border border-success rounded mt-2'>
         <h1>Post a job</h1>
     </div>
-    <div className='container overflow-hidden main-page  d-flex flex-column border border-success rounded mt-5'>
+    <div className='container overflow-hidden main-page  d-flex flex-column border border-success rounded mt-2'>
         <h1>Edit your job post</h1>
     </div>
-    <div className='container overflow-hidden main-page  d-flex flex-column border border-success rounded mt-5'>
+    <div className='container overflow-hidden main-page  d-flex flex-column border border-success rounded mt-2'>
         <h1>Explore more talent</h1>
     </div>
     </div>
