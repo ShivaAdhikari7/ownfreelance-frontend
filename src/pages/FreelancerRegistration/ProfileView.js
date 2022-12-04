@@ -56,7 +56,7 @@ const ProfileView = () => {
           <div className="d-flex align-items-center justify-content-between px-4 py-2">
             <div className="preview-description">
               <p className="preview-user-greet">
-                Looking good, {profileDetail?.firstName}
+                Looking good, {profileDetail?.userId.firstName}
               </p>
               <p className="preview-user-msg">
                 You can preview your profile here.
@@ -81,7 +81,7 @@ const ProfileView = () => {
               <img src={profileUrl} alt="profile_picture" />
             </div>
             <div className="profile-detail">
-              <h3 className="user-name">{`${profileDetail?.firstName} ${profileDetail?.lastName}`}</h3>
+              <h3 className="user-name">{`${profileDetail?.userId.firstName} ${profileDetail?.userId.lastName}`}</h3>
               <p className="user-location">{`Kathmandu, ${profileDetail?.country}`}</p>
             </div>
           </div>

@@ -37,6 +37,11 @@ a {
   color: $black-tint-3;
 }
 
+button {
+  border: none;
+  cursor: pointer;
+}
+
 @media (max-width: 576px) {
   html {
     font-size: 50%;

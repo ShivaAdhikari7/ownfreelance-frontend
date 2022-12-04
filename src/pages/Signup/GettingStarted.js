@@ -18,11 +18,13 @@ const GettingStarted = () => {
 
   const navigateToClientRegistration = () => {
     clientCtx.setUserType('Client');
+    localStorage.setItem('userType', 'Client');
     navigate('/add/client/headline');
   };
 
   const navigateToFreelancerRegistration = () => {
     freelancerCtx.setUserType('Freelancer');
+    localStorage.setItem('userType', 'Freelancer');
     navigate('/add/title');
   };
 
