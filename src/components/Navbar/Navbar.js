@@ -23,7 +23,7 @@ const Navbar = () => {
             {
               <li className="nav-item mx-3">
                 <NavLink
-                  to={'/login'}
+                  to={'/user/login'}
                   className="nav-link nav-link-login my-2 px-3 py-3"
                 >
                   Login
