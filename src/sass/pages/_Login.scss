@@ -4,15 +4,48 @@
   border-radius: 1rem;
 }
 
+.login-option-separator {
+  gap: 1.2rem;
+
+  .line {
+    height: 0.1rem;
+    background-color: $grey2-300;
+  }
+
+  .separator-text {
+    font-size: 1.8rem;
+    font-weight: $font-weight-bold;
+  }
+}
+
 .btn-apple {
   background-color: $white;
   color: $black-tint-3;
   font-size: 1.6rem;
   border: 0.1rem solid $grey1-600;
+
+  &:hover {
+    background-color: $white;
+    color: $black-tint-3;
+    border: 0.1rem solid $grey1-600;
+  }
 }
 
 .btn-google {
   background-color: $google-color;
   color: $white;
   font-size: 1.6rem;
+
+  &:hover {
+    background-color: $google-color;
+    color: $white;
+  }
+}
+
+.btn-apple,
+.btn-google {
+  img {
+    max-width: 5%;
+    border-radius: 50%;
+  }
 }
