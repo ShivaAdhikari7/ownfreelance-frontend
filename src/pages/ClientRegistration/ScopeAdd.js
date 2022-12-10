@@ -199,8 +199,9 @@ const Scope = () => {
           <Button
             onClick={navigateToBudget}
             className="btn btn-registration btn-round"
-            label="Next"
-          />
+          >
+            Next
+          </Button>
         </div>
       </div>
     </>

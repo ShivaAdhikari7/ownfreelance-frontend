@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import Navbar from 'components/Navbar/Navbar';
@@ -10,7 +10,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const CustomerLogin = async e => {
     e.preventDefault();
@@ -35,7 +35,7 @@ const Login = () => {
 
       navigate('/dashboard');
     } catch (err) {
-      setMessage('Invalid credentials');
+      setErrorMessage('Invalid credentials');
     }
   };
 
@@ -45,73 +45,65 @@ const Login = () => {
       <div className="container overflow-hidden section-signup ">
         <div className="row row-cols-1 row-cols-md-1 gx-5 gy-5">
           <div
-            className="signup-form m-5 align-items-center w-50 m-auto"
+            className="login-form mt-5 align-items-center m-auto p-5"
             id="flex-login"
           >
             <div>
-              <h1 className="page-title m-5" id="text-login">
-                Login to OwnFreelance!!
-              </h1>
-              <p style={{ color: 'red' }} className="m-5">
-                {message}
+              <h1 className="page-title">Login to OwnFreelance!!</h1>
+              {errorMessage && <p className="error-msg">{errorMessage}</p>}
+            </div>
+
+            <form className="signup-form-controls w-100 d-flex flex-column">
+              <Input
+                id="email"
+                label="Email address"
+                type="email"
+                placeholder="Enter email address"
+                name="email"
+                onChange={e => setEmail(e.target.value)}
+              />
+
+              <Input
+                id="password"
+                label="Password"
+                type="password"
+                placeholder="Enter Password"
+                name="password"
+                onChange={e => setPassword(e.target.value)}
+              />
+
+              <div className="form-action text-center">
+                <Button
+                  className="btn-round btn-submit w-100"
+                  type="submit"
+                  onClick={CustomerLogin}
+                >
+                  Continue with Email
+                </Button>
+              </div>
+              <p className="pt-5" id="text-login">
+                or
               </p>
-            </div>
-
-            <div>
-              <form>
-                <div className="signup-form-controls w-75 m-auto d-flex flex-column">
-                  <Input
-                    id="email"
-                    label="Email address"
-                    type="email"
-                    placeholder="Enter email address"
-                    name="email"
-                    onChange={e => setEmail(e.target.value)}
-                  />
-
-                  <Input
-                    id="password"
-                    label="Password"
-                    type="password"
-                    placeholder="Enter Password"
-                    name="password"
-                    onChange={e => setPassword(e.target.value)}
-                  />
-                </div>
-
-                <div className="form-action text-center">
-                  <Button
-                    className="btn-round btn-submit "
-                    type="submit"
-                    label="Continue with Email"
-                    onClick={CustomerLogin}
-                  />
-                </div>
-                <p className="pt-5" id="text-login">
-                  or
-                </p>
-                <div className="form-action text-center">
-                  <Button
-                    className="btn-round btn-google "
-                    type="submit"
-                    label="Continue with Google"
-                  />
-                </div>
-                <div className="form-action text-center">
-                  <Button
-                    className="btn-round btn-apple "
-                    type="submit"
-                    label="Continue with Apple"
-                  />
-                </div>
-              </form>
-            </div>
+              <div className="form-action text-center">
+                <Button
+                  className="btn-round btn-google p-3 w-100"
+                  type="submit"
+                >
+                  Continue With Google
+                </Button>
+              </div>
+              <div className="form-action text-center">
+                <Button className="btn-round btn-apple p-3 w-100" type="submit">
+                  Continue With Apple
+                </Button>
+              </div>
+            </form>
 
             <div className="login-display text-center d-flex mt-5 justify-content-center">
               <p className="login-text">Don't Have an account?</p>
-              <a href="/" className="login-link">
+              <NavLink to="/signup" className="login-link">
                 Register Here
-              </a>
+              </NavLink>
             </div>
           </div>
         </div>

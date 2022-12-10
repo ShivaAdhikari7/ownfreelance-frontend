@@ -152,11 +152,9 @@ const FreelancerPreferences = () => {
           </div>
 
           <div className="form-action text-center form-btn">
-            <Button
-              className="btn-round btn-submit"
-              type="submit"
-              label="Next"
-            />
+            <Button className="btn-round btn-submit" type="submit">
+              Next
+            </Button>
           </div>
         </form>
       </div>

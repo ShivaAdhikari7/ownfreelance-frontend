@@ -149,11 +149,9 @@ const Description = () => {
             )}
           </div>
           <div className="text-end">
-            <Button
-              className="btn btn-registration btn-round"
-              type="submit"
-              label="Review"
-            />
+            <Button className="btn btn-registration btn-round" type="submit">
+              Review
+            </Button>
           </div>
         </form>
       </div>

@@ -90,7 +90,9 @@ const Skills = () => {
             className="btn btn-registration btn-round"
             label="Next"
             onClick={navigateToScope}
-          />
+          >
+            Next
+          </Button>
         </div>
       </div>
     </>

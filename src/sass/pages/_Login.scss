@@ -1,36 +1,18 @@
-#text-login{
-    text-align: center;
+.login-form {
+  width: 40%;
+  border: 0.1rem solid $grey2-100;
+  border-radius: 1rem;
 }
 
-#flex-login{
+.btn-apple {
+  background-color: $white;
+  color: $black-tint-3;
+  font-size: 1.6rem;
+  border: 0.1rem solid $grey1-600;
 }
 
-.btn-apple{
-    background-color: gray;
-    color: $white;
-    padding: 1.0rem 1.0rem;
-    font-size: 1.6rem;
-    margin-top: 1.0rem;
-    width: 75%;
-
-    &:hover {
-      background-color: white;
-      color: black;
-      border-color: antiquewhite;
-    }
-}
-
-.btn-google{
-    background-color: rgb(64, 156, 182);
-    color: $white;
-    padding: 1.0rem 1.0rem;
-    font-size: 1.6rem;
-    margin-top: 1.0rem;
-    width: 75%;
-
-    &:hover {
-      background-color: white;
-      color: black;
-      border-color: antiquewhite;
-    }
+.btn-google {
+  background-color: $google-color;
+  color: $white;
+  font-size: 1.6rem;
 }

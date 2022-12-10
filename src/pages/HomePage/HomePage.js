@@ -1,52 +1,51 @@
-import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
-import { BiLock } from "react-icons/bi";
-import { BiFile } from "react-icons/bi";
-import { GoChecklist } from "react-icons/go";
-import { GoPerson } from "react-icons/go";
-import { IoIosArrowBack } from "react-icons/io";
-import { IoIosArrowForward } from "react-icons/io";
+import { BiLock } from 'react-icons/bi';
+import { BiFile } from 'react-icons/bi';
+import { GoChecklist } from 'react-icons/go';
+import { GoPerson } from 'react-icons/go';
+import { IoIosArrowBack } from 'react-icons/io';
+import { IoIosArrowForward } from 'react-icons/io';
 
-import Button from "components/Button/Button";
-import Footer from "components/Footer/Footer";
+import Button from 'components/Button/Button';
+import Footer from 'components/Footer/Footer';
 
-import Navbar from "components/Navbar/Navbar";
+import Navbar from 'components/Navbar/Navbar';
 
-import heroImage from "../../assets/images/hero-img.jpg";
-import darazLogo from "../../assets/images/daraz.png";
-import ncellLogo from "../../assets/images/ncell-logo.png";
-import nabilBankLogo from "../../assets/images/nabil-bank.png";
-import imperialLogo from "../../assets/images/imperial-logo.png";
-import cgLogo from "../../assets/images/cg-logo.png";
-import testimonialImage1 from "../../assets/images/testimonial-1.jpg";
+import heroImage from '../../assets/images/hero-img.jpg';
+import darazLogo from '../../assets/images/daraz.png';
+import ncellLogo from '../../assets/images/ncell-logo.png';
+import nabilBankLogo from '../../assets/images/nabil-bank.png';
+import imperialLogo from '../../assets/images/imperial-logo.png';
+import cgLogo from '../../assets/images/cg-logo.png';
+import testimonialImage1 from '../../assets/images/testimonial-1.jpg';
 
 const HomePage = () => {
   const data = [
     {
       id: 1,
       // image: { testimonialImage1 },
-      image: "/assets/images/sneha.jpg",
-      name: "Sneha Sharma",
-      title: "manager",
+      image: '/assets/images/sneha.jpg',
+      name: 'Sneha Sharma',
+      title: 'manager',
       quote:
-        "It is extremely exciting that OwnFreelance has freelancersfrom all over the Nepal it broadens the talent pool and helps in developing country. One of the best things aboutOwnFreelance is that we can communicate in our native tongue.",
+        'It is extremely exciting that OwnFreelance has freelancersfrom all over the Nepal it broadens the talent pool and helps in developing country. One of the best things aboutOwnFreelance is that we can communicate in our native tongue.',
     },
     {
       id: 2,
-      image: "/assets/images/james-gun.jpg",
-      name: "James Gun",
-      title: "Project Manager",
+      image: '/assets/images/james-gun.jpg',
+      name: 'James Gun',
+      title: 'Project Manager',
       quote:
-        "It is extremely exciting that OwnFreelance has freelancersfrom all over the Nepal it broadens the talent pool and helps in developing country. One of the best things aboutOwnFreelance is that we can communicate in our native tongue.",
+        'It is extremely exciting that OwnFreelance has freelancersfrom all over the Nepal it broadens the talent pool and helps in developing country. One of the best things aboutOwnFreelance is that we can communicate in our native tongue.',
     },
     {
       id: 3,
-      image: "/assets/images/michale.jpg",
-      name: "Michael Mosely",
-      title: "Product Manager",
+      image: '/assets/images/michale.jpg',
+      name: 'Michael Mosely',
+      title: 'Product Manager',
       quote:
-        "It is extremely exciting that OwnFreelance has freelancersfrom all over the Nepal it broadens the talent pool and helps in developing country. One of the best things aboutOwnFreelance is that we can communicate in our native tongue.",
+        'It is extremely exciting that OwnFreelance has freelancersfrom all over the Nepal it broadens the talent pool and helps in developing country. One of the best things aboutOwnFreelance is that we can communicate in our native tongue.',
     },
   ];
   const [people] = useState(data);
@@ -70,11 +69,7 @@ const HomePage = () => {
       clearInterval(slider);
     };
   }, [index]);
-  const navigate = useNavigate();
 
-  const navigateToHomePage = () => {
-    navigate("/homepage");
-  };
   return (
     <>
       <Navbar />
@@ -92,14 +87,12 @@ const HomePage = () => {
                 Hire discuss and start.
               </p>
               <div className="btn-container d-flex">
-                <Button
-                  className="btn btn-get-started btn-round"
-                  label="Get Started"
-                />
-                <Button
-                  className="btn btn-explore btn-round"
-                  label="Explore fields"
-                />
+                <Button className="btn btn-get-started btn-round">
+                  Get Started
+                </Button>
+                <Button className="btn btn-explore btn-round">
+                  Explore fields
+                </Button>
               </div>
             </div>
             <div className="hero-image ">
@@ -153,12 +146,6 @@ const HomePage = () => {
                 <p>More accountable business</p>
                 <h3 className="service-title">Data Entry</h3>
               </div>
-              {/* <span className="arrow-left arrow d-flex align-items-center justify-content-center">
-                <IoIosArrowBack />
-              </span>
-              <span className="arrow-right arrow d-flex align-items-center justify-content-center">
-                <IoIosArrowForward />
-              </span> */}
             </div>
           </div>
         </div>
@@ -210,16 +197,16 @@ const HomePage = () => {
           <div className="row">
             <div className="testimonial-container ">
               {people.map((item, indexPeople) => {
-                const { id, image, name, title, quote } = item;
-                let position = "nextSlide";
+                const { id, name, title, quote } = item;
+                let position = 'nextSlide';
                 if (indexPeople === index) {
-                  position = "activeSlide";
+                  position = 'activeSlide';
                 }
                 if (
                   indexPeople === index - 1 ||
                   (index === 0 && indexPeople === people.length - 1)
                 ) {
-                  position = "lastSlide";
+                  position = 'lastSlide';
                 }
                 return (
                   <article className={position} key={id}>
@@ -240,23 +227,6 @@ const HomePage = () => {
                   </article>
                 );
               })}
-              {/* <img
-                src={testimonialImage1}
-                alt="Sneha Sharma founder of PustakBhandar"
-                className="testimonial-image"
-              />
-
-              <div className="testimonial-content  d-flex flex-column ">
-                <div className="testimonial-author">
-                  Sneha Sharma | <span>PustakBhandar</span>
-                </div>
-                <p className="testimonial">
-                  "It is extremely exciting that OwnFreelance has freelancers
-                  from all over the Nepal it broadens the talent pool and helps
-                  in developing country. One of the best things about
-                  OwnFreelance is that we can communicate in our native tongue."
-                </p>
-              </div> */}
               <span className="testimonial-arrow-left arrow d-flex align-items-center justify-content-center">
                 <IoIosArrowBack />
               </span>

@@ -195,8 +195,9 @@ const EducationForm = () => {
             <Button
               className="btn-round btn-submit btn-registration"
               type="submit"
-              label="Next"
-            />
+            >
+              Next
+            </Button>
           </div>
         </form>
       </div>

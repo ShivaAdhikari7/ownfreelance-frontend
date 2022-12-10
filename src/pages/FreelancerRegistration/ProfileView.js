@@ -8,6 +8,7 @@ import Navbar from 'components/Navbar/Navbar';
 import FreelancerRegistrationContext from 'context/FreelancerRegistration/freelancer-context';
 
 import profileCompleteImg from 'assets/images/profile_complete.png';
+import Button from 'components/Button/Button';
 
 const ProfileView = () => {
   const [profileDetail, setProfileDetail] = useState(null);
@@ -62,12 +63,12 @@ const ProfileView = () => {
                 <p className="preview-user-msg">
                   You can preview your profile here.
                 </p>
-                <button
+                <Button
                   onClick={submitProfile}
                   className="btn btn-success btn-profile-submit py-3"
                 >
                   Submit my profile
-                </button>
+                </Button>
               </div>
               <div className="preview-image">
                 <img src={profileCompleteImg} alt="freelancer-profile-pic" />

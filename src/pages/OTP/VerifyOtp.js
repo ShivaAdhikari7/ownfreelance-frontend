@@ -116,11 +116,9 @@ const VerifyOtp = () => {
             />
           </div>
 
-          <Button
-            type="submit"
-            className="btn-validate-otp mb-5"
-            label="Validate OTP"
-          />
+          <Button type="submit" className="btn-validate-otp mb-5">
+            Validate OTP
+          </Button>
         </form>
 
         <p className="otp-not-received-text">
