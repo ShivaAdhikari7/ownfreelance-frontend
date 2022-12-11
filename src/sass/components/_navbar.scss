@@ -20,6 +20,14 @@
     &:hover {
       background-color: $primary-tint-8;
     }
+
+    &:active {
+      background-color: $primary-tint-8;
+    }
+
+    &:visited {
+      background-color: $primary-tint-8;
+    }
   }
 
   .nav-link-msg {
