@@ -1,3 +1,4 @@
+const { AiFillHeart } = require('react-icons/ai');
 const { AiOutlineHeart } = require('react-icons/ai');
 
 const SearchResultFreelancer = ({
@@ -7,6 +8,8 @@ const SearchResultFreelancer = ({
   description,
   projectDuration,
   projectSize,
+  saved,
+  onSave,
 }) => {
   return (
     <div className="search-result">
@@ -14,7 +17,11 @@ const SearchResultFreelancer = ({
         <a href="/" className="search-link">
           {headline}
         </a>
-        <AiOutlineHeart className="heart-icon" />
+        {saved ? (
+          <AiFillHeart onClick={onSave} className="heart-icon filled" />
+        ) : (
+          <AiOutlineHeart onClick={onSave} className="heart-icon" />
+        )}
       </div>
       <div className="search-subtitle d-flex">
         <span className="search-hourly__rate">

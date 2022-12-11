@@ -6,7 +6,7 @@ const getSearchResults = async (searchQuery, currentPage) => {
   try {
     if (localStorage.getItem('userType') === 'Client') {
       ({ data } = await axios.get(
-        `http://localhost:90/freelancer?keyword=${searchQuery}&limit=15&page=${currentPage}`,
+        `http://localhost:90/freelancer?keyword=${searchQuery}&limit=5&page=${currentPage}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('__token__')}`,
@@ -15,7 +15,7 @@ const getSearchResults = async (searchQuery, currentPage) => {
       ));
     } else if (localStorage.getItem('userType') === 'Freelancer') {
       ({ data } = await axios.get(
-        `http://localhost:90/client?keyword=${searchQuery}&limit=15&page=${currentPage}`,
+        `http://localhost:90/client?keyword=${searchQuery}&limit=5&page=${currentPage}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('__token__')}`,

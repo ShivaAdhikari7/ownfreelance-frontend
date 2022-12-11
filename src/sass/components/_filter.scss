@@ -1,0 +1,19 @@
+.sort-option {
+  &:not(:last-child) {
+    border-bottom: 0.1rem solid $grey1-600;
+  }
+
+  .filter-input-field {
+    gap: 0.8rem;
+
+    input {
+      @include size(1.6rem);
+
+      accent-color: $primary-color;
+    }
+
+    label {
+      font-size: 1.6rem;
+    }
+  }
+}

@@ -1,19 +1,26 @@
-.section-main {
+.section-search {
   padding: 1.2rem 4.8rem;
   margin-bottom: 4.8rem;
+  display: grid;
+  grid-template-columns: 30fr 70fr;
 
   .filter-section {
-    width: 20%;
-    height: auto;
-    padding: 1.2rem;
     border-radius: 0.5rem;
   }
 
   .search-section {
-    width: 80%;
     border: 0.05rem solid $grey1-600;
     border-radius: 0.5rem;
-    padding: 1.2rem;
+
+    .btn-sort {
+      font-size: 1.6rem;
+      background-color: $black-tint-6;
+      color: $white;
+
+      &:hover {
+        background-color: $black-tint-5;
+      }
+    }
 
     .search-box {
       font-size: 1.4rem;
@@ -78,6 +85,17 @@
             border-radius: 50%;
             border: 0.1rem solid $grey2-600;
             cursor: pointer;
+            transition: all 0.35s;
+
+            path {
+              fill: $black-tint-6;
+            }
+
+            &.filled {
+              path {
+                fill: $primary-color;
+              }
+            }
           }
         }
         .search-subtitle {

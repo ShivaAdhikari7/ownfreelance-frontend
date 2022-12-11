@@ -1,15 +1,19 @@
 import { useState, useEffect, useCallback } from 'react';
 import { FiSearch } from 'react-icons/fi';
-import { MdOutlineRssFeed } from 'react-icons/md';
+import { MdOutlineRssFeed, MdSort } from 'react-icons/md';
 
 import Navbar from 'components/Navbar/Navbar';
 import SearchResultFreelancer from 'components/Search/SearchResultFreelancer';
 import SearchResultClient from 'components/Search/SearchResultClient';
+import FreelancerFilter from 'components/Sorting/FreelancerFilter';
 
 import LoadingSpinner from 'components/Spinner/LoadingSpinner';
 import Pagination from 'components/Pagination/Pagination';
+import Button from 'components/Button/Button';
 
 import getSearchResults from 'api/getSearchResults';
+import axios from 'axios';
+import Footer from 'components/Footer/Footer';
 
 const Search = () => {
   const [searchResults, setSearchResults] = useState([]);
@@ -18,19 +22,13 @@ const Search = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [finalQuery, setFinalQuery] = useState('');
+  const [isSaved, setIsSaved] = useState(false);
+  const [hourlyRateIsHighest, setHourlyRateIsHighest] = useState(true);
+  const [filters, setFilters] = useState([]);
 
-  useEffect(() => {
-    let timer;
-    let delay = 750;
-
-    clearTimeout(timer);
-
-    timer = setTimeout(() => {
-      setFinalQuery(searchQuery);
-    }, delay);
-
-    return () => clearTimeout(timer);
-  }, [searchQuery]);
+  const hourlyRateChangeHandler = () => {
+    setHourlyRateIsHighest(prevState => !prevState);
+  };
 
   const getPaginatedResults = useCallback(async () => {
     setIsLoading(true);
@@ -47,6 +45,101 @@ const Search = () => {
       setIsLoading(false);
     }
   }, [currentPage, finalQuery]);
+
+  useEffect(() => {
+    const getFilteredData = async () => {
+      setIsLoading(true);
+
+      let apiStr = '';
+      if (filters.length > 0) {
+        filters.forEach((filter, i) => {
+          apiStr += `scope.${filter.filterName}=${filter.label}${
+            i !== filters.length - 1 ? '&' : ''
+          }`;
+        });
+      }
+
+      try {
+        if (filters && filters.length > 0) {
+          const res = await axios.get(`http://localhost:90/client?${apiStr}`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('__token__')}`,
+            },
+          });
+
+          setIsLoading(false);
+          setTotalResults(res.data.data.result);
+
+          localStorage.getItem('userType') === 'Client'
+            ? setSearchResults(res.data.data.freelancers)
+            : setSearchResults(res.data.data.clients);
+        } else {
+          await getPaginatedResults();
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getFilteredData();
+  }, [filters, getPaginatedResults]);
+
+  useEffect(() => {
+    const getData = async () => {
+      let res;
+
+      setIsLoading(true);
+      if (localStorage.getItem('userType') === 'Client') {
+        res = hourlyRateIsHighest
+          ? await axios.get('http://localhost:90/freelancer?sort=-hourlyRate', {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem('__token__')}`,
+              },
+            })
+          : await axios.get('http://localhost:90/freelancer?sort=hourlyRate', {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem('__token__')}`,
+              },
+            });
+      } else {
+        res = hourlyRateIsHighest
+          ? await axios.get('http://localhost:90/client?sort=-hourlyRate', {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem('__token__')}`,
+              },
+            })
+          : await axios.get('http://localhost:90/client?sort=hourlyRate', {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem('__token__')}`,
+              },
+            });
+      }
+
+      setIsLoading(false);
+      localStorage.getItem('userType') === 'Client'
+        ? setSearchResults(res.data.data.freelancers)
+        : setSearchResults(res.data.data.clients);
+    };
+
+    getData();
+  }, [hourlyRateIsHighest]);
+
+  const saveHandler = () => {
+    setIsSaved(prevVal => !prevVal);
+  };
+
+  useEffect(() => {
+    let timer;
+    let delay = 750;
+
+    clearTimeout(timer);
+
+    timer = setTimeout(() => {
+      setFinalQuery(searchQuery);
+    }, delay);
+
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
 
   useEffect(() => {
     const getResults = async () => {
@@ -66,17 +159,22 @@ const Search = () => {
     await getPaginatedResults(finalQuery, currentPage);
   };
 
+  const filtersHandler = useCallback(filters => {
+    setFilters(filters);
+  }, []);
+
   return (
     <>
       <Navbar />
       <div className="container mt-5">
         <div className="row">
-          <div className="section-main d-flex justify-content-around ">
-            <div className="filter-section py-5">
-              <h2>Filter By:</h2>
+          <div className="section-search">
+            <div className="filter-section py-5 px-4">
+              <h2 className="mb-3">Filter By:</h2>
+              <FreelancerFilter getAllFilters={filtersHandler} />
             </div>
             <div className="search-section p-5">
-              <div className="mb-5">
+              <div className="mb-5 pb-3">
                 <h2 className="mb-4">Search Here</h2>
 
                 <form onSubmit={searchSubmitHandler} className="d-flex">
@@ -94,19 +192,25 @@ const Search = () => {
                 </form>
               </div>
 
-              <div className="search-stats d-flex align-items-center mb-2">
-                <MdOutlineRssFeed />
-                <span>
-                  <strong>{totalResults}</strong>{' '}
-                  {localStorage.getItem('userType') === 'Freelancer'
-                    ? 'Jobs'
-                    : `Freelancer${totalResults > 1 ? 's ' : ' '}`}
-                  found
-                </span>
+              <div className="d-flex align-items-center justify-content-between mt-5">
+                <div className="search-stats d-flex align-items-center mb-2">
+                  <MdOutlineRssFeed />
+                  <span>
+                    <strong>{totalResults}</strong>{' '}
+                    {localStorage.getItem('userType') === 'Freelancer'
+                      ? `Job${totalResults > 1 ? 's ' : ' '}`
+                      : `Freelancer${totalResults > 1 ? 's ' : ' '}`}
+                    found
+                  </span>
+                </div>
+
+                <Button onClick={hourlyRateChangeHandler} className="btn-sort">
+                  Sort by hourly rate <MdSort />
+                </Button>
               </div>
               <div className="search-result-section">
                 <div className="search-results d-flex flex-column">
-                  {!isLoading ? (
+                  {!isLoading && searchResults ? (
                     searchResults.map(result =>
                       localStorage.getItem('userType') === 'Client' ? (
                         <SearchResultClient
@@ -118,6 +222,8 @@ const Search = () => {
                           bio={result.bio}
                           skills={result.skills}
                           jobTitle={result.jobTitle}
+                          onSave={saveHandler}
+                          saved={isSaved}
                         />
                       ) : localStorage.getItem('userType') === 'Freelancer' ? (
                         <SearchResultFreelancer
@@ -127,6 +233,8 @@ const Search = () => {
                           description={result.description}
                           projectDuration={result.scope.projectDuration}
                           projectSize={result.scope.projectSize}
+                          onSave={saveHandler}
+                          saved={isSaved}
                         />
                       ) : (
                         ''
@@ -136,7 +244,7 @@ const Search = () => {
                     <LoadingSpinner />
                   )}
                 </div>
-                {searchResults.length > 1 && (
+                {searchResults && searchResults.length >= 1 && (
                   <Pagination
                     className="w-50 ml-auto justify-content-end mt-5"
                     currentPage={currentPage}
@@ -148,6 +256,7 @@ const Search = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };
