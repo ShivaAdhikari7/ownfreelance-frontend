@@ -19,6 +19,10 @@ const Navbar = () => {
     setDisplayUserModal(prevState => !prevState);
   };
 
+  const handleLogout = () => {
+    localStorage.clear('__token__').clear('userType');
+  };
+
   return (
     <nav className="py-3 navbar navbar-expand-lg bg-custom navbar-custom">
       <div className="container-fluid">
@@ -177,7 +181,8 @@ const Navbar = () => {
 
                       <div className="controls d-flex flex-column align-self-start">
                         <NavLink
-                          to="/"
+                          onClick={handleLogout}
+                          to="/login"
                           className="d-flex align-items-center justify-content-between text-decoration-none"
                         >
                           <BiLogOut />
