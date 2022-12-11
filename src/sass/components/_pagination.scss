@@ -1,0 +1,22 @@
+.pagination-container {
+  font-size: 2rem;
+  gap: 2.4rem;
+
+  .page-item {
+    background-color: $white;
+    color: $grey2-800;
+    height: 3.6rem;
+    width: 3.6rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.15);
+
+    &.disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    &.page-item-active {
+      background-color: $primary-color;
+      color: $white;
+    }
+  }
+}
