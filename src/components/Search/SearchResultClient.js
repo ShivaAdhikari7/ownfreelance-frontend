@@ -11,9 +11,10 @@ const SearchResultClient = ({
   jobTitle,
   saved,
   onSave,
+  onClick,
 }) => {
   return (
-    <div className="search-result search-result-client">
+    <div onClick={onClick} className="search-result search-result-client">
       <div className="search-title d-flex align-items-center justify-content-between">
         <div className="search-personal__details d-flex align-items-center mb-4">
           <img

@@ -25,8 +25,17 @@
       background-color: $primary-tint-8;
     }
 
-    &:visited {
-      background-color: $primary-tint-8;
+    &.active {
+      background-color: transparent;
+      color: $black-tint-1;
+
+      &:hover {
+        background-color: $primary-tint-8;
+      }
+
+      &:active {
+        background-color: $primary-tint-8;
+      }
     }
   }
 

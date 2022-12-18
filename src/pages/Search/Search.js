@@ -2,6 +2,8 @@ import { useState, useEffect, useCallback } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import { MdOutlineRssFeed, MdSort } from 'react-icons/md';
 
+import { useNavigate } from 'react-router-dom';
+
 import Navbar from 'components/Navbar/Navbar';
 import SearchResultFreelancer from 'components/Search/SearchResultFreelancer';
 import SearchResultClient from 'components/Search/SearchResultClient';
@@ -16,6 +18,8 @@ import axios from 'axios';
 import Footer from 'components/Footer/Footer';
 
 const Search = () => {
+  const navigate = useNavigate();
+
   const [searchResults, setSearchResults] = useState([]);
   const [totalResults, setTotalResults] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
@@ -163,6 +167,10 @@ const Search = () => {
     setFilters(filters);
   }, []);
 
+  const navigateToDetailsPage = id => {
+    navigate(`/freelancer/${id}`);
+  };
+
   return (
     <>
       <Navbar />
@@ -224,6 +232,7 @@ const Search = () => {
                           jobTitle={result.jobTitle}
                           onSave={saveHandler}
                           saved={isSaved}
+                          onClick={navigateToDetailsPage.bind(null, result._id)}
                         />
                       ) : localStorage.getItem('userType') === 'Freelancer' ? (
                         <SearchResultFreelancer

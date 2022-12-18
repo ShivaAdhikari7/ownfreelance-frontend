@@ -23,6 +23,7 @@ import VerificationSuccessful from 'pages/Signup/VerificationSuccessful';
 import ProfileView from 'pages/FreelancerRegistration/ProfileView';
 import HomePage from 'pages/HomePage/HomePage';
 import Search from 'pages/Search/Search';
+import Detail from 'pages/Detail/Detail';
 
 const App = () => {
   return (
@@ -52,6 +53,7 @@ const App = () => {
       <Route path="/add/client/description" element={<Description />} />
       <Route path="/" element={<HomePage />} />
       <Route path="/search" element={<Search />} />
+      <Route path="/freelancer/:id" element={<Detail />} />
     </Routes>
   );
 };
