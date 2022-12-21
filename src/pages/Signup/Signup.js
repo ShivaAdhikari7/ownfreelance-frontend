@@ -7,10 +7,13 @@ import Input from 'components/Input/Input';
 import Button from 'components/Button/Button';
 
 import signUpImg from 'assets/images/sign_up_page_img.jpg';
+import Spinner from 'components/Spinner/Spinner';
 
 const Signup = () => {
   const [isPrivacyChecked, setIsPrivacyChecked] = useState(false);
   const navigate = useNavigate();
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -109,21 +112,29 @@ const Signup = () => {
       country,
     };
 
-    const res = await axios.post('http://localhost:90/user/register', data);
-    localStorage.setItem('__token__', res.data.token);
+    try {
+      setIsLoading(true);
 
-    const response = await axios.post('http://localhost:90/otp/send', null, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('__token__')}`,
-      },
-    });
+      const res = await axios.post('http://localhost:90/user/register', data);
+      localStorage.setItem('__token__', res.data.token);
 
-    console.log(response);
+      await axios.post('http://localhost:90/otp/send', null, {
+        headers: {
+          Authorization: `Bearer ${res.data.token}`,
+        },
+      });
 
-    navigate('/otp/verify', { state: { email } });
+      navigate('/otp/verify', { state: { email } });
+
+      setIsLoading(false);
+    } catch (err) {
+      setIsLoading(false);
+    }
   };
 
-  return (
+  return isLoading ? (
+    <Spinner isVisible={isLoading} />
+  ) : (
     <>
       <Navbar />
       <div className="container overflow-hidden section-signup">

@@ -1,0 +1,39 @@
+.loader-container {
+  padding: 2.4rem;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: rgba(255, 255, 255, 0.25);
+
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(0.35rem);
+
+  z-index: 99999;
+}
+
+.loader {
+  width: 6.4rem;
+  height: 6.4rem;
+
+  border-radius: 50%;
+
+  animation: rotate 0.75s linear infinite;
+
+  border: 0.6rem solid $primary-color;
+  border-color: $primary-color transparent $primary-color transparent;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+} ;

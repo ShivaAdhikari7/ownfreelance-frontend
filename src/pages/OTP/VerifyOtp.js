@@ -6,10 +6,14 @@ import Input from 'components/Input/Input';
 import Navbar from 'components/Navbar/Navbar';
 import axios from 'axios';
 
+import Spinner from 'components/Spinner/Spinner';
+
 const VerifyOtp = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
-  const email  = state?.email;
+  const email = state?.email;
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const [otpVal1, setOtpVal1] = useState('');
   const [otpVal2, setOtpVal2] = useState('');
@@ -45,22 +49,31 @@ const VerifyOtp = () => {
 
     const otp = +`${otpVal1}${otpVal2}${otpVal3}${otpVal4}`;
 
-    const res = await axios.post(
-      'http://localhost:90/otp/verify',
-      { otp },
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('__token__')}`,
-        },
-      }
-    );
+    try {
+      setIsLoading(true);
+      const res = await axios.post(
+        'http://localhost:90/otp/verify',
+        { otp },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('__token__')}`,
+          },
+        }
+      );
 
-    if (res.data.verified) {
-      navigate('/otp/success');
+      if (res.data.verified) {
+        navigate('/otp/success');
+      }
+
+      setIsLoading(false);
+    } catch (err) {
+      setIsLoading(false);
     }
   };
 
-  return (
+  return isLoading ? (
+    <Spinner />
+  ) : (
     <>
       <Navbar />
       <div className="verify-otp-container text-center">

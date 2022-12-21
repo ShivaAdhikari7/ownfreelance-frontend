@@ -4,7 +4,7 @@
 
   .filter-section {
     width: 20%;
-    border: 2px solid red;
+    border: 2px solid $grey1-600;
     height: auto;
     padding: 1.2rem;
   }
@@ -15,81 +15,99 @@
     padding: 1.2rem;
 
     .search-box {
-      width: 80%;
-      padding: 1rem 1.2rem;
-      font-size: 1.6rem;
-      border: 1px solid $grey2-600;
+      font-size: 1.4rem;
+      border: 0.1rem solid $grey2-600;
       border-radius: 10rem;
-      position: relative;
-      overflow: hidden;
-      border-right: none;
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
     }
+
     .search-icon {
-      position: absolute;
       font-size: 2rem;
-      top: 17.9%;
-      right: 23%;
       color: $white;
-      background-color: $black;
-      padding: 0.9rem 1rem;
+      background-color: $primary-color;
       border-radius: 1rem;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
     }
-    .search-result {
-      margin-top: 2rem;
-      padding: 1.2rem 2.4rem;
-      border-radius: 1rem;
-      background-color: $grey1-200;
-      box-shadow: 0 2px 1rem rgba($black, 0.2);
 
-      .search-title {
-        justify-content: space-between;
-        margin-bottom: 2rem;
+    .search-results {
+      gap: 1.6rem;
+      .search-result {
+        margin-top: 2rem;
+        padding: 1.2rem 2.4rem;
+        border-radius: 1rem;
+        background-color: $grey1-200;
+        box-shadow: 0 2px 1rem rgba($black, 0.2);
 
-        .search-link {
-          text-decoration: none;
-          font-size: 1.8rem;
+        .search-title {
+          .search-link {
+            text-decoration: none;
+            font-size: 2rem;
+            font-weight: $font-weight-bold;
+            transition: all 0.35s;
+
+            &:hover {
+              color: $primary-color;
+            }
+          }
+          .heart-icon {
+            font-size: 3.6rem;
+            font-weight: $font-weight-bold;
+            padding: 0.5rem;
+            border-radius: 50%;
+            border: 0.1rem solid $grey2-600;
+            cursor: pointer;
+          }
         }
-        .heart-icon {
-          border: 1px solid $black;
-          padding: 5px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-weight: 700;
-          border-radius: 50%;
-          cursor: pointer;
-          width: 4%;
-          height: 4%;
+        .search-subtitle {
+          font-size: 1.4rem;
+          gap: 3rem;
+          margin-bottom: 2rem;
         }
-      }
-      .search-subtitle {
-        font-size: 1.2rem;
-        gap: 3rem;
-        margin-bottom: 2rem;
-      }
-      .search-description {
-        font-size: 1.4rem;
-        line-height: 1.6;
-        text-align: justify;
-        margin-bottom: 2rem;
-      }
-      .search-skills {
-        gap: 2rem;
+        .search-description {
+          font-size: 1.6rem;
+          line-height: 1.6;
+          margin-bottom: 2rem;
+        }
+        .search-skills {
+          gap: 2rem;
 
-        & span {
-          background-color: $grey2-200;
-          padding: 1.2rem 2.4rem;
-          border-radius: 10rem;
-          font-size: 1.2rem;
-          color: #555;
+          & span {
+            background-color: $grey2-200;
+            padding: 1.2rem 2.4rem;
+            border-radius: 10rem;
+            font-size: 1.4rem;
+            color: $black-tint-2;
+          }
         }
       }
     }
   }
 }
 
-.profile-image {
-  width: 10%;
+.search-personal__details {
+  gap: 1.6rem;
+  .profile-image {
+    @include size(10rem);
+  }
+
+  .personal__details {
+    gap: 0.4rem;
+    font-size: 1.4rem;
+
+    .name {
+      font-size: 1.6rem;
+      font-weight: $font-weight-bold;
+      color: $primary-color;
+    }
+
+    .job-title {
+      font-weight: $font-weight-bold;
+    }
+
+    .country {
+      color: $grey2-800;
+    }
+  }
 }
