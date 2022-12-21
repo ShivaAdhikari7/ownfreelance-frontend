@@ -1,19 +1,33 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import Navbar from 'components/Navbar/Navbar';
 import Input from 'components/Input/Input';
 import Button from 'components/Button/Button';
 
+import appleLogo from 'assets/images/apple-logo.png';
+import googleLogo from 'assets/images/google-logo.png';
+
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const [emailHasError, setEmailHasError] = useState(false);
+  const [passwordHasError, setPasswordHasError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const formIsInvalid =
+    email.trim().length === 0 || password.trim().length === 0;
 
   const CustomerLogin = async e => {
     e.preventDefault();
+
+    if (email.trim().length === 0) setEmailHasError(true);
+    if (password.trim().length === 0) setPasswordHasError(true);
+
+    if (formIsInvalid) return;
+
     const data = {
       email: email,
       password: password,
@@ -38,7 +52,7 @@ const Login = () => {
 
       
     } catch (err) {
-      setMessage('Invalid credentials');
+      setErrorMessage('Invalid credentials');
     }
   };
 
@@ -48,73 +62,94 @@ const Login = () => {
       <div className="container overflow-hidden section-signup ">
         <div className="row row-cols-1 row-cols-md-1 gx-5 gy-5">
           <div
-            className="signup-form m-5 align-items-center w-50 m-auto"
+            className="login-form mt-5 align-items-center m-auto p-5"
             id="flex-login"
           >
             <div>
-              <h1 className="page-title m-5" id="text-login">
-                Login to OwnFreelance!!
-              </h1>
-              <p style={{ color: 'red' }} className="m-5">
-                {message}
-              </p>
+              <h2 className="heading-secondary mb-5 page-title">
+                Login to OwnFreelance
+              </h2>
+              {errorMessage && <p className="error-msg">{errorMessage}</p>}
             </div>
 
-            <div>
-              <form>
-                <div className="signup-form-controls w-75 m-auto d-flex flex-column">
-                  <Input
-                    id="email"
-                    label="Email address"
-                    type="email"
-                    placeholder="Enter email address"
-                    name="email"
-                    onChange={e => setEmail(e.target.value)}
-                  />
+            <form className="signup-form-controls w-100 d-flex flex-column">
+              <div>
+                <Input
+                  id="email"
+                  label="Email address"
+                  type="email"
+                  placeholder="Enter email address"
+                  name="email"
+                  className="mb-2"
+                  onChange={e => {
+                    setEmailHasError(e.target.value.trim().length === 0);
+                    setEmail(e.target.value);
+                  }}
+                />
+                {emailHasError && (
+                  <p className="error-msg">Email can not be empty.</p>
+                )}
+              </div>
 
-                  <Input
-                    id="password"
-                    label="Password"
-                    type="password"
-                    placeholder="Enter Password"
-                    name="password"
-                    onChange={e => setPassword(e.target.value)}
-                  />
-                </div>
+              <div>
+                <Input
+                  id="password"
+                  label="Password"
+                  type="password"
+                  placeholder="Enter Password"
+                  name="password"
+                  className="mb-2"
+                  onChange={e => {
+                    setPasswordHasError(e.target.value.trim().length === 0);
+                    setPassword(e.target.value);
+                  }}
+                />
+                {passwordHasError && (
+                  <p className="error-msg">Password can not be empty.</p>
+                )}
+              </div>
 
-                <div className="form-action text-center">
-                  <Button
-                    className="btn-round btn-submit "
-                    type="submit"
-                    label="Continue with Email"
-                    onClick={CustomerLogin}
-                  />
-                </div>
-                <p className="pt-5" id="text-login">
-                  or
-                </p>
-                <div className="form-action text-center">
-                  <Button
-                    className="btn-round btn-google "
-                    type="submit"
-                    label="Continue with Google"
-                  />
-                </div>
-                <div className="form-action text-center">
-                  <Button
-                    className="btn-round btn-apple "
-                    type="submit"
-                    label="Continue with Apple"
-                  />
-                </div>
-              </form>
-            </div>
+              <div className="form-action text-center">
+                <Button
+                  className="btn-round btn-submit w-100"
+                  type="submit"
+                  onClick={CustomerLogin}
+                >
+                  Continue with Email
+                </Button>
+              </div>
+              <div className="login-option-separator d-flex align-items-center justify-content-center my-3">
+                <span className="line w-25"></span>
+                <span className="separator-text">OR</span>
+                <span className="line w-25"></span>
+              </div>
+              <div className="form-action text-center">
+                <Button
+                  className="d-flex align-items-center justify-content-between btn-round btn-google p-3 w-100"
+                  type="submit"
+                >
+                  <img src={googleLogo} alt="Google logo" />
+                  Continue With Google
+                  <span></span>
+                </Button>
+              </div>
+              <div className="form-action text-center">
+                <Button
+                  className="d-flex align-items-center justify-content-between btn-round btn-apple p-3 w-100"
+                  type="submit"
+                >
+                  <img src={appleLogo} alt="Apple logo" />
+                  Continue With Apple
+                  <span></span>
+                </Button>
+              </div>
+            </form>
 
             <div className="login-display text-center d-flex mt-5 justify-content-center">
               <p className="login-text">Don't Have an account?</p>
-              <a href="/" className="login-link">
+              <NavLink to="/signup" className="login-link">
                 Register Here
-              </a>
+              </NavLink>
             </div>
           </div>
         </div>

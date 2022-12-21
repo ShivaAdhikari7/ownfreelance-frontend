@@ -1,4 +1,5 @@
 import { AiOutlineHeart } from 'react-icons/ai';
+import { AiFillHeart } from 'react-icons/ai';
 
 const SearchResultClient = ({
   profilePictureUrl,
@@ -8,9 +9,12 @@ const SearchResultClient = ({
   bio,
   skills,
   jobTitle,
+  saved,
+  onSave,
+  onClick,
 }) => {
   return (
-    <div className="search-result search-result-client">
+    <div onClick={onClick} className="search-result search-result-client">
       <div className="search-title d-flex align-items-center justify-content-between">
         <div className="search-personal__details d-flex align-items-center mb-4">
           <img
@@ -27,8 +31,12 @@ const SearchResultClient = ({
           </div>
         </div>
 
-        <span>
-          <AiOutlineHeart className="heart-icon" />
+        <span onClick={onSave}>
+          {saved ? (
+            <AiFillHeart className="heart-icon filled" />
+          ) : (
+            <AiOutlineHeart className="heart-icon" />
+          )}
         </span>
       </div>
       <div className="search-subtitle d-flex">

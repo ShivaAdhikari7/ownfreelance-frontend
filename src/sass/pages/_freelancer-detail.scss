@@ -1,0 +1,156 @@
+.freelancer-detail-section {
+  border: 0.1rem solid $grey1-600;
+  border-radius: 0.5rem;
+
+  .intro-section {
+    margin-bottom: 5.2rem;
+
+    .freelancer-profile-img {
+      @include size(12rem);
+    }
+
+    .freelancer-name {
+      font-size: 3rem;
+      letter-spacing: -0.1rem;
+    }
+
+    .location-detail {
+      font-size: 1.6rem;
+    }
+
+    .btn-hire {
+      font-size: 1.8rem;
+      border: none;
+    }
+
+    .heart-icon {
+      font-size: 2.4rem;
+    }
+  }
+
+  .left-sidebar {
+    border-right: 0.1rem solid $grey1-600;
+
+    .border-bottom {
+      border-bottom: 0.1rem solid $grey1-600;
+    }
+
+    h4 {
+      font-size: 2rem;
+    }
+
+    h5 {
+      font-size: 1.6rem;
+    }
+
+    strong {
+      font-size: 1.6rem;
+      font-weight: $font-weight-mid-bold;
+    }
+
+    span {
+      font-size: 1.4rem;
+    }
+  }
+
+  .job-description {
+    h2 {
+      font-size: 2.8rem;
+      letter-spacing: -0.1rem;
+    }
+
+    h4 {
+      font-size: 1.8em;
+    }
+
+    strong {
+      font-size: 2rem;
+      font-weight: $font-weight-mid-bold;
+    }
+
+    .bio {
+      font-size: 1.4rem;
+      line-height: 1.5;
+      border-bottom: 0.1rem solid $grey1-600;
+    }
+
+    .skills-container {
+      gap: 1rem;
+      flex-wrap: wrap;
+
+      span {
+        font-size: 1.4rem;
+        background-color: $primary-color;
+        color: $white;
+        padding: 0.8rem;
+        border-radius: 0.5rem;
+      }
+    }
+
+    .work-history-container {
+      gap: 1.6rem;
+
+      p {
+        font-size: 1.6rem;
+        border-bottom: 0.1rem solid $grey1-600;
+      }
+
+      .work-history {
+        border-bottom: 0.1rem solid $grey1-600;
+
+        h5 {
+          font-size: 1.6rem;
+        }
+
+        .icon-star {
+          font-size: 1.4rem;
+          fill: $primary-color;
+        }
+
+        span {
+          font-size: 1.2rem;
+          color: $grey1-800;
+        }
+
+        .testimonial {
+          font-size: 1.4rem;
+          font-style: italic;
+        }
+      }
+    }
+  }
+}
+
+.freelancer-employment-section {
+  border: 0.1rem solid $grey1-600;
+  border-radius: 1rem;
+
+  h3 {
+    font-size: 2.4rem;
+  }
+
+  .employment-histories {
+    gap: 3.2rem;
+
+    .employment-history {
+      h4 {
+        font-size: 1.8rem;
+      }
+
+      .location {
+        font-size: 1.4rem;
+      }
+
+      .date {
+        font-size: 1.2rem;
+        color: $grey2-700;
+      }
+
+      p {
+        font-size: 1.4rem;
+        line-height: 1.5;
+        border-bottom: 0.1rem solid $grey1-600;
+      }
+    }
+  }
+}

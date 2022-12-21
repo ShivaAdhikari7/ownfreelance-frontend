@@ -1,82 +1,84 @@
+import { NavLink } from 'react-router-dom';
+
 const Footer = () => {
   return (
-    <>
-      <div className="row">
-        <div className=" footer d-flex  justify-content-between">
+    <footer className="footer-container py-5">
+      <div className="container my-5">
+        <div className="footer d-flex  justify-content-between">
           <div className="footer_links-container">
-            <h3 className="text-center">Categories</h3>
-            <ul className="footer_links ">
+            <h3 className="mb-5">Categories</h3>
+            <ul className="footer_links p-0">
               <li>
-                <a href="#">Programming & Tech</a>
+                <NavLink to="/">Programming & Tech</NavLink>
               </li>
               <li>
-                <a href="#">Design & creativity</a>
+                <NavLink to="/">Design & creativity</NavLink>
               </li>
               <li>
-                <a href="#">Sales & Marketing</a>
+                <NavLink to="/">Sales & Marketing</NavLink>
               </li>
               <li>
-                <a href="#">Data Entry</a>
+                <NavLink to="/">Data Entry</NavLink>
               </li>
               <li>
-                <a href="#">Business</a>
+                <NavLink to="/">Business</NavLink>
               </li>
               <li>
-                <a href="#">Digital Marketing</a>
+                <NavLink to="/">Digital Marketing</NavLink>
               </li>
             </ul>
           </div>
           <div className="footer_links-container">
-            <h3 className="footer_about">About</h3>
-            <ul className="footer_links">
+            <h3 className="mb-5">About</h3>
+            <ul className="footer_links p-0">
               <li>
-                <a href="#">Careers</a>
+                <NavLink to="/">Careers</NavLink>
               </li>
               <li>
-                <a href="#">Press & News</a>
+                <NavLink to="/">Press & News</NavLink>
               </li>
               <li>
-                <a href="#">Privacy Policy</a>
+                <NavLink to="/">Privacy Policy</NavLink>
               </li>
               <li>
-                <a href="#">Terms of service</a>
-              </li>
-            </ul>
-          </div>
-          <div className="footer_links-container">
-            <h3 className="footer_support">Support</h3>
-            <ul className="footer_links">
-              <li>
-                <a href="#">Help & Support</a>
-              </li>
-              <li>
-                <a href="#">Trust & safety</a>
-              </li>
-              <li>
-                <a href="#">Selling on ownFreelance</a>
-              </li>
-              <li>
-                <a href="#">Buying on ownFreelance</a>
+                <NavLink to="/">Terms of service</NavLink>
               </li>
             </ul>
           </div>
           <div className="footer_links-container">
-            <h3>Programs</h3>
-            <ul className="footer_links">
+            <h3 className="mb-5">Support</h3>
+            <ul className="footer_links p-0">
               <li>
-                <a href="#">Events</a>
+                <NavLink to="/">Help & Support</NavLink>
               </li>
               <li>
-                <a href="#">Blogs</a>
+                <NavLink to="/">Trust & safety</NavLink>
               </li>
               <li>
-                <a href="#">Forums</a>
+                <NavLink to="/">Selling on ownFreelance</NavLink>
               </li>
               <li>
-                <a href="#">Podcasts</a>
+                <NavLink to="/">Buying on ownFreelance</NavLink>
+              </li>
+            </ul>
+          </div>
+          <div className="footer_links-container">
+            <h3 className="mb-5">Programs</h3>
+            <ul className="footer_links p-0">
+              <li>
+                <NavLink to="/">Events</NavLink>
               </li>
               <li>
-                <a href="#">Become a seller</a>
+                <NavLink to="/">Blogs</NavLink>
+              </li>
+              <li>
+                <NavLink to="/">Forums</NavLink>
+              </li>
+              <li>
+                <NavLink to="/">Podcasts</NavLink>
+              </li>
+              <li>
+                <NavLink to="/">Become NavLink seller</NavLink>
               </li>
             </ul>
           </div>
@@ -85,7 +87,7 @@ const Footer = () => {
           Copyright &copy; 2022 ownFreelance Ltd. All rights reserved
         </p>
       </div>
-    </>
+    </footer>
   );
 };
 

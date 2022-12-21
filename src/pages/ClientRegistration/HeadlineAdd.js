@@ -73,11 +73,9 @@ const Headline = () => {
             </ul>
           </div>
           <div className="text-end">
-            <Button
-              type="submit"
-              className="btn btn-registration btn-round"
-              label="Next"
-            />
+            <Button type="submit" className="btn btn-registration btn-round">
+              Next
+            </Button>
           </div>
         </form>
       </div>

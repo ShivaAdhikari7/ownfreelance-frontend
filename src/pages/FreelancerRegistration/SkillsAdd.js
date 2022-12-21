@@ -82,8 +82,9 @@ const SkillsAdd = () => {
           <Button
             onClick={skillsAddHandler}
             className="btn btn-registration btn-round"
-            label="Next"
-          />
+          >
+            Next
+          </Button>
         </div>
       </div>
     </>

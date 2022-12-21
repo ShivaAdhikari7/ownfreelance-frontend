@@ -273,8 +273,9 @@ const Signup = () => {
                     isPrivacyChecked ? '' : 'disabled'
                   }`}
                   type="submit"
-                  label="Create my account"
-                />
+                >
+                  Create my account
+                </Button>
               </div>
             </form>
 
