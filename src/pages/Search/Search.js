@@ -167,8 +167,8 @@ const Search = () => {
     setFilters(filters);
   }, []);
 
-  const navigateToDetailsPage = id => {
-    navigate(`/freelancer/${id}`);
+  const navigateToDetailPage = id => {
+    navigate(`/detail/${id}`);
   };
 
   return (
@@ -232,7 +232,7 @@ const Search = () => {
                           jobTitle={result.jobTitle}
                           onSave={saveHandler}
                           saved={isSaved}
-                          onClick={navigateToDetailsPage.bind(null, result._id)}
+                          onClick={navigateToDetailPage.bind(null, result._id)}
                         />
                       ) : localStorage.getItem('userType') === 'Freelancer' ? (
                         <SearchResultFreelancer
@@ -244,6 +244,7 @@ const Search = () => {
                           projectSize={result.scope.projectSize}
                           onSave={saveHandler}
                           saved={isSaved}
+                          onClick={navigateToDetailPage.bind(null, result._id)}
                         />
                       ) : (
                         ''

@@ -10,13 +10,12 @@ const SearchResultFreelancer = ({
   projectSize,
   saved,
   onSave,
+  onClick,
 }) => {
   return (
-    <div className="search-result">
+    <div onClick={onClick} className="search-result">
       <div className="search-title d-flex align-items-center justify-content-between mb-4">
-        <a href="/" className="search-link">
-          {headline}
-        </a>
+        <span className="search-link">{headline}</span>
         {saved ? (
           <AiFillHeart onClick={onSave} className="heart-icon filled" />
         ) : (
