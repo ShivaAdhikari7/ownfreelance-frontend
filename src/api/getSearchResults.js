@@ -1,33 +1,32 @@
 import axios from 'axios';
+import { USER_TYPE, TOKEN } from 'constants/utils';
 
 const getSearchResults = async (searchQuery, currentPage) => {
   let data;
 
   try {
-    if (localStorage.getItem('userType') === 'Client') {
+    if (USER_TYPE === 'Client') {
       ({ data } = await axios.get(
         `http://localhost:90/freelancer?keyword=${searchQuery}&limit=5&page=${currentPage}`,
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('__token__')}`,
+            Authorization: `Bearer ${TOKEN}`,
           },
         }
       ));
-    } else if (localStorage.getItem('userType') === 'Freelancer') {
+    } else if (USER_TYPE === 'Freelancer') {
       ({ data } = await axios.get(
         `http://localhost:90/client?keyword=${searchQuery}&limit=5&page=${currentPage}`,
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('__token__')}`,
+            Authorization: `Bearer ${TOKEN}`,
           },
         }
       ));
     }
 
     let result =
-      localStorage.getItem('userType') === 'Client'
-        ? data.data.freelancers
-        : data.data.clients;
+      USER_TYPE === 'Client' ? data.data.freelancers : data.data.clients;
 
     return [data.data.result, result];
   } catch (err) {

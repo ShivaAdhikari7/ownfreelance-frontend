@@ -9,10 +9,10 @@ import { MdSettings } from 'react-icons/md';
 
 import userIcon from 'assets/images/user-icon.png';
 import { Button } from 'react-bootstrap';
+import { USER_TYPE } from 'constants/utils';
 
 const Navbar = () => {
   const isLoggedIn = localStorage.getItem('__token__');
-
   const [displayUserModal, setDisplayUserModal] = useState(false);
 
   const userModalToggleHandler = () => {
@@ -174,9 +174,7 @@ const Navbar = () => {
 
                       <div className="user-info d-flex flex-column align-items-center mb-3">
                         <span className="user-name">Dikshak Poudel</span>
-                        <span className="user-type">
-                          {localStorage.getItem('userType')}
-                        </span>
+                        <span className="user-type">{USER_TYPE}</span>
                       </div>
 
                       <div className="controls d-flex flex-column align-self-start">

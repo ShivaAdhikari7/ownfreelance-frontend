@@ -16,6 +16,7 @@ import Button from 'components/Button/Button';
 import getSearchResults from 'api/getSearchResults';
 import axios from 'axios';
 import Footer from 'components/Footer/Footer';
+import { USER_TYPE, TOKEN } from 'constants/utils';
 
 const Search = () => {
   const navigate = useNavigate();
@@ -67,14 +68,14 @@ const Search = () => {
         if (filters && filters.length > 0) {
           const res = await axios.get(`http://localhost:90/client?${apiStr}`, {
             headers: {
-              Authorization: `Bearer ${localStorage.getItem('__token__')}`,
+              Authorization: `Bearer ${TOKEN}`,
             },
           });
 
           setIsLoading(false);
           setTotalResults(res.data.data.result);
 
-          localStorage.getItem('userType') === 'Client'
+          USER_TYPE === 'Client'
             ? setSearchResults(res.data.data.freelancers)
             : setSearchResults(res.data.data.clients);
         } else {
@@ -93,34 +94,34 @@ const Search = () => {
       let res;
 
       setIsLoading(true);
-      if (localStorage.getItem('userType') === 'Client') {
+      if (USER_TYPE === 'Client') {
         res = hourlyRateIsHighest
           ? await axios.get('http://localhost:90/freelancer?sort=-hourlyRate', {
               headers: {
-                Authorization: `Bearer ${localStorage.getItem('__token__')}`,
+                Authorization: `Bearer ${TOKEN}`,
               },
             })
           : await axios.get('http://localhost:90/freelancer?sort=hourlyRate', {
               headers: {
-                Authorization: `Bearer ${localStorage.getItem('__token__')}`,
+                Authorization: `Bearer ${TOKEN}`,
               },
             });
       } else {
         res = hourlyRateIsHighest
           ? await axios.get('http://localhost:90/client?sort=-hourlyRate', {
               headers: {
-                Authorization: `Bearer ${localStorage.getItem('__token__')}`,
+                Authorization: `Bearer ${TOKEN}`,
               },
             })
           : await axios.get('http://localhost:90/client?sort=hourlyRate', {
               headers: {
-                Authorization: `Bearer ${localStorage.getItem('__token__')}`,
+                Authorization: `Bearer ${TOKEN}`,
               },
             });
       }
 
       setIsLoading(false);
-      localStorage.getItem('userType') === 'Client'
+      USER_TYPE === 'Client'
         ? setSearchResults(res.data.data.freelancers)
         : setSearchResults(res.data.data.clients);
     };
@@ -205,7 +206,7 @@ const Search = () => {
                   <MdOutlineRssFeed />
                   <span>
                     <strong>{totalResults}</strong>{' '}
-                    {localStorage.getItem('userType') === 'Freelancer'
+                    {USER_TYPE === 'Freelancer'
                       ? `Job${totalResults > 1 ? 's ' : ' '}`
                       : `Freelancer${totalResults > 1 ? 's ' : ' '}`}
                     found
@@ -220,7 +221,7 @@ const Search = () => {
                 <div className="search-results d-flex flex-column">
                   {!isLoading && searchResults ? (
                     searchResults.map(result =>
-                      localStorage.getItem('userType') === 'Client' ? (
+                      USER_TYPE === 'Client' ? (
                         <SearchResultClient
                           key={result._id}
                           profilePictureUrl={result.profilePictureUrl}
@@ -234,7 +235,7 @@ const Search = () => {
                           saved={isSaved}
                           onClick={navigateToDetailPage.bind(null, result._id)}
                         />
-                      ) : localStorage.getItem('userType') === 'Freelancer' ? (
+                      ) : USER_TYPE === 'Freelancer' ? (
                         <SearchResultFreelancer
                           headline={result.headline}
                           skills={result.skills}

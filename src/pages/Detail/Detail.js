@@ -5,12 +5,11 @@ import axios from 'axios';
 
 import FreelancerDetail from './FreelancerDetail';
 import JobDetail from './JobDetail';
+import { USER_TYPE, TOKEN } from 'constants/utils';
 
 const Detail = () => {
   const { pathname } = useLocation();
   const id = pathname.split('/')[2];
-
-  console.log(id);
 
   const [data, setData] = useState(null);
 
@@ -18,24 +17,22 @@ const Detail = () => {
     const getData = async () => {
       let res;
 
-      if (localStorage.getItem('userType') === 'Client') {
+      if (USER_TYPE === 'Client') {
         res = await axios.get(`http://localhost:90/freelancer/${id}`, {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('__token__')}`,
+            Authorization: `Bearer ${TOKEN}`,
           },
         });
       } else {
         res = await axios.get(`http://localhost:90/client/${id}`, {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('__token__')}`,
+            Authorization: `Bearer ${TOKEN}`,
           },
         });
       }
 
       setData(
-        localStorage.getItem('userType') === 'Client'
-          ? res.data.freelancerData
-          : res.data.clientData
+        USER_TYPE === 'Client' ? res.data.freelancerData : res.data.clientData
       );
     };
 
@@ -43,7 +40,7 @@ const Detail = () => {
   }, [id]);
 
   return data ? (
-    localStorage.getItem('userType') === 'Client' ? (
+    USER_TYPE === 'Client' ? (
       <FreelancerDetail freelancerDetail={data} />
     ) : (
       <JobDetail jobDetail={data} />

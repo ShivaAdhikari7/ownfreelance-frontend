@@ -8,6 +8,8 @@ import axios from 'axios';
 
 import Spinner from 'components/Spinner/Spinner';
 
+import { TOKEN } from 'constants/utils';
+
 const VerifyOtp = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
@@ -56,7 +58,7 @@ const VerifyOtp = () => {
         { otp },
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('__token__')}`,
+            Authorization: `Bearer ${TOKEN}`,
           },
         }
       );

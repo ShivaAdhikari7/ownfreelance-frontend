@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 
+import { TOKEN } from 'constants/utils';
+
 import Input from 'components/Input/Input';
 import Button from 'components/Button/Button';
 import Navbar from 'components/Navbar/Navbar';
@@ -65,19 +67,9 @@ const Description = () => {
     data.append('hourlyRate', +budget);
     data.append('description', description);
 
-    console.log({
-      headline,
-      skills,
-      scope,
-      projectFile,
-      title,
-      budget,
-      description,
-    });
-
     const res = await axios.post('http://localhost:90/client/add', data, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('__token__')}`,
+        Authorization: `Bearer ${TOKEN}`,
       },
     });
 

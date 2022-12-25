@@ -1,7 +1,7 @@
+import { useContext } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import Signup from 'pages/Signup/Signup';
-
 import GettingStarted from 'pages/Signup/GettingStarted';
 import EducationForm from 'pages/FreelancerRegistration/EducationForm';
 import FreelancerPreferences from 'pages/FreelancerRegistration/FreelancerPreferences';
@@ -24,37 +24,187 @@ import ProfileView from 'pages/FreelancerRegistration/ProfileView';
 import HomePage from 'pages/HomePage/HomePage';
 import Search from 'pages/Search/Search';
 import Detail from 'pages/Detail/Detail';
-import JobDetail from 'pages/Detail/JobDetail';
+import ProtectedRoute from 'routes/ProtectedRoute';
+
+import AuthContext from 'context/AuthContext/auth-context';
 
 const App = () => {
+  const authCtx = useContext(AuthContext);
+
+  console.log(authCtx.isLoggedIn);
+
   return (
     <Routes>
-      <Route path="/otp/success" element={<SuccessfulOtp />} />
-      <Route path="/otp/verify" element={<VerifyOtp />} />
+      <Route
+        path="/"
+        element={authCtx.isLoggedIn ? <Dashboard /> : <HomePage />}
+      />
       <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/getstarted" element={<GettingStarted />} />
+
+      <Route
+        path="/otp/success"
+        element={
+          <ProtectedRoute>
+            <SuccessfulOtp />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/otp/verify"
+        element={
+          <ProtectedRoute>
+            <VerifyOtp />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/getstarted"
+        element={
+          <ProtectedRoute>
+            <GettingStarted />
+          </ProtectedRoute>
+        }
+      />
       <Route
         path="/verification_successful"
-        element={<VerificationSuccessful />}
+        element={
+          <ProtectedRoute>
+            <VerificationSuccessful />
+          </ProtectedRoute>
+        }
       />
-      <Route path="/add/title" element={<TitleAdd />} />
-      <Route path="/add/work/experience" element={<WorkExperience />} />
-      <Route path="/add/education/qualification" element={<EducationForm />} />
-      <Route path="/add/skills" element={<SkillsAdd />} />
-      <Route path="/add/bio" element={<BioAdd />} />
-      <Route path="/profile/submit" element={<ProfileView />} />
-      <Route path="/add/rate" element={<HourlyRateAdd />} />
-      <Route path="/add/preferences" element={<FreelancerPreferences />} />
-      <Route path="/add/client/headline" element={<Headline />} />
-      <Route path="/add/client/skills" element={<Skills />} />
-      <Route path="/add/client/scopes" element={<Scope />} />
-      <Route path="/add/client/budget" element={<Budget />} />
-      <Route path="/add/client/description" element={<Description />} />
-      <Route path="/" element={<HomePage />} />
-      <Route path="/search" element={<Search />} />
-      <Route path="/detail/:id" element={<Detail />} />
+
+      <Route
+        path="/add/title"
+        element={
+          <ProtectedRoute>
+            <TitleAdd />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/add/work/experience"
+        element={
+          <ProtectedRoute>
+            <WorkExperience />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/add/education/qualification"
+        element={
+          <ProtectedRoute>
+            <EducationForm />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/add/skills"
+        element={
+          <ProtectedRoute>
+            <SkillsAdd />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/add/bio"
+        element={
+          <ProtectedRoute>
+            <BioAdd />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/profile/submit"
+        element={
+          <ProtectedRoute>
+            <ProfileView />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/add/rate"
+        element={
+          <ProtectedRoute>
+            <HourlyRateAdd />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/add/preferences"
+        element={
+          <ProtectedRoute>
+            <FreelancerPreferences />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/add/client/headline"
+        element={
+          <ProtectedRoute>
+            <Headline />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/add/client/skills"
+        element={
+          <ProtectedRoute>
+            <Skills />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/add/client/scopes"
+        element={
+          <ProtectedRoute>
+            <Scope />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/add/client/budget"
+        element={
+          <ProtectedRoute>
+            <Budget />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/add/client/description"
+        element={
+          <ProtectedRoute>
+            <Description />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/search"
+        element={
+          <ProtectedRoute>
+            <Search />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/detail/:id"
+        element={
+          <ProtectedRoute>
+            <Detail />
+          </ProtectedRoute>
+        }
+      />
     </Routes>
   );
 };
