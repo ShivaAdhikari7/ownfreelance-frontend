@@ -47,10 +47,7 @@ const Login = () => {
       });
 
       localStorage.setItem('userType', res.data.user.userType);
-      
-     
-
-      
+      window.location = "/";     
     } catch (err) {
       setErrorMessage('Invalid credentials');
     }

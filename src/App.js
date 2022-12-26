@@ -27,6 +27,7 @@ import ClientProfile from 'pages/UserProfile/clientProfile';
 import FreelancerProfile from 'pages/UserProfile/freelancerProfile';
 import Forgot from 'pages/ForgotPassword/forgotPassword';
 import Detail from 'pages/Detail/Detail';
+import UpdateProfile from 'pages/UserProfile/updateFreelancerProfile';
 
 const App = () => {
   return (
@@ -60,6 +61,8 @@ const App = () => {
       <Route path="/freelancer/profile" element={<FreelancerProfile />} />
 
       <Route path="/forgot/password" element={<Forgot />} />
+      <Route path="/update/profile" element={<UpdateProfile />} />
+
 
 
       <Route path="/freelancer/:id" element={<Detail />} />
