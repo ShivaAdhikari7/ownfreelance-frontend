@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import Navbar from 'components/Navbar/Navbar';
+import { TOKEN } from 'constants/utils';
 
 import FreelancerRegistrationContext from 'context/FreelancerRegistration/freelancer-context';
 
@@ -28,7 +29,7 @@ const ProfileView = () => {
     const getProfileDetails = async () => {
       const res = await axios.get('http://localhost:90/user/me', {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('__token__')}`,
+          Authorization: `Bearer ${TOKEN}`,
         },
       });
 

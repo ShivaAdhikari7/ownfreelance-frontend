@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -9,8 +9,12 @@ import Button from 'components/Button/Button';
 import appleLogo from 'assets/images/apple-logo.png';
 import googleLogo from 'assets/images/google-logo.png';
 
+import AuthContext from 'context/AuthContext/auth-context';
+
 const Login = () => {
   const navigate = useNavigate();
+  const { setIsLoggedIn } = useContext(AuthContext);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailHasError, setEmailHasError] = useState(false);
@@ -47,7 +51,9 @@ const Login = () => {
       });
 
       localStorage.setItem('userType', res.data.user.userType);
-      window.location = "/";     
+
+      setIsLoggedIn(true);
+      navigate('/');
     } catch (err) {
       setErrorMessage('Invalid credentials');
     }

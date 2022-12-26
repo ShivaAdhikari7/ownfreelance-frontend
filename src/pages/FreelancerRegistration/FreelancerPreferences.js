@@ -6,6 +6,8 @@ import Navbar from 'components/Navbar/Navbar';
 import Input from 'components/Input/Input';
 import Button from 'components/Button/Button';
 
+import { TOKEN } from 'constants/utils';
+
 import FreelancerRegistrationContext from 'context/FreelancerRegistration/freelancer-context';
 
 const FreelancerPreferences = () => {
@@ -83,7 +85,7 @@ const FreelancerPreferences = () => {
 
     const res = await axios.post('http://localhost:90/freelancer/add', data, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('__token__')}`,
+        Authorization: `Bearer ${TOKEN}`,
       },
     });
 

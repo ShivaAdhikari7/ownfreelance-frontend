@@ -7,8 +7,6 @@ import { MdLocationOn } from 'react-icons/md';
 import { MdStar } from 'react-icons/md';
 
 const FreelancerDetail = ({ freelancerDetail }) => {
-  console.log(freelancerDetail);
-
   return (
     <>
       <Navbar />
@@ -162,11 +160,6 @@ const FreelancerDetail = ({ freelancerDetail }) => {
               <div>
                 <h4 className="mb-4">Skills</h4>
                 <div className="d-flex align-items-center skills-container">
-                  {/* <span>Web design</span>
-                  <span>Web development</span>
-                  <span>Figma UI/UX</span>
-                  <span>Wordpress development</span>
-                  <span>Webflow development</span> */}
                   {freelancerDetail.skills.map(skill => (
                     <span key={skill.id}>{skill.label}</span>
                   ))}

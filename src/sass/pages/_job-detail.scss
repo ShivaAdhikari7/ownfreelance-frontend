@@ -1,0 +1,80 @@
+.job-detail-section {
+  border: 0.1rem solid $grey1-600;
+  border-radius: 1rem;
+
+  .job-section {
+    border-right: 0.1rem solid $grey1-600;
+  }
+
+  .job-title {
+    font-size: 3rem;
+    letter-spacing: -0.1rem;
+    line-height: 1.3;
+  }
+
+  .job-description {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    border-bottom: 0.1rem solid $grey1-600;
+  }
+
+  .job-scope-container {
+    gap: 6.4rem;
+    border-bottom: 0.1rem solid $grey1-600;
+
+    .job-scope {
+      gap: 0.8rem;
+      font-size: 1.6rem;
+
+      .brain-icon {
+        fill: $primary-color;
+      }
+
+      .job-scope-icon {
+        stroke: $primary-color;
+      }
+
+      span {
+        margin: 0 !important;
+      }
+
+      strong {
+        font-weight: $font-weight-bold;
+      }
+    }
+  }
+
+  .skills-container {
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    span {
+      font-size: 1.4rem;
+      background-color: $primary-color;
+      color: $white;
+      padding: 0.8rem;
+      border-radius: 0.5rem;
+    }
+  }
+
+  .client-actions {
+    gap: 1.6rem;
+
+    .btn-apply,
+    .btn-save {
+      width: 75%;
+      font-size: 1.6rem;
+    }
+
+    .btn-apply {
+      &:hover {
+        background-color: $primary-tint-1;
+      }
+    }
+
+    .btn-save {
+      border: 0.2rem solid $primary-color;
+      gap: 0.8rem;
+    }
+  }
+}
