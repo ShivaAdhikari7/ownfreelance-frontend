@@ -32,6 +32,8 @@ import ProtectedRoute from "routes/ProtectedRoute";
 
 import AuthContext from "context/AuthContext/auth-context";
 
+import { USER_TYPE } from "constants/utils";
+
 const App = () => {
   const authCtx = useContext(AuthContext);
 
@@ -41,7 +43,7 @@ const App = () => {
     <Routes>
       <Route
         path="/"
-        element={authCtx.isLoggedIn ? <Dashboard /> : <HomePage />}
+        element={authCtx.isLoggedIn ? <ProtectedRoute>{USER_TYPE === 'Client' ? <ClientProfile/> : <FreelancerProfile/>}</ProtectedRoute> : <HomePage />}
       />
       <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Login />} />
@@ -192,6 +194,9 @@ const App = () => {
           </ProtectedRoute>
         }
       />
+      <Route path="/update/profile" element={<ProtectedRoute><UpdateProfile /></ProtectedRoute>} />
+      
+      <Route path="/client/profile" element={<ProtectedRoute><ClientProfile /></ProtectedRoute>} />
 
       <Route
         path="/search"
@@ -210,11 +215,9 @@ const App = () => {
         }
       />
 
-      <Route path="/client/profile" element={<ProtectedRoute><ClientProfile /></ProtectedRoute>} />
-      <Route path="/freelancer/profile" element={<ProtectedRoute><FreelancerProfile /></ProtectedRoute>} />
 
       <Route path="/forgot/password" element={<Forgot />} />
-      <Route path="/update/profile" element={<ProtectedRoute><UpdateProfile /></ProtectedRoute>} />
+      
     </Routes>
   );
 };

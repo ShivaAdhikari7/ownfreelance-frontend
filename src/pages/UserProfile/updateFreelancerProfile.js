@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import signUpImg from 'assets/images/update-profile.png';
 import Navbar from "components/Navbar/Navbar";
 
 const UpdateProfile = () =>{
+    const navigate = useNavigate();
     const [profileDetail, setProfileDetail] = useState(null);
 
     const [message, setMessage] = useState('');
@@ -27,7 +29,8 @@ const UpdateProfile = () =>{
         axios.put("http://localhost:90/user/update", data, config)
         .then(result=>{
             console.log(result);
-            window.location="/freelancer/profile"
+
+           navigate('/');
         })
         .catch(e=>{
             console.log(e);
@@ -38,11 +41,12 @@ const UpdateProfile = () =>{
         axios.get("http://localhost:90/user/me", config)
         .then(result=>{
             console.log(result);
-            setMessage(result.data.message);
-            setUserdata(result.data.data);
-            setFn(result.data.data.firstName);
-            setLn(result.data.data.lastName);
-            setemail(result.data.data.email);
+
+            // setMessage(result.data.message);
+            setUserdata(result.data);
+            setFn(result.data.user.userId.firstName);
+            setLn(result.data.user.userId.lastName);
+            setemail(result.data.user.userId.email);
             
         })
         .catch(e=>{
