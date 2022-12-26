@@ -36,8 +36,9 @@ const Login = () => {
       email: email,
       password: password,
     };
-
     try {
+      //console.log(loginResponse.data.token);
+
       const loginResponse = await axios.post(
         'http://localhost:90/user/login',
         data

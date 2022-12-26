@@ -1,0 +1,47 @@
+.main-page{
+    gap: 2.0rem;
+    margin:2rem auto 4.0rem auto;
+}
+
+.profile-image {
+    display:flex;
+    border-color: aliceblue;
+    justify-content: center;
+  }
+
+.profile-description{
+    font-size: 1.6rem;
+    line-height: 1.5;
+
+
+}  
+#profile-circle{
+    width: 35%;
+
+}
+
+#profile{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(194, 193, 192);
+    margin-left: 200px;
+    margin-top: 50px;
+    padding-bottom: 100px;
+    margin-bottom: 50px;
+
+  }
+
+#profile1{
+    text-align: center;
+    margin:50px;
+    margin-top: 150px;
+  
+}  
+
+  #update{
+    background-color: rgb(74, 121, 162);
+  }  
+
+#img{
+  margin-top: 100px;
+}  

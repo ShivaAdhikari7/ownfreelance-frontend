@@ -9,11 +9,33 @@ import { MdSettings } from 'react-icons/md';
 
 import userIcon from 'assets/images/user-icon.png';
 import { Button } from 'react-bootstrap';
+
+import axios from 'axios';
 import { USER_TYPE } from 'constants/utils';
+import { useEffect } from 'react';
 
 const Navbar = () => {
   const isLoggedIn = localStorage.getItem('__token__');
+  const [profileDetail, setProfileDetail] = useState(null);
+
+
   const [displayUserModal, setDisplayUserModal] = useState(false);
+
+  useEffect(() => {
+    const getProfileDetails = async () => {
+      const res = await axios.get('http://localhost:90/user/me', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('__token__')}`,
+        },
+      }          
+      );
+
+      setProfileDetail(res.data.user);
+      console.log(res.data.user);
+    };
+
+    getProfileDetails();
+  }, []);
 
   const userModalToggleHandler = () => {
     setDisplayUserModal(prevState => !prevState);
@@ -22,6 +44,22 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.clear('__token__').clear('userType');
   };
+ 
+  const myProfile=()=>{
+
+  };
+  const deleteUser =()=>{
+    const res = axios.delete("http://localhost:90/user/delete/")
+    .then(result => {
+        console.log(result)
+        
+            window.location= "/";
+        
+    })
+    .catch(e=>{
+        console.log(e)
+    })
+}
 
   return (
     <nav className="py-3 navbar navbar-expand-lg bg-custom navbar-custom">
@@ -170,11 +208,14 @@ const Navbar = () => {
                         alt="User Icon"
                         width="75"
                         height="75"
+                        onClick={myProfile}
                       />
 
                       <div className="user-info d-flex flex-column align-items-center mb-3">
-                        <span className="user-name">Dikshak Poudel</span>
-                        <span className="user-type">{USER_TYPE}</span>
+                        <span className="user-name">{profileDetail?.userId.firstName} {profileDetail?.userId.lastName}</span>
+                        <span className="user-type">
+                          {USER_TYPE}
+                        </span>
                       </div>
 
                       <div className="controls d-flex flex-column align-self-start">
@@ -188,9 +229,11 @@ const Navbar = () => {
                         </NavLink>
 
                         <NavLink
-                          to="/"
+                          
                           className="d-flex align-items-center justify-content-between text-decoration-none"
+                        onClick={deleteUser}
                         >
+                          
                           <MdSettings />
                           Settings
                         </NavLink>
