@@ -13,7 +13,7 @@ import AuthContext from 'context/AuthContext/auth-context';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { setIsLoggedIn, setUserType } = useContext(AuthContext);
+  const { setIsLoggedIn, setUserType, setToken } = useContext(AuthContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -53,6 +53,7 @@ const Login = () => {
 
       setIsLoggedIn(true);
       setUserType(res.data.user.userType);
+      setToken(loginResponse.data.token);
 
       navigate('/');
     } catch (err) {
