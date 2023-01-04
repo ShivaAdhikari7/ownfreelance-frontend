@@ -13,7 +13,7 @@ import AuthContext from 'context/AuthContext/auth-context';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { setIsLoggedIn } = useContext(AuthContext);
+  const { setIsLoggedIn, setUserType } = useContext(AuthContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -36,9 +36,8 @@ const Login = () => {
       email: email,
       password: password,
     };
-    try {
-      //console.log(loginResponse.data.token);
 
+    try {
       const loginResponse = await axios.post(
         'http://localhost:90/user/login',
         data
@@ -53,6 +52,8 @@ const Login = () => {
       localStorage.setItem('userType', res.data.user.userType);
 
       setIsLoggedIn(true);
+      setUserType(res.data.user.userType);
+
       navigate('/');
     } catch (err) {
       setErrorMessage('Invalid credentials');
