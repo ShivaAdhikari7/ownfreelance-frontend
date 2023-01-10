@@ -1,37 +1,37 @@
-import { IS_LOGGED_IN, USER_TYPE, TOKEN } from 'constants/utils';
-import { useState, useEffect, createContext } from 'react';
+import { IS_LOGGED_IN, USER_TYPE, USER } from "constants/utils";
+import { useState, useEffect, createContext } from "react";
 
 const AuthContext = createContext({
   isLoggedIn: false,
-  setIsLoggedIn: state => {},
-  userType: '',
-  setUserType: userType => {},
-  token: '',
-  setToken: () => {},
+  setIsLoggedIn: (state) => {},
+  USER: "",
+  setUser: (USER) => {},
+  userType: "",
+  setUserType: () => {},
 });
 
 export const AuthContextProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userType, setUserType] = useState('');
-  const [token, setToken] = useState('');
+  const [user, setUser] = useState("");
+  const [userType, setUserType] = useState("");
 
   useEffect(() => {
     if (IS_LOGGED_IN) {
       setIsLoggedIn(true);
       setUserType(USER_TYPE);
-      setToken(TOKEN);
+      setUser(USER);
     }
-  }, [isLoggedIn]);
+  }, []);
 
   return (
     <AuthContext.Provider
       value={{
         isLoggedIn,
         setIsLoggedIn,
+        user,
+        setUser,
         userType,
         setUserType,
-        token,
-        setToken,
       }}
     >
       {children}

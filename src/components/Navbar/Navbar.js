@@ -1,33 +1,35 @@
-import { useState } from 'react';
+import { useState, useEffect, useContext } from "react";
 
-import { NavLink } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 
-import { BiSearch } from 'react-icons/bi';
-import { IoMdNotificationsOutline } from 'react-icons/io';
-import { IoMdPaperPlane } from 'react-icons/io';
-import { BiUserCircle, BiLogOut } from 'react-icons/bi';
-import { MdSettings } from 'react-icons/md';
+import { BiSearch } from "react-icons/bi";
+import { IoMdNotificationsOutline } from "react-icons/io";
+import { IoMdPaperPlane } from "react-icons/io";
+import { BiUserCircle, BiLogOut } from "react-icons/bi";
+import { MdSettings } from "react-icons/md";
 
-import { useEffect, useContext } from 'react';
-import axios from 'axios';
+import userIcon from "assets/images/user-icon.png";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-import userIcon from 'assets/images/user-icon.png';
-import Button from 'components/Button/Button';
+import Button from "components/Button/Button";
 
-import AuthContext from 'context/AuthContext/auth-context';
+import AuthContext from "context/AuthContext/auth-context";
 
 const Navbar = () => {
-  const { userType, isLoggedIn } = useContext(AuthContext);
-
+  const isLoggedIn = localStorage.getItem("__token__");
   const [profileDetail, setProfileDetail] = useState(null);
+  const navigate = useNavigate();
+
+  const { userType } = useContext(AuthContext);
 
   const [displayUserModal, setDisplayUserModal] = useState(false);
 
   useEffect(() => {
     const getProfileDetails = async () => {
-      const res = await axios.get('http://localhost:90/user/me', {
+      const res = await axios.get("http://localhost:90/user/me", {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('__token__')}`,
+          Authorization: `Bearer ${localStorage.getItem("__token__")}`,
         },
       });
 
@@ -38,11 +40,16 @@ const Navbar = () => {
   }, []);
 
   const userModalToggleHandler = () => {
-    setDisplayUserModal(prevState => !prevState);
+    setDisplayUserModal((prevState) => !prevState);
   };
 
   const handleLogout = () => {
-    localStorage.clear('__token__').clear('userType');
+    localStorage.clear("__token__").clear("userType");
+  };
+
+  const myProfile = () => {};
+  const updateUser = () => {
+    navigate("/update/profile");
   };
 
   return (
@@ -184,7 +191,7 @@ const Navbar = () => {
 
                     <div
                       className={`d-flex flex-column align-items-center user-info-box py-5 px-5 position-absolute ${
-                        displayUserModal ? '' : 'hidden'
+                        displayUserModal ? "" : "hidden"
                       }`}
                     >
                       <img
@@ -196,7 +203,7 @@ const Navbar = () => {
 
                       <div className="user-info d-flex flex-column align-items-center mb-3">
                         <span className="user-name">
-                          {profileDetail?.userId.firstName}{' '}
+                          {profileDetail?.userId.firstName}{" "}
                           {profileDetail?.userId.lastName}
                         </span>
                         <span className="user-type">{userType}</span>
@@ -214,7 +221,7 @@ const Navbar = () => {
 
                         <NavLink
                           className="d-flex align-items-center justify-content-between text-decoration-none"
-                          to="/"
+                          to={"/update/profile"}
                         >
                           <MdSettings />
                           Settings
@@ -228,7 +235,7 @@ const Navbar = () => {
             {!isLoggedIn && (
               <li className="nav-item mx-3">
                 <NavLink
-                  to={'/login'}
+                  to={"/login"}
                   className="nav-link nav-link-login my-2 px-3 py-3"
                 >
                   Login
@@ -239,7 +246,7 @@ const Navbar = () => {
             {!isLoggedIn && (
               <li className="nav-item">
                 <NavLink
-                  to={'/signup'}
+                  to={"/signup"}
                   className={`nav-link custom-nav-link nav-link-signup my-2 px-3 py-3`}
                 >
                   Sign Up

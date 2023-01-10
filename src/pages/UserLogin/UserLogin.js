@@ -1,30 +1,30 @@
-import { useState, useContext } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useState, useContext } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import axios from "axios";
 
-import Navbar from 'components/Navbar/Navbar';
-import Input from 'components/Input/Input';
-import Button from 'components/Button/Button';
+import Navbar from "components/Navbar/Navbar";
+import Input from "components/Input/Input";
+import Button from "components/Button/Button";
 
-import appleLogo from 'assets/images/apple-logo.png';
-import googleLogo from 'assets/images/google-logo.png';
+import appleLogo from "assets/images/apple-logo.png";
+import googleLogo from "assets/images/google-logo.png";
 
-import AuthContext from 'context/AuthContext/auth-context';
+import AuthContext from "context/AuthContext/auth-context";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { setIsLoggedIn, setUserType, setToken } = useContext(AuthContext);
+  const { setIsLoggedIn, setUser, setUserType } = useContext(AuthContext);
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [emailHasError, setEmailHasError] = useState(false);
   const [passwordHasError, setPasswordHasError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
 
   const formIsInvalid =
     email.trim().length === 0 || password.trim().length === 0;
 
-  const CustomerLogin = async e => {
+  const CustomerLogin = async (e) => {
     e.preventDefault();
 
     if (email.trim().length === 0) setEmailHasError(true);
@@ -39,25 +39,24 @@ const Login = () => {
 
     try {
       const loginResponse = await axios.post(
-        'http://localhost:90/user/login',
+        "http://localhost:90/user/login",
         data
       );
 
-      localStorage.setItem('__token__', loginResponse.data.token);
+      localStorage.setItem("__token__", loginResponse.data.token);
 
-      const res = await axios.get('http://localhost:90/user/me', {
+      const res = await axios.get("http://localhost:90/user/me", {
         headers: { Authorization: `Bearer ${loginResponse.data.token}` },
       });
 
-      localStorage.setItem('userType', res.data.user.userType);
-
+      localStorage.setItem("userType", res.data.user.userType);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
       setIsLoggedIn(true);
       setUserType(res.data.user.userType);
-      setToken(loginResponse.data.token);
-
-      navigate('/');
+      setUser(res.data.user);
+      navigate("/");
     } catch (err) {
-      setErrorMessage('Invalid credentials');
+      setErrorMessage("Invalid credentials");
     }
   };
 
@@ -86,7 +85,7 @@ const Login = () => {
                   placeholder="Enter email address"
                   name="email"
                   className="mb-2"
-                  onChange={e => {
+                  onChange={(e) => {
                     setEmailHasError(e.target.value.trim().length === 0);
                     setEmail(e.target.value);
                   }}
@@ -104,7 +103,7 @@ const Login = () => {
                   placeholder="Enter Password"
                   name="password"
                   className="mb-2"
-                  onChange={e => {
+                  onChange={(e) => {
                     setPasswordHasError(e.target.value.trim().length === 0);
                     setPassword(e.target.value);
                   }}
