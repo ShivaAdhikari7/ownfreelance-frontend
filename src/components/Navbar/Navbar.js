@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 
 import { NavLink } from "react-router-dom";
 
@@ -9,11 +9,9 @@ import { BiUserCircle, BiLogOut } from "react-icons/bi";
 import { MdSettings } from "react-icons/md";
 
 import userIcon from "assets/images/user-icon.png";
-import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import userIcon from "assets/images/user-icon.png";
 import Button from "components/Button/Button";
 
 import AuthContext from "context/AuthContext/auth-context";
@@ -22,6 +20,8 @@ const Navbar = () => {
   const isLoggedIn = localStorage.getItem("__token__");
   const [profileDetail, setProfileDetail] = useState(null);
   const navigate = useNavigate();
+
+  const { userType } = useContext(AuthContext);
 
   const [displayUserModal, setDisplayUserModal] = useState(false);
 
