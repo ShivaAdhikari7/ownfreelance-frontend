@@ -1,56 +1,56 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import { NavLink } from 'react-router-dom';
-import { BiSearch } from 'react-icons/bi';
-import { IoMdNotificationsOutline } from 'react-icons/io';
-import { IoMdPaperPlane } from 'react-icons/io';
-import { BiUserCircle, BiLogOut } from 'react-icons/bi';
-import { MdSettings } from 'react-icons/md';
+import { NavLink } from "react-router-dom";
 
-import userIcon from 'assets/images/user-icon.png';
-import { Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { USER_TYPE } from 'constants/utils';
-import { useEffect } from 'react';
+import { BiSearch } from "react-icons/bi";
+import { IoMdNotificationsOutline } from "react-icons/io";
+import { IoMdPaperPlane } from "react-icons/io";
+import { BiUserCircle, BiLogOut } from "react-icons/bi";
+import { MdSettings } from "react-icons/md";
+
+import userIcon from "assets/images/user-icon.png";
+import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+import userIcon from "assets/images/user-icon.png";
+import Button from "components/Button/Button";
+
+import AuthContext from "context/AuthContext/auth-context";
 
 const Navbar = () => {
-  const isLoggedIn = localStorage.getItem('__token__');
+  const isLoggedIn = localStorage.getItem("__token__");
   const [profileDetail, setProfileDetail] = useState(null);
   const navigate = useNavigate();
-
 
   const [displayUserModal, setDisplayUserModal] = useState(false);
 
   useEffect(() => {
     const getProfileDetails = async () => {
-      const res = await axios.get('http://localhost:90/user/me', {
+      const res = await axios.get("http://localhost:90/user/me", {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('__token__')}`,
+          Authorization: `Bearer ${localStorage.getItem("__token__")}`,
         },
-      }          
-      );
+      });
 
       setProfileDetail(res.data.user);
-      console.log(res.data.user);
     };
 
     getProfileDetails();
   }, []);
 
   const userModalToggleHandler = () => {
-    setDisplayUserModal(prevState => !prevState);
+    setDisplayUserModal((prevState) => !prevState);
   };
 
   const handleLogout = () => {
-    localStorage.clear('__token__').clear('userType');
+    localStorage.clear("__token__").clear("userType");
   };
- 
-  const myProfile=()=>{
 
+  const myProfile = () => {};
+  const updateUser = () => {
+    navigate("/update/profile");
   };
-  const updateUser=()=>{
-    navigate('/update/profile')}
 
   return (
     <nav className="py-3 navbar navbar-expand-lg bg-custom navbar-custom">
@@ -191,7 +191,7 @@ const Navbar = () => {
 
                     <div
                       className={`d-flex flex-column align-items-center user-info-box py-5 px-5 position-absolute ${
-                        displayUserModal ? '' : 'hidden'
+                        displayUserModal ? "" : "hidden"
                       }`}
                     >
                       <img
@@ -199,14 +199,14 @@ const Navbar = () => {
                         alt="User Icon"
                         width="75"
                         height="75"
-                        onClick={myProfile}
                       />
 
                       <div className="user-info d-flex flex-column align-items-center mb-3">
-                        <span className="user-name">{profileDetail?.userId.firstName} {profileDetail?.userId.lastName}</span>
-                        <span className="user-type">
-                          {USER_TYPE}
+                        <span className="user-name">
+                          {profileDetail?.userId.firstName}{" "}
+                          {profileDetail?.userId.lastName}
                         </span>
+                        <span className="user-type">{userType}</span>
                       </div>
 
                       <div className="controls d-flex flex-column align-self-start">
@@ -220,11 +220,9 @@ const Navbar = () => {
                         </NavLink>
 
                         <NavLink
-                          
                           className="d-flex align-items-center justify-content-between text-decoration-none"
-                          to={'/update/profile'}
+                          to={"/update/profile"}
                         >
-                          
                           <MdSettings />
                           Settings
                         </NavLink>
@@ -237,7 +235,7 @@ const Navbar = () => {
             {!isLoggedIn && (
               <li className="nav-item mx-3">
                 <NavLink
-                  to={'/login'}
+                  to={"/login"}
                   className="nav-link nav-link-login my-2 px-3 py-3"
                 >
                   Login
@@ -248,7 +246,7 @@ const Navbar = () => {
             {!isLoggedIn && (
               <li className="nav-item">
                 <NavLink
-                  to={'/signup'}
+                  to={"/signup"}
                   className={`nav-link custom-nav-link nav-link-signup my-2 px-3 py-3`}
                 >
                   Sign Up
