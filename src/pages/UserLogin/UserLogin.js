@@ -13,7 +13,7 @@ import AuthContext from "context/AuthContext/auth-context";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { setIsLoggedIn, setUserType, setUser } = useContext(AuthContext);
+  const { setIsLoggedIn, setUser, setUserType } = useContext(AuthContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -50,7 +50,6 @@ const Login = () => {
 
       localStorage.setItem("userType", res.data.user.userType);
       localStorage.setItem("user", JSON.stringify(res.data.user));
-
       setIsLoggedIn(true);
       setUserType(res.data.user.userType);
       setUser(res.data.user);

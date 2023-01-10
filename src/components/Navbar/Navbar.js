@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+
 import { BiSearch } from "react-icons/bi";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { IoMdPaperPlane } from "react-icons/io";
@@ -8,16 +9,19 @@ import { BiUserCircle, BiLogOut } from "react-icons/bi";
 import { MdSettings } from "react-icons/md";
 
 import userIcon from "assets/images/user-icon.png";
-import { Button } from "react-bootstrap";
-
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { USER_TYPE } from "constants/utils";
-import { useEffect } from "react";
+
+import Button from "components/Button/Button";
+
+import AuthContext from "context/AuthContext/auth-context";
 
 const Navbar = () => {
-  const navigate = useNavigate();
   const isLoggedIn = localStorage.getItem("__token__");
   const [profileDetail, setProfileDetail] = useState(null);
+  const navigate = useNavigate();
+
+  const { userType } = useContext(AuthContext);
 
   const [displayUserModal, setDisplayUserModal] = useState(false);
 
@@ -44,15 +48,9 @@ const Navbar = () => {
   };
 
   const myProfile = () => {};
-  const deleteUser = () => {
-    const res = axios
-      .delete("http://localhost:90/user/delete/")
-      .then((result) => {
-        navigate("/");
-      })
-      .catch((e) => {
-        console.error(e);
-      });
+
+  const updateUser = () => {
+    navigate("/update/profile");
   };
 
   return (
@@ -205,7 +203,6 @@ const Navbar = () => {
                         alt="User Icon"
                         width="75"
                         height="75"
-                        onClick={myProfile}
                       />
 
                       <div className="user-info d-flex flex-column align-items-center mb-3">
@@ -213,7 +210,7 @@ const Navbar = () => {
                           {profileDetail?.userId.firstName}{" "}
                           {profileDetail?.userId.lastName}
                         </span>
-                        <span className="user-type">{USER_TYPE}</span>
+                        <span className="user-type">{userType}</span>
                       </div>
 
                       <div className="controls d-flex flex-column align-self-start">
@@ -228,7 +225,7 @@ const Navbar = () => {
 
                         <NavLink
                           className="d-flex align-items-center justify-content-between text-decoration-none"
-                          onClick={deleteUser}
+                          to={"/update/profile"}
                         >
                           <MdSettings />
                           Settings

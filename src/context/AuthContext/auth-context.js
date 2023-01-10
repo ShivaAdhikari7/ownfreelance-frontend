@@ -4,10 +4,10 @@ import { useState, useEffect, createContext } from "react";
 const AuthContext = createContext({
   isLoggedIn: false,
   setIsLoggedIn: (state) => {},
+  USER: "",
+  setUser: (USER) => {},
   userType: "",
   setUserType: () => {},
-  USER: "",
-  setUser: () => {},
 });
 
 export const AuthContextProvider = ({ children }) => {
@@ -28,10 +28,10 @@ export const AuthContextProvider = ({ children }) => {
       value={{
         isLoggedIn,
         setIsLoggedIn,
-        userType,
-        setUserType,
         user,
         setUser,
+        userType,
+        setUserType,
       }}
     >
       {children}

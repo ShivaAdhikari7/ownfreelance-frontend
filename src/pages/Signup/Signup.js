@@ -10,10 +10,10 @@ import signUpImg from 'assets/images/sign_up_page_img.jpg';
 import Spinner from 'components/Spinner/Spinner';
 
 const Signup = () => {
-  const [isPrivacyChecked, setIsPrivacyChecked] = useState(false);
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isPrivacyChecked, setIsPrivacyChecked] = useState(false);
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');

@@ -1,24 +1,27 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { FiSearch } from "react-icons/fi";
 import { MdOutlineRssFeed, MdSort } from "react-icons/md";
 
-import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+import AuthContext from "context/AuthContext/auth-context";
 
 import Navbar from "components/Navbar/Navbar";
 import SearchResultFreelancer from "components/Search/SearchResultFreelancer";
 import SearchResultClient from "components/Search/SearchResultClient";
 import FreelancerFilter from "components/Sorting/FreelancerFilter";
-
 import LoadingSpinner from "components/Spinner/LoadingSpinner";
 import Pagination from "components/Pagination/Pagination";
 import Button from "components/Button/Button";
+import Footer from "components/Footer/Footer";
 
 import getSearchResults from "api/getSearchResults";
-import axios from "axios";
-import Footer from "components/Footer/Footer";
-import { USER_TYPE, TOKEN } from "constants/utils";
 
 const Search = () => {
+  const { userType, token } = useContext(AuthContext);
+
   const navigate = useNavigate();
 
   const [searchResults, setSearchResults] = useState([]);
@@ -40,7 +43,9 @@ const Search = () => {
     try {
       const [totalResults, searchResults] = await getSearchResults(
         finalQuery,
-        currentPage
+        currentPage,
+        userType,
+        token
       );
 
       setIsLoading(false);
@@ -49,7 +54,7 @@ const Search = () => {
     } catch (err) {
       setIsLoading(false);
     }
-  }, [currentPage, finalQuery]);
+  }, [currentPage, finalQuery, token, userType]);
 
   useEffect(() => {
     const getFilteredData = async () => {
@@ -68,14 +73,14 @@ const Search = () => {
         if (filters && filters.length > 0) {
           const res = await axios.get(`http://localhost:90/client?${apiStr}`, {
             headers: {
-              Authorization: `Bearer ${TOKEN}`,
+              Authorization: `Bearer ${token}`,
             },
           });
 
           setIsLoading(false);
           setTotalResults(res.data.data.result);
 
-          USER_TYPE === "Client"
+          userType === "Client"
             ? setSearchResults(res.data.data.freelancers)
             : setSearchResults(res.data.data.clients);
         } else {
@@ -87,47 +92,49 @@ const Search = () => {
     };
 
     getFilteredData();
-  }, [filters, getPaginatedResults]);
+  }, [filters, getPaginatedResults, userType, token]);
 
   useEffect(() => {
     const getData = async () => {
       let res;
 
       setIsLoading(true);
-      if (USER_TYPE === "Client") {
+      if (userType === "Client") {
         res = hourlyRateIsHighest
           ? await axios.get("http://localhost:90/freelancer?sort=-hourlyRate", {
               headers: {
-                Authorization: `Bearer ${TOKEN}`,
+                Authorization: `Bearer ${token}`,
               },
             })
           : await axios.get("http://localhost:90/freelancer?sort=hourlyRate", {
               headers: {
-                Authorization: `Bearer ${TOKEN}`,
+                Authorization: `Bearer ${token}`,
               },
             });
       } else {
         res = hourlyRateIsHighest
           ? await axios.get("http://localhost:90/client?sort=-hourlyRate", {
               headers: {
-                Authorization: `Bearer ${TOKEN}`,
+                Authorization: `Bearer ${token}`,
               },
             })
           : await axios.get("http://localhost:90/client?sort=hourlyRate", {
               headers: {
-                Authorization: `Bearer ${TOKEN}`,
+                Authorization: `Bearer ${token}`,
               },
             });
       }
 
+      console.log(res);
+
       setIsLoading(false);
-      USER_TYPE === "Client"
+      userType === "Client"
         ? setSearchResults(res.data.data.freelancers)
         : setSearchResults(res.data.data.clients);
     };
 
     getData();
-  }, [hourlyRateIsHighest]);
+  }, [hourlyRateIsHighest, userType, token]);
 
   const saveHandler = () => {
     setIsSaved((prevVal) => !prevVal);
@@ -206,7 +213,7 @@ const Search = () => {
                   <MdOutlineRssFeed />
                   <span>
                     <strong>{totalResults}</strong>{" "}
-                    {USER_TYPE === "Freelancer"
+                    {userType === "Freelancer"
                       ? `Job${totalResults > 1 ? "s " : " "}`
                       : `Freelancer${totalResults > 1 ? "s " : " "}`}
                     found
@@ -221,7 +228,7 @@ const Search = () => {
                 <div className="search-results d-flex flex-column">
                   {!isLoading && searchResults ? (
                     searchResults.map((result) =>
-                      USER_TYPE === "Client" ? (
+                      userType === "Client" ? (
                         <SearchResultClient
                           key={result._id}
                           profilePictureUrl={result.profilePictureUrl}
@@ -235,7 +242,7 @@ const Search = () => {
                           saved={isSaved}
                           onClick={navigateToDetailPage.bind(null, result._id)}
                         />
-                      ) : USER_TYPE === "Freelancer" ? (
+                      ) : userType === "Freelancer" ? (
                         <SearchResultFreelancer
                           headline={result.headline}
                           skills={result.skills}

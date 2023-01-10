@@ -25,26 +25,25 @@ import HomePage from "pages/HomePage/HomePage";
 import Search from "pages/Search/Search";
 import ClientProfile from "pages/UserProfile/clientProfile";
 import FreelancerProfile from "pages/UserProfile/freelancerProfile";
-import Forgot from "pages/ForgotPassword/forgotPassword";
 import Detail from "pages/Detail/Detail";
-import UpdateProfile from "pages/UserProfile/updateFreelancerProfile";
+import UpdateProfile from "pages/UserProfile/UpdateUserProfile";
 import ProtectedRoute from "routes/ProtectedRoute";
 import Messenger from "pages/messenger/Messenger";
 
-import AuthContext from "context/AuthContext/auth-context";
 import Khalti from "pages/Khalti/Khalti";
+import AuthContext from "context/AuthContext/auth-context";
 
 const App = () => {
-  const authCtx = useContext(AuthContext);
+  const { userType, isLoggedIn } = useContext(AuthContext);
 
   return (
     <Routes>
       <Route
         path="/"
         element={
-          authCtx.isLoggedIn ? (
+          isLoggedIn ? (
             <ProtectedRoute>
-              {authCtx.userType === "Client" ? (
+              {userType === "Client" ? (
                 <ClientProfile />
               ) : (
                 <FreelancerProfile />
@@ -245,8 +244,6 @@ const App = () => {
           </ProtectedRoute>
         }
       />
-
-      <Route path="/forgot/password" element={<Forgot />} />
     </Routes>
   );
 };

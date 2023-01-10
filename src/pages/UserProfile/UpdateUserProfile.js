@@ -14,13 +14,12 @@ const UpdateProfile = () => {
   const [lastName, setLn] = useState("");
   const [email, setemail] = useState("");
 
+  const config = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("__token__"),
+    },
+  };
   const updateProfile = (e) => {
-    const config = {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("__token__"),
-      },
-    };
-
     e.preventDefault();
     const data = {
       firstName: firstName,
@@ -30,10 +29,7 @@ const UpdateProfile = () => {
     axios
       .put("http://localhost:90/user/update", data, config)
       .then((result) => {
-        navigate("/");
-      })
-      .catch((e) => {
-        console.error(e);
+        console.log(result);
       });
   };
 
@@ -73,7 +69,7 @@ const UpdateProfile = () => {
                   </label>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control profile-description p-2"
                     value={firstName}
                     onChange={(e) => {
                       setFn(e.target.value);
@@ -84,7 +80,7 @@ const UpdateProfile = () => {
                   <label className="profile-description mt-4">Last name:</label>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control profile-description p-2"
                     value={lastName}
                     onChange={(e) => {
                       setLn(e.target.value);
@@ -96,7 +92,7 @@ const UpdateProfile = () => {
                   <label className="profile-description mt-4">Email:</label>
                   <input
                     type="email"
-                    className="form-control"
+                    className="form-control profile-description p-2"
                     value={email}
                     onChange={(e) => {
                       setemail(e.target.value);
@@ -105,7 +101,7 @@ const UpdateProfile = () => {
                 </div>
                 <button
                   type="submit"
-                  className="btn btn-primary mt-3"
+                  className="m-5 font-lg profile-description pe-5 ps-5 pt-3 pb-3 border rounded-pill btn btn-success"
                   onClick={updateProfile}
                 >
                   {" "}
@@ -129,4 +125,5 @@ const UpdateProfile = () => {
     </div>
   );
 };
+
 export default UpdateProfile;

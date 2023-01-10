@@ -2,19 +2,23 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "components/Navbar/Navbar";
 import Button from "components/Button/Button";
 import Img from "assets/images/client4.jpg";
-import Img3 from "assets/images/client (2).png";
+import Img3 from "assets/images/client(2).png";
 import I1 from "assets/images/I1.png";
 import I2 from "assets/images/I2.png";
 import I3 from "assets/images/I3.png";
 import I4 from "assets/images/I4.png";
-
+import { TbUser } from "react-icons/tb";
+import { MdEmail, MdLocationOn } from "react-icons/md";
+import ClientRegistrationContext from "context/ClientRegistration/client-context";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useContext, useState } from "react";
 
 const ClientProfile = () => {
   const navigate = useNavigate();
 
   const [profileDetail, setProfileDetail] = useState(null);
+  const clientCtx = useContext(ClientRegistrationContext);
+  const {} = clientCtx;
 
   useEffect(() => {
     const getProfileDetails = async () => {
@@ -33,26 +37,37 @@ const ClientProfile = () => {
   const postNew = () => {
     navigate("/add/client/headline");
   };
-
   return (
     profileDetail && (
       <>
         <Navbar />
         <div>
           <div className="d-flex flex-row w-100 justify-content-center">
-            <img class="d-block w-75 m-5 " src={Img3} alt="slide" />
+            <img
+              class="d-block w-75 m-5 border border-$grey2-300 rounded  "
+              src={Img3}
+              alt="slide"
+            />
           </div>
+          {/* <div class="embed-responsive embed-responsive-16by9"> 
+              <video autoPlay="true" playing={true} class="w-75 m-5" 
+                src={video} type="video/mp4"/>
+              
+          </div>  */}
 
-          <div className="d-flex flex-row mt-2 w-75 justify-content-center pb-5">
+          <div className="d-flex flex-row mt-2 ms-5 w-75 justify-content-center pb-5">
             <div className="d-flex flex-column justify-content-center ms-5 ps-3 ">
               <h1>Your dashboard</h1>
               <br></br>
-              <h4>
-                {profileDetail?.userId.firstName}{" "}
+              <h3>
+                <TbUser /> {profileDetail?.userId.firstName}{" "}
                 {profileDetail?.userId.lastName}
-              </h4>
+              </h3>
               <p className="profile-description">
-                {profileDetail?.userId.email}
+                <MdEmail /> {profileDetail?.userId.email}
+              </p>
+              <p className="profile-description">
+                <MdLocationOn /> {profileDetail?.userId.country}
               </p>
             </div>
             <div className="form-action text-center m-5  ps-5">
@@ -65,42 +80,35 @@ const ClientProfile = () => {
             </div>
             <div className="form-action text-center m-5">
               <Button
-                type="button"
+                type="submit"
                 className="btn-round btn-submit p -3 w-100"
                 onClick={postNew}
               >
-                Post a new Job
+                Post a new Job{" "}
               </Button>
             </div>
           </div>
 
           <div className="container overflow-hidden w-75 main-page mt-0  d-flex flex-row ">
-            <div className="me-3 ms-3">
-              <div className="container overflow-hidden main-page  d-flex flex-column border border-$grey2-300 rounded ">
-                <h1 className="pt-5">Your drafts</h1>
-                <br></br>
-                <br></br>
-                <h3>Ui and Ux</h3>
-                <p className="profile-description">Saved 12 days ago</p>
-              </div>
+            <div className="me-3  mt-4">
               <div className="container overflow-hidden main-page  d-flex flex-column border border-$grey2-300 rounded  mt-4">
                 <h1 className="pt-5">Your Postings</h1>
-                {/* <h2>{profileDetail.headline}</h2>
-            <h3>{profileDetail.description}</h3>
-            <h3>{profileDetail.requiredJobTitle}</h3> */}
-
-                {/* <p className='profile-description'></p> */}
-
-                <div>
-                  <p className="profile-description">
-                    {profileDetail.headline}
-                  </p>
+                <div className="m-3 p-3 d-flex flex-column justify-content-center border border-$grey2-300 rounded ">
+                  <h1>
+                    <span className="color:red">
+                      {profileDetail.headline}/{" "}
+                    </span>
+                    {profileDetail.requiredJobTitle}
+                  </h1>
                   <p className="profile-description">
                     {profileDetail.description}
                   </p>
                   <p className="profile-description">
-                    {profileDetail.requiredJobTitle}
+                    {profileDetail.scope.projectSize} -
+                    {profileDetail.scope.projectDuration} -
+                    {profileDetail.scope.projectExperienceLevel}{" "}
                   </p>
+                  <h5>{profileDetail.hourlyRate}$ per hour</h5>
                 </div>
               </div>
               <div className="container overflow-hidden main-page  d-flex flex-column border border-$grey2-300 rounded">
