@@ -1,56 +1,69 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-import { BiLock } from 'react-icons/bi';
-import { BiFile } from 'react-icons/bi';
-import { GoChecklist } from 'react-icons/go';
-import { GoPerson } from 'react-icons/go';
-import { IoIosArrowBack } from 'react-icons/io';
-import { IoIosArrowForward } from 'react-icons/io';
+import { BiLock } from "react-icons/bi";
+import { BiFile } from "react-icons/bi";
+import { GoChecklist } from "react-icons/go";
+import { GoPerson } from "react-icons/go";
+import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowForward } from "react-icons/io";
 
-import Button from 'components/Button/Button';
-import Footer from 'components/Footer/Footer';
+import Button from "components/Button/Button";
+import Footer from "components/Footer/Footer";
 
-import Navbar from 'components/Navbar/Navbar';
+import Navbar from "components/Navbar/Navbar";
 
-import heroImage from '../../assets/images/hero-img.jpg';
-import darazLogo from '../../assets/images/daraz.png';
-import ncellLogo from '../../assets/images/ncell-logo.png';
-import nabilBankLogo from '../../assets/images/nabil-bank.png';
-import imperialLogo from '../../assets/images/imperial-logo.png';
-import cgLogo from '../../assets/images/cg-logo.png';
-import testimonialImage1 from '../../assets/images/testimonial-1.jpg';
+import heroImage from "../../assets/images/hero-img.jpg";
+import darazLogo from "../../assets/images/daraz.png";
+import ncellLogo from "../../assets/images/ncell-logo.png";
+import nabilBankLogo from "../../assets/images/nabil-bank.png";
+import imperialLogo from "../../assets/images/imperial-logo.png";
+import cgLogo from "../../assets/images/cg-logo.png";
+import testimonialImage1 from "../../assets/images/testimonial-1.jpg";
 
 const HomePage = () => {
   const data = [
     {
       id: 1,
       // image: { testimonialImage1 },
-      image: '/assets/images/sneha.jpg',
-      name: 'Sneha Sharma',
-      title: 'manager',
+      image: "/assets/images/sneha.jpg",
+      name: "Sneha Sharma",
+      title: "manager",
       quote:
-        'It is extremely exciting that OwnFreelance has freelancersfrom all over the Nepal it broadens the talent pool and helps in developing country. One of the best things aboutOwnFreelance is that we can communicate in our native tongue.',
+        "It is extremely exciting that OwnFreelance has freelancersfrom all over the Nepal it broadens the talent pool and helps in developing country. One of the best things aboutOwnFreelance is that we can communicate in our native tongue.",
     },
     {
       id: 2,
-      image: '/assets/images/james-gun.jpg',
-      name: 'James Gun',
-      title: 'Project Manager',
+      image: "/assets/images/james-gun.jpg",
+      name: "James Gun",
+      title: "Project Manager",
       quote:
-        'It is extremely exciting that OwnFreelance has freelancersfrom all over the Nepal it broadens the talent pool and helps in developing country. One of the best things aboutOwnFreelance is that we can communicate in our native tongue.',
+        "It is extremely exciting that OwnFreelance has freelancersfrom all over the Nepal it broadens the talent pool and helps in developing country. One of the best things aboutOwnFreelance is that we can communicate in our native tongue.",
     },
     {
       id: 3,
-      image: '/assets/images/michale.jpg',
-      name: 'Michael Mosely',
-      title: 'Product Manager',
+      image: "/assets/images/michale.jpg",
+      name: "Michael Mosely",
+      title: "Product Manager",
       quote:
-        'It is extremely exciting that OwnFreelance has freelancersfrom all over the Nepal it broadens the talent pool and helps in developing country. One of the best things aboutOwnFreelance is that we can communicate in our native tongue.',
+        "It is extremely exciting that OwnFreelance has freelancersfrom all over the Nepal it broadens the talent pool and helps in developing country. One of the best things aboutOwnFreelance is that we can communicate in our native tongue.",
     },
   ];
   const [people] = useState(data);
   const [index, setIndex] = useState(0);
-
+  // const [users, setUsers] = useState([]);
+  // useEffect(() => {
+  //   const getUsers = async () => {
+  //     try {
+  //       const res = await axios.get("http://localhost:90/user/all");
+  //       setUsers(res.data);
+  //       console.log(res.data);
+  //       console.log(res.data.user.map((d) => d._id));
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   getUsers();
+  // }, []);
   useEffect(() => {
     const lastIndex = people.length - 1;
     if (index < 0) {
@@ -198,15 +211,15 @@ const HomePage = () => {
             <div className="testimonial-container ">
               {people.map((item, indexPeople) => {
                 const { id, name, title, quote } = item;
-                let position = 'nextSlide';
+                let position = "nextSlide";
                 if (indexPeople === index) {
-                  position = 'activeSlide';
+                  position = "activeSlide";
                 }
                 if (
                   indexPeople === index - 1 ||
                   (index === 0 && indexPeople === people.length - 1)
                 ) {
-                  position = 'lastSlide';
+                  position = "lastSlide";
                 }
                 return (
                   <article className={position} key={id}>

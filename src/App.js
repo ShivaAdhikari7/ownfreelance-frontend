@@ -28,6 +28,9 @@ import FreelancerProfile from "pages/UserProfile/freelancerProfile";
 import Detail from "pages/Detail/Detail";
 import UpdateProfile from "pages/UserProfile/UpdateUserProfile";
 import ProtectedRoute from "routes/ProtectedRoute";
+import Messenger from "pages/messenger/Messenger";
+
+import Khalti from "pages/Khalti/Khalti";
 import AuthContext from "context/AuthContext/auth-context";
 
 const App = () => {
@@ -63,6 +66,14 @@ const App = () => {
         }
       />
       <Route
+        path="/payment"
+        element={
+          <ProtectedRoute>
+            <Khalti />
+          </ProtectedRoute>
+        }
+      />
+      <Route
         path="/otp/verify"
         element={
           <ProtectedRoute>
@@ -76,6 +87,14 @@ const App = () => {
         element={
           <ProtectedRoute>
             <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/messenger"
+        element={
+          <ProtectedRoute>
+            <Messenger />
           </ProtectedRoute>
         }
       />

@@ -29,7 +29,6 @@ const ClientProfile = () => {
       });
 
       setProfileDetail(res.data.user);
-      console.log(res.data.user);
     };
 
     getProfileDetails();

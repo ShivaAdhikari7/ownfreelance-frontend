@@ -6,7 +6,6 @@ import { useEffect, useContext, useState } from "react";
 import { MdEdit } from "react-icons/md";
 import { MdEmail, MdPhone } from "react-icons/md";
 import { GoLocation } from "react-icons/go";
-import { USER_TYPE } from "constants/utils";
 import AuthContext from "context/AuthContext/auth-context";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
@@ -93,9 +92,11 @@ const FreelancerProfile = () => {
         console.log(e);
       });
   };
+
   const updateUser = () => {
     navigate("/update/profile");
   };
+
   return (
     profileDetail && (
       <>

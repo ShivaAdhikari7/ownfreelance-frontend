@@ -1,17 +1,17 @@
-import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
-import Input from 'components/Input/Input';
-import Button from 'components/Button/Button';
-import Navbar from 'components/Navbar/Navbar';
+import Input from "components/Input/Input";
+import Button from "components/Button/Button";
+import Navbar from "components/Navbar/Navbar";
 
-import ClientRegistrationContext from 'context/ClientRegistration/client-context';
+import ClientRegistrationContext from "context/ClientRegistration/client-context";
 
 const Skills = () => {
   const navigate = useNavigate();
   const clientCtx = useContext(ClientRegistrationContext);
 
-  const [skill, setSkill] = useState('');
+  const [skill, setSkill] = useState("");
   const [skillId, setSkillId] = useState(1);
   const [skills, setSkills] = useState([]);
 
@@ -19,20 +19,20 @@ const Skills = () => {
 
   const formIsInvalid = skill.trim().length === 0;
 
-  const skillChangeHandler = e => {
+  const skillChangeHandler = (e) => {
     setSkillHasError(e.target.value.trim().length === 0);
     setSkill(e.target.value);
   };
 
-  const skillSubmitHandler = e => {
+  const skillSubmitHandler = (e) => {
     e.preventDefault();
 
     if (skill.trim().length === 0) setSkillHasError(true);
 
     if (formIsInvalid) return;
 
-    setSkills(prevSkills => [...prevSkills, { skillId, label: skill }]);
-    setSkillId(prevId => ++prevId);
+    setSkills((prevSkills) => [...prevSkills, { skillId, label: skill }]);
+    setSkillId((prevId) => ++prevId);
   };
 
   const navigateToScope = () => {
@@ -40,8 +40,7 @@ const Skills = () => {
 
     if (formIsInvalid) return;
 
-    console.log(clientCtx.headline);
-    navigate('/add/client/scopes');
+    navigate("/add/client/scopes");
   };
 
   return (
@@ -69,7 +68,7 @@ const Skills = () => {
             )}
           </div>
           <div className="skills-container d-flex align-item-center mb-5">
-            {skills.map(skill => {
+            {skills.map((skill) => {
               return (
                 <div
                   key={skill.id}

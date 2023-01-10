@@ -12,13 +12,13 @@ const AuthContext = createContext({
 
 export const AuthContextProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState("");
   const [userType, setUserType] = useState("");
+  const [user, setUser] = useState("");
 
   useEffect(() => {
     if (IS_LOGGED_IN) {
-      setIsLoggedIn(true);
       setUserType(USER_TYPE);
+      setIsLoggedIn(true);
       setUser(USER);
     }
   }, []);
