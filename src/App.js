@@ -29,21 +29,31 @@ import Forgot from "pages/ForgotPassword/forgotPassword";
 import Detail from "pages/Detail/Detail";
 import UpdateProfile from "pages/UserProfile/updateFreelancerProfile";
 import ProtectedRoute from "routes/ProtectedRoute";
+import Messenger from "pages/messenger/Messenger";
 
 import AuthContext from "context/AuthContext/auth-context";
-
-import { USER_TYPE } from "constants/utils";
+import Khalti from "pages/Khalti/Khalti";
 
 const App = () => {
   const authCtx = useContext(AuthContext);
-
-  console.log(authCtx.isLoggedIn);
 
   return (
     <Routes>
       <Route
         path="/"
-        element={authCtx.isLoggedIn ? <ProtectedRoute>{USER_TYPE === 'Client' ? <ClientProfile/> : <FreelancerProfile/>}</ProtectedRoute> : <HomePage />}
+        element={
+          authCtx.isLoggedIn ? (
+            <ProtectedRoute>
+              {authCtx.userType === "Client" ? (
+                <ClientProfile />
+              ) : (
+                <FreelancerProfile />
+              )}
+            </ProtectedRoute>
+          ) : (
+            <HomePage />
+          )
+        }
       />
       <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Login />} />
@@ -53,6 +63,14 @@ const App = () => {
         element={
           <ProtectedRoute>
             <SuccessfulOtp />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/payment"
+        element={
+          <ProtectedRoute>
+            <Khalti />
           </ProtectedRoute>
         }
       />
@@ -70,6 +88,14 @@ const App = () => {
         element={
           <ProtectedRoute>
             <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/messenger"
+        element={
+          <ProtectedRoute>
+            <Messenger />
           </ProtectedRoute>
         }
       />
@@ -194,9 +220,14 @@ const App = () => {
           </ProtectedRoute>
         }
       />
-      <Route path="/update/profile" element={<ProtectedRoute><UpdateProfile /></ProtectedRoute>} />
-      
-      <Route path="/client/profile" element={<ProtectedRoute><ClientProfile /></ProtectedRoute>} />
+      <Route
+        path="/update/profile"
+        element={
+          <ProtectedRoute>
+            <UpdateProfile />
+          </ProtectedRoute>
+        }
+      />
 
       <Route
         path="/search"
@@ -215,9 +246,7 @@ const App = () => {
         }
       />
 
-
       <Route path="/forgot/password" element={<Forgot />} />
-      
     </Routes>
   );
 };

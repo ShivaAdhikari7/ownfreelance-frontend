@@ -1,14 +1,12 @@
-import Footer from 'components/Footer/Footer';
-import Navbar from 'components/Navbar/Navbar';
-import Button from 'components/Button/Button';
+import Footer from "components/Footer/Footer";
+import Navbar from "components/Navbar/Navbar";
+import Button from "components/Button/Button";
 
-import { FiDollarSign, FiHeart } from 'react-icons/fi';
-import { FiCalendar } from 'react-icons/fi';
-import { BiBrain } from 'react-icons/bi';
+import { FiDollarSign, FiHeart } from "react-icons/fi";
+import { FiCalendar } from "react-icons/fi";
+import { BiBrain } from "react-icons/bi";
 
 const JobDetail = ({ jobDetail }) => {
-  console.log(jobDetail);
-
   return jobDetail ? (
     <>
       <Navbar />
@@ -51,7 +49,7 @@ const JobDetail = ({ jobDetail }) => {
             <div>
               <h4 className="mb-4">Skills</h4>
               <div className="d-flex align-items-center skills-container">
-                {jobDetail.skills.map(skill => (
+                {jobDetail.skills.map((skill) => (
                   <span key={skill.id}>{skill.label}</span>
                 ))}
               </div>

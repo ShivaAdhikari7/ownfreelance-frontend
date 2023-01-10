@@ -1,16 +1,16 @@
-import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
-import axios from 'axios';
+import axios from "axios";
 
-import { TOKEN } from 'constants/utils';
+import { TOKEN } from "constants/utils";
 
-import Input from 'components/Input/Input';
-import Button from 'components/Button/Button';
-import Navbar from 'components/Navbar/Navbar';
-import TextArea from 'components/TextArea/TextArea';
+import Input from "components/Input/Input";
+import Button from "components/Button/Button";
+import Navbar from "components/Navbar/Navbar";
+import TextArea from "components/TextArea/TextArea";
 
-import ClientRegistrationContext from 'context/ClientRegistration/client-context';
+import ClientRegistrationContext from "context/ClientRegistration/client-context";
 
 const Description = () => {
   const navigate = useNavigate();
@@ -19,8 +19,8 @@ const Description = () => {
     ClientRegistrationContext
   );
 
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [projectFile, setProjectFile] = useState(null);
 
   const [titleHasError, setTitleHasError] = useState(false);
@@ -32,22 +32,22 @@ const Description = () => {
     description.trim().length === 0 ||
     projectFile === null;
 
-  const titleChangeHandler = e => {
+  const titleChangeHandler = (e) => {
     setTitleHasError(e.target.value.trim().length === 0);
     setTitle(e.target.value);
   };
 
-  const descriptionChangeHandler = e => {
+  const descriptionChangeHandler = (e) => {
     setDescriptionHasError(e.target.value.trim().length === 0);
     setDescription(e.target.value);
   };
 
-  const projectFileChangeHandler = e => {
+  const projectFileChangeHandler = (e) => {
     setProjectFileHasError(e.target.files.length === 0);
     setProjectFile(e.target.files[0]);
   };
 
-  const formSubmitHandler = async e => {
+  const formSubmitHandler = async (e) => {
     e.preventDefault();
 
     if (title.trim().length === 0) setTitleHasError(true);
@@ -58,28 +58,26 @@ const Description = () => {
 
     const data = new FormData();
 
-    data.append('userType', 'Client');
-    data.append('headline', headline);
-    data.append('skills', JSON.stringify(skills));
-    data.append('scope', JSON.stringify(scope));
-    data.append('file', projectFile);
-    data.append('requiredJobTitle', title);
-    data.append('hourlyRate', +budget);
-    data.append('description', description);
+    data.append("userType", "Client");
+    data.append("headline", headline);
+    data.append("skills", JSON.stringify(skills));
+    data.append("scope", JSON.stringify(scope));
+    data.append("file", projectFile);
+    data.append("requiredJobTitle", title);
+    data.append("hourlyRate", +budget);
+    data.append("description", description);
 
-    const res = await axios.post('http://localhost:90/client/add', data, {
+    const res = await axios.post("http://localhost:90/client/add", data, {
       headers: {
         Authorization: `Bearer ${TOKEN}`,
       },
     });
 
-    console.log(res);
-
     if (res.status === 200) {
-      navigate('/verification_successful', {
+      navigate("/verification_successful", {
         state: {
-          dashboard: { label: 'Visit my dashboard' },
-          search: { label: 'Search for freelancers' },
+          dashboard: { label: "Visit my dashboard" },
+          search: { label: "Search for freelancers" },
         },
       });
     }
