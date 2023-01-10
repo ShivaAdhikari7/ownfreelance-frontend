@@ -80,8 +80,6 @@ const Search = () => {
           setIsLoading(false);
           setTotalResults(res.data.data.result);
 
-          console.log(userType);
-
           userType === 'Client'
             ? setSearchResults(res.data.data.freelancers)
             : setSearchResults(res.data.data.clients);
@@ -89,7 +87,7 @@ const Search = () => {
           await getPaginatedResults();
         }
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     };
 
@@ -126,8 +124,6 @@ const Search = () => {
               },
             });
       }
-
-      console.log(res);
 
       setIsLoading(false);
       userType === 'Client'

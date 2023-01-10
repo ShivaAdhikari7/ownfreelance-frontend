@@ -1,4 +1,4 @@
-import { IS_LOGGED_IN, USER_TYPE, TOKEN } from 'constants/utils';
+import { IS_LOGGED_IN, USER_TYPE, USER, TOKEN } from 'constants/utils';
 import { useState, useEffect, createContext } from 'react';
 
 const AuthContext = createContext({
@@ -10,6 +10,8 @@ const AuthContext = createContext({
   setToken: token => {},
   userId: '',
   setUserId: userId => {},
+  USER: '',
+  setUser: USER => {},
 });
 
 export const AuthContextProvider = ({ children }) => {
@@ -17,20 +19,24 @@ export const AuthContextProvider = ({ children }) => {
   const [userType, setUserType] = useState('');
   const [token, setToken] = useState('');
   const [userId, setUserId] = useState('');
+  const [user, setUser] = useState('');
 
   useEffect(() => {
     if (IS_LOGGED_IN) {
-      setIsLoggedIn(true);
-      setUserType(USER_TYPE);
       setToken(TOKEN);
+      setUserType(USER_TYPE);
+      setIsLoggedIn(true);
+      setUser(USER);
     }
-  }, [isLoggedIn]);
+  }, []);
 
   return (
     <AuthContext.Provider
       value={{
         isLoggedIn,
         setIsLoggedIn,
+        user,
+        setUser,
         userType,
         setUserType,
         token,

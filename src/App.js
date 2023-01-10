@@ -25,18 +25,20 @@ import HomePage from 'pages/HomePage/HomePage';
 import Search from 'pages/Search/Search';
 import ClientProfile from 'pages/UserProfile/clientProfile';
 import FreelancerProfile from 'pages/UserProfile/freelancerProfile';
-import Forgot from 'pages/ForgotPassword/forgotPassword';
 import Detail from 'pages/Detail/Detail';
-import UpdateProfile from 'pages/UserProfile/updateFreelancerProfile';
+import UpdateProfile from 'pages/UserProfile/UpdateUserProfile';
 import ProtectedRoute from 'routes/ProtectedRoute';
+import Messenger from 'pages/messenger/Messenger';
 
 import AuthContext from 'context/AuthContext/auth-context';
 import ProposalSubmit from 'pages/ProposalSubmit/ProposalSubmit';
 import ProposalSubmitSuccess from 'pages/ProposalSubmit/ProposalSubmitSuccess';
 import ApplicantProposal from 'pages/ApplicantProposal/ApplicantProposal';
+import Khalti from 'pages/Khalti/Khalti';
+import Forgot from 'pages/ForgotPassword/forgotPassword';
 
 const App = () => {
-  const { isLoggedIn, userType } = useContext(AuthContext);
+  const { userType, isLoggedIn } = useContext(AuthContext);
 
   return (
     <Routes>
@@ -68,6 +70,14 @@ const App = () => {
         }
       />
       <Route
+        path="/payment"
+        element={
+          <ProtectedRoute>
+            <Khalti />
+          </ProtectedRoute>
+        }
+      />
+      <Route
         path="/otp/verify"
         element={
           <ProtectedRoute>
@@ -81,6 +91,14 @@ const App = () => {
         element={
           <ProtectedRoute>
             <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/messenger"
+        element={
+          <ProtectedRoute>
+            <Messenger />
           </ProtectedRoute>
         }
       />
@@ -210,15 +228,6 @@ const App = () => {
         element={
           <ProtectedRoute>
             <UpdateProfile />
-          </ProtectedRoute>
-        }
-      />
-
-      <Route
-        path="/client/profile"
-        element={
-          <ProtectedRoute>
-            <ClientProfile />
           </ProtectedRoute>
         }
       />

@@ -42,8 +42,6 @@ const ApplicantProposal = () => {
           }
         );
 
-        console.log(updateRes);
-
         setProposalDetail(res.data.proposalData);
         setApplicantDetail({
           ...res.data.freelancerDetail.freelancerData,
@@ -56,8 +54,6 @@ const ApplicantProposal = () => {
 
     getProposalData();
   }, [id, token]);
-
-  console.log(applicantDetail);
 
   const render = () => {
     return (

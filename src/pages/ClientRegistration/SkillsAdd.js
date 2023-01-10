@@ -77,12 +77,9 @@ const Skills = () => {
     const tempSkills = [...skills];
 
     tempSkills.splice(skillIndex, 1);
-    console.log(tempSkills);
 
     setSkills(tempSkills);
   };
-
-  console.log(skills.length);
 
   return (
     <>

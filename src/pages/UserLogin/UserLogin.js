@@ -16,7 +16,8 @@ import Spinner from 'components/Spinner/Spinner';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { setIsLoggedIn, setUserType, setToken } = useContext(AuthContext);
+  const { setIsLoggedIn, setUser, setUserType, setToken } =
+    useContext(AuthContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -42,7 +43,6 @@ const Login = () => {
       email: email,
       password: password,
     };
-
     try {
       setIsLoading(true);
 
@@ -58,7 +58,7 @@ const Login = () => {
       });
 
       localStorage.setItem('userType', res.data.user.userType);
-
+      localStorage.setItem('user', JSON.stringify(res.data.user));
       setIsLoggedIn(true);
       setUserType(res.data.user.userType);
       setToken(loginResponse.data.token);

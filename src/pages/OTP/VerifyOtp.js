@@ -53,8 +53,6 @@ const VerifyOtp = () => {
 
     const otp = +`${otpVal1}${otpVal2}${otpVal3}${otpVal4}`;
 
-    console.log(otp);
-
     try {
       setIsLoading(true);
       const res = await axios.post(
@@ -66,8 +64,6 @@ const VerifyOtp = () => {
           },
         }
       );
-
-      console.log(res);
 
       if (res.data.verified) {
         navigate('/otp/success');

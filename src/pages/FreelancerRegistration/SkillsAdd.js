@@ -73,7 +73,6 @@ const SkillsAdd = () => {
     const tempSkills = [...skills];
 
     tempSkills.splice(skillIndex, 1);
-    console.log(tempSkills);
 
     setSkills(tempSkills);
   };
