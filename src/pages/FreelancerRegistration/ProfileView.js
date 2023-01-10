@@ -3,17 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import Navbar from 'components/Navbar/Navbar';
-import { TOKEN } from 'constants/utils';
 
 import FreelancerRegistrationContext from 'context/FreelancerRegistration/freelancer-context';
 
 import profileCompleteImg from 'assets/images/profile_complete.png';
 import Button from 'components/Button/Button';
+import AuthContext from 'context/AuthContext/auth-context';
 
 const ProfileView = () => {
   const [profileDetail, setProfileDetail] = useState(null);
   const navigate = useNavigate();
 
+  const { token, setIsLoggedIn } = useContext(AuthContext);
   const freelancerCtx = useContext(FreelancerRegistrationContext);
   const {
     profileUrl,
@@ -29,7 +30,7 @@ const ProfileView = () => {
     const getProfileDetails = async () => {
       const res = await axios.get('http://localhost:90/user/me', {
         headers: {
-          Authorization: `Bearer ${TOKEN}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -37,9 +38,11 @@ const ProfileView = () => {
     };
 
     getProfileDetails();
-  }, []);
+  }, [token]);
 
   const submitProfile = () => {
+    setIsLoggedIn(true);
+
     navigate('/verification_successful', {
       state: {
         dashboard: { label: 'Visit my dashboard' },

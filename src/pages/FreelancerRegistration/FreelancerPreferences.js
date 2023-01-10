@@ -6,9 +6,8 @@ import Navbar from 'components/Navbar/Navbar';
 import Input from 'components/Input/Input';
 import Button from 'components/Button/Button';
 
-import { TOKEN } from 'constants/utils';
-
 import FreelancerRegistrationContext from 'context/FreelancerRegistration/freelancer-context';
+import AuthContext from 'context/AuthContext/auth-context';
 
 const FreelancerPreferences = () => {
   const {
@@ -20,6 +19,8 @@ const FreelancerPreferences = () => {
     hourlyRate,
     setProfileUrl,
   } = useContext(FreelancerRegistrationContext);
+  const { token } = useContext(AuthContext);
+
   const navigate = useNavigate();
 
   const [language, setLanguage] = useState('');
@@ -85,7 +86,7 @@ const FreelancerPreferences = () => {
 
     const res = await axios.post('http://localhost:90/freelancer/add', data, {
       headers: {
-        Authorization: `Bearer ${TOKEN}`,
+        Authorization: `Bearer ${token}`,
       },
     });
 

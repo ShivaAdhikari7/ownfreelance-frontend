@@ -1,16 +1,15 @@
-import myKey from "./khaltiKey";
-import axios from "axios";
+import myKey from './khaltiKey';
+import axios from 'axios';
 
 let config = {
   // replace this key with yours
   publicKey: myKey.publicTestKey,
-  productIdentity: "123766",
-  productName: "OwnFreelance Website",
-  productUrl: "http://localhost:3000",
+  productIdentity: '123766',
+  productName: 'OwnFreelance Website',
+  productUrl: 'http://localhost:3000',
   eventHandler: {
     onSuccess(payload) {
       // hit merchant api for initiating verfication
-      console.log(payload);
       let data = {
         token: payload.token,
         amount: +payload.amount,
@@ -23,12 +22,10 @@ let config = {
       };
 
       axios
-        .post("https://khalti.com/api/v2/payment/verify/", data, config)
-        .then((response) => {
-          console.log(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
+        .post('https://khalti.com/api/v2/payment/verify/', data, config)
+        .then(response => {})
+        .catch(error => {
+          console.error(error);
         });
     },
     // onError handler is optional
@@ -36,16 +33,14 @@ let config = {
       // handle errors
       console.log(error);
     },
-    onClose() {
-      console.log("widget is closing");
-    },
+    onClose() {},
   },
   paymentPreference: [
-    "KHALTI",
-    "EBANKING",
-    "MOBILE_BANKING",
-    "CONNECT_IPS",
-    "SCT",
+    'KHALTI',
+    'EBANKING',
+    'MOBILE_BANKING',
+    'CONNECT_IPS',
+    'SCT',
   ],
 };
 

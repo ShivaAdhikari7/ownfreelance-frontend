@@ -62,6 +62,7 @@ const HourlyRateAdd = () => {
                   className="text-end"
                   type="number"
                   placeholder="$0.00"
+                  value={(+hourlyRate).toFixed(2)}
                 />
                 {hourlyRateHasError && (
                   <p className="mt-3 error-msg">
@@ -80,7 +81,9 @@ const HourlyRateAdd = () => {
                 </p>
               </div>
 
-              <span className="deducted-rate">$ -{serviceCharge}</span>
+              <span className="deducted-rate">
+                $ -{serviceCharge.toFixed(2)}
+              </span>
             </div>
 
             <div className="rate-info d-flex align-items-center justify-content-between">
@@ -95,7 +98,7 @@ const HourlyRateAdd = () => {
                 className="text-end"
                 type="number"
                 placeholder="$0.00"
-                value={netAmount}
+                value={netAmount.toFixed(2)}
               />
             </div>
           </div>

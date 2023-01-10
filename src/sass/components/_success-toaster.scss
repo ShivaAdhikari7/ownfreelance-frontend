@@ -1,0 +1,15 @@
+.success-toaster {
+  background-color: $primary-tint-8;
+  font-size: 1.4rem;
+  border-radius: 0.5rem;
+
+  .success-icon {
+    font-size: 2rem;
+    fill: $primary-color;
+
+    &:nth-child(2) {
+      fill: $black-tint-4;
+      cursor: pointer;
+    }
+  }
+}

@@ -22,7 +22,7 @@
   background-color: $white;
   color: $black-tint-3;
   font-size: 1.6rem;
-  border: 0.1rem solid $grey1-600;
+  border: 0.1rem solid $grey1-600 !important;
 
   &:hover {
     background-color: $white;

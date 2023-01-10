@@ -18,3 +18,15 @@
     }
   }
 }
+
+.password-eye {
+  top: 50%;
+  transform: translateY(-50%);
+  right: 1rem;
+
+  .eye {
+    @include size(2.4rem);
+
+    fill: $primary-tint-2;
+  }
+}

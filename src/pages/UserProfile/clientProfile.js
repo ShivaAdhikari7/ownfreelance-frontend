@@ -1,41 +1,49 @@
-import { useNavigate } from "react-router-dom";
-import Navbar from "components/Navbar/Navbar";
-import Button from "components/Button/Button";
-import Img from "assets/images/client4.jpg";
-import Img3 from "assets/images/client(2).png";
-import I1 from "assets/images/I1.png";
-import I2 from "assets/images/I2.png";
-import I3 from "assets/images/I3.png";
-import I4 from "assets/images/I4.png";
-import { TbUser } from "react-icons/tb";
-import { MdEmail, MdLocationOn } from "react-icons/md";
-import ClientRegistrationContext from "context/ClientRegistration/client-context";
-import axios from "axios";
-import { useEffect, useContext, useState } from "react";
+import { useContext } from 'react';
+
+import { useNavigate } from 'react-router-dom';
+
+import Navbar from 'components/Navbar/Navbar';
+import Button from 'components/Button/Button';
+import Img from 'assets/images/client4.jpg';
+import Img3 from 'assets/images/client(2).png';
+import I1 from 'assets/images/I1.png';
+import I2 from 'assets/images/I2.png';
+import I3 from 'assets/images/I3.png';
+import I4 from 'assets/images/I4.png';
+
+import { MdLocationOn, MdEmail } from 'react-icons/md';
+import { BiUser } from 'react-icons/bi';
+
+import AuthContext from 'context/AuthContext/auth-context';
+
+import axios from 'axios';
+
+import { useEffect, useState } from 'react';
 
 const ClientProfile = () => {
+  const { setUserId, token } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [profileDetail, setProfileDetail] = useState(null);
-  const clientCtx = useContext(ClientRegistrationContext);
-  const {} = clientCtx;
 
   useEffect(() => {
     const getProfileDetails = async () => {
-      const res = await axios.get("http://localhost:90/user/me", {
+      const res = await axios.get('http://localhost:90/user/me', {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("__token__")}`,
+          Authorization: `Bearer ${token}`,
         },
       });
+
+      setUserId(res.data.user.userId._id);
 
       setProfileDetail(res.data.user);
     };
 
     getProfileDetails();
-  }, []);
+  }, [setUserId, token]);
 
   const postNew = () => {
-    navigate("/add/client/headline");
+    navigate('/add/client/headline');
   };
   return (
     profileDetail && (
@@ -60,7 +68,7 @@ const ClientProfile = () => {
               <h1>Your dashboard</h1>
               <br></br>
               <h3>
-                <TbUser /> {profileDetail?.userId.firstName}{" "}
+                <BiUser /> {profileDetail?.userId.firstName}{' '}
                 {profileDetail?.userId.lastName}
               </h3>
               <p className="profile-description">
@@ -75,7 +83,7 @@ const ClientProfile = () => {
                 type="button"
                 className="btn-round me-5 btn-submit p -3 w-100 "
               >
-                Browse Project Catalog{" "}
+                Browse Project Catalog{' '}
               </Button>
             </div>
             <div className="form-action text-center m-5">
@@ -84,7 +92,7 @@ const ClientProfile = () => {
                 className="btn-round btn-submit p -3 w-100"
                 onClick={postNew}
               >
-                Post a new Job{" "}
+                Post a new Job{' '}
               </Button>
             </div>
           </div>
@@ -96,7 +104,7 @@ const ClientProfile = () => {
                 <div className="m-3 p-3 d-flex flex-column justify-content-center border border-$grey2-300 rounded ">
                   <h1>
                     <span className="color:red">
-                      {profileDetail.headline}/{" "}
+                      {profileDetail.headline}/{' '}
                     </span>
                     {profileDetail.requiredJobTitle}
                   </h1>
@@ -106,7 +114,7 @@ const ClientProfile = () => {
                   <p className="profile-description">
                     {profileDetail.scope.projectSize} -
                     {profileDetail.scope.projectDuration} -
-                    {profileDetail.scope.projectExperienceLevel}{" "}
+                    {profileDetail.scope.projectExperienceLevel}{' '}
                   </p>
                   <h5>{profileDetail.hourlyRate}$ per hour</h5>
                 </div>
@@ -121,7 +129,7 @@ const ClientProfile = () => {
                       <h3 className="ps-5">1. Post a job to the marketplace</h3>
 
                       <p className="profile-description ps-5">
-                        {" "}
+                        {' '}
                         Provide enough detail for great talent to figure out if
                         the work is right for them.<br></br>
                         (You can always edit your post, or send an invite to

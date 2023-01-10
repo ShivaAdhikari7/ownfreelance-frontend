@@ -9,7 +9,7 @@ const TextArea = ({
 }) => {
   return (
     <div className="textarea-container d-flex flex-column">
-      <label htmlFor={id}>{label}</label>
+      {label && <label htmlFor={id}>{label}</label>}
       <textarea
         id={id}
         name={name}

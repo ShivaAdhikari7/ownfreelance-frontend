@@ -8,6 +8,7 @@ import clientImg from 'assets/images/client.png';
 
 import FreelancerRegistrationContext from 'context/FreelancerRegistration/freelancer-context';
 import ClientRegistrationContext from 'context/ClientRegistration/client-context';
+import AuthContext from 'context/AuthContext/auth-context';
 
 const VerificationSuccessful = () => {
   const navigate = useNavigate();
@@ -17,14 +18,18 @@ const VerificationSuccessful = () => {
   const freelancerCtx = useContext(FreelancerRegistrationContext);
   const clientCtx = useContext(ClientRegistrationContext);
 
-  const navigateToClientRegistration = () => {
+  const { setUserType } = useContext(AuthContext);
+
+  const navigateToDashboard = () => {
     clientCtx.setUserType('Client');
-    navigate('/add/client/headline');
+    setUserType('Client');
+    navigate('/');
   };
 
-  const navigateToFreelancerRegistration = () => {
+  const navigateToSearch = () => {
     freelancerCtx.setUserType('Freelancer');
-    navigate('/add/title');
+    setUserType('Freelancer');
+    navigate('/search');
   };
 
   return (
@@ -35,7 +40,7 @@ const VerificationSuccessful = () => {
         <div className="row text-center row-cols-1 row-cols-md-1 row-cols-lg-2 gx-5 gy-5">
           <div
             role="button"
-            onClick={navigateToClientRegistration}
+            onClick={navigateToDashboard}
             tabIndex={0}
             className="choice-client choice"
           >
@@ -50,7 +55,7 @@ const VerificationSuccessful = () => {
           </div>
           <div
             role="button"
-            onClick={navigateToFreelancerRegistration}
+            onClick={navigateToSearch}
             tabIndex={0}
             className="choice-freelancer choice"
           >

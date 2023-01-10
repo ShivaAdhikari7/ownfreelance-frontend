@@ -7,6 +7,28 @@ import Button from 'components/Button/Button';
 
 import FreelancerRegistrationContext from 'context/FreelancerRegistration/freelancer-context';
 
+const SUGGESTED_OPTIONS = [
+  'HTML',
+  'CSS',
+  'JavaScript',
+  'ReactJS',
+  'NodeJS',
+  'Bootstrap',
+  'MongoDB',
+  'AngularJS',
+  'VueJS',
+  'Flutter',
+  'Swift',
+  'Tailwind',
+  'SQL',
+  'Oracle',
+  'React Native',
+  'Kotlin',
+  'Ruby on Rails',
+  'Python',
+  'Django',
+];
+
 const SkillsAdd = () => {
   const freelancerCtx = useContext(FreelancerRegistrationContext);
   const navigate = useNavigate();
@@ -15,12 +37,7 @@ const SkillsAdd = () => {
   const [skill, setSkill] = useState('');
   const [skills, setSkills] = useState([]);
 
-  const [skillHasError, setSkillHasError] = useState(false);
-
-  const formIsInvalid = skill.trim().length === 0;
-
   const skillChangeHandler = e => {
-    setSkillHasError(e.target.value.trim().length === 0);
     setSkill(e.target.value);
   };
 
@@ -33,12 +50,31 @@ const SkillsAdd = () => {
   };
 
   const skillsAddHandler = () => {
-    if (skill.trim().length === 0) setSkillHasError(true);
-
-    if (formIsInvalid) return;
-
     freelancerCtx.setSkills(skills);
     navigate('/add/bio');
+  };
+
+  const selectSkill = e => {
+    const selectedSkill = e.target.dataset.value;
+
+    if (skills.find(skill => skill.label === selectedSkill)) return;
+
+    setSkills(prevSkills => [
+      ...prevSkills,
+      { id: skillId, label: selectedSkill },
+    ]);
+
+    setSkillId(prevId => ++prevId);
+  };
+
+  const removeSkillHandler = label => {
+    const skillIndex = skills.findIndex(skill => skill.label === label);
+
+    const tempSkills = [...skills];
+
+    tempSkills.splice(skillIndex, 1);
+
+    setSkills(tempSkills);
   };
 
   return (
@@ -52,17 +88,14 @@ const SkillsAdd = () => {
           Skills makes it easier for clients to find the right talent for them.
           So, add the skills you have.
         </p>
+
         <form onSubmit={skillFormSubmitHandler}>
-          <div>
+          <div className="mb-4">
             <Input
               onChange={skillChangeHandler}
-              className="mb-5"
               type="text"
               placeholder="Example: Full stack developer | React developer"
             />
-            {skillHasError && (
-              <p className="mt-3 error-msg">Skills must be added.</p>
-            )}
           </div>
           <div className="skills-container d-flex align-item-center mb-5">
             {skills.map(skill => (
@@ -71,13 +104,34 @@ const SkillsAdd = () => {
                 className="skill px-3 py-2 d-flex align-items-center"
               >
                 <span className="skill-text">{skill.label}</span>
-                <span role="button" className="skill-cross">
+                <span
+                  onClick={removeSkillHandler.bind(null, skill.label)}
+                  role="button"
+                  className="skill-cross"
+                >
                   &#10005;
                 </span>
               </div>
             ))}
           </div>
         </form>
+
+        <div className="suggested-skills w-50">
+          <h4 className="mb-4">Suggested skills</h4>
+          <div className="d-flex align-items-center gap-3 flex-wrap">
+            {SUGGESTED_OPTIONS.map(option => (
+              <span
+                key={option}
+                role="button"
+                onClick={selectSkill}
+                data-value={option}
+              >
+                {option}
+              </span>
+            ))}
+          </div>
+        </div>
+
         <div className="text-end">
           <Button
             onClick={skillsAddHandler}

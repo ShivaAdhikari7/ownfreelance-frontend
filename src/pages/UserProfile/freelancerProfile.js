@@ -1,21 +1,21 @@
-import Button from "components/Button/Button";
-import Navbar from "components/Navbar/Navbar";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useContext, useState } from "react";
-import { MdEdit } from "react-icons/md";
-import { MdEmail, MdPhone } from "react-icons/md";
-import { GoLocation } from "react-icons/go";
-import AuthContext from "context/AuthContext/auth-context";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import Button from 'components/Button/Button';
+import Navbar from 'components/Navbar/Navbar';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useContext, useState } from 'react';
+import { MdEdit } from 'react-icons/md';
+import { MdEmail, MdPhone } from 'react-icons/md';
+import { GoLocation } from 'react-icons/go';
+import AuthContext from 'context/AuthContext/auth-context';
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 const FreelancerProfile = () => {
   const { user, userType } = useContext(AuthContext);
   const [modal, setModal] = useState(false);
   const [modal1, setModal1] = useState(false);
   const [modal2, setModal2] = useState(false);
-  const [hourlyRate, setrate] = useState("");
-  const [language, setlanguage] = useState("");
+  const [hourlyRate, setrate] = useState('');
+  const [language, setlanguage] = useState('');
 
   const navigate = useNavigate();
   const [profileDetail, setProfileDetail] = useState(null);
@@ -23,45 +23,26 @@ const FreelancerProfile = () => {
 
   const config = {
     headers: {
-      Authorization: "Bearer " + localStorage.getItem("__token__"),
+      Authorization: 'Bearer ' + localStorage.getItem('__token__'),
     },
   };
-  console.log(user._id, userType);
+
   useEffect(() => {
     const getProfileDetails = async () => {
-      const res = await axios.get("http://localhost:90/user/me", {
+      const res = await axios.get('http://localhost:90/user/me', {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("__token__")}`,
+          Authorization: `Bearer ${localStorage.getItem('__token__')}`,
         },
       });
 
       setProfileDetail(res.data.user);
       setrate(res.data.user.hourlyRate);
-      console.log(res.data.user);
     };
 
     getProfileDetails();
   }, []);
 
-  // useEffect(() => {
-  //   const getFreelancerDetails = async () => {
-  //     const res = await axios.get("http://localhost:90/freelancer/", {
-  //       headers: {
-  //         Authorization: `Bearer ${localStorage.getItem('__token__')}`,
-  //       },
-  //     }
-  //     );
-
-  //     setFreelancerDetail(res.data);
-  //     console.log(res);
-  //     setrate(res.data.hourlyRate);
-
-  //   };
-
-  //   getFreelancerDetails();
-  // }, []);
-
-  const updateProfile = (e) => {
+  const updateProfile = e => {
     e.preventDefault();
     const data = {
       hourlyRate: hourlyRate,
@@ -70,31 +51,29 @@ const FreelancerProfile = () => {
     axios
       .put(
         `http://localhost:90/${
-          userType === "Freelancer" ? "freelancer" : "client"
+          userType === 'Freelancer' ? 'freelancer' : 'client'
         }/update/${user._id}`,
         data,
         config
       )
-      .then((result) => {
+      .then(result => {
         var dialog = window.confirm(
-          "Are you sure you want to update these data?"
+          'Are you sure you want to update these data?'
         );
         if (dialog) {
-          console.log("Freelancer profile updated");
         } else {
-          console.log("Please try again!");
         }
-        console.log(result);
+
         setrate(result.data.hourlyRate);
         setlanguage(result.data.preferences.language);
       })
-      .catch((e) => {
-        console.log(e);
+      .catch(e => {
+        console.error(e);
       });
   };
 
   const updateUser = () => {
-    navigate("/update/profile");
+    navigate('/update/profile');
   };
 
   return (
@@ -117,8 +96,8 @@ const FreelancerProfile = () => {
                 type="button"
                 className="btn-round me-5 btn-submit p -3 w-50 align-items-right justify-items-right"
               >
-                {" "}
-                Create a Specialized Profile{" "}
+                {' '}
+                Create a Specialized Profile{' '}
               </Button>
             </div>
           </div>
@@ -134,8 +113,8 @@ const FreelancerProfile = () => {
               />
               <div className="mt-4 pt-5 pe-5">
                 <h1>
-                  {profileDetail?.userId.firstName}{" "}
-                  {profileDetail?.userId.lastName}{" "}
+                  {profileDetail?.userId.firstName}{' '}
+                  {profileDetail?.userId.lastName}{' '}
                 </h1>
                 <p className="profile-description">
                   <MdEmail /> {profileDetail?.userId.email}
@@ -154,8 +133,8 @@ const FreelancerProfile = () => {
                 type="button"
                 className="btn-round me-3 ms-5 btn-submit p -3 w-100 "
               >
-                {" "}
-                Public View{" "}
+                {' '}
+                Public View{' '}
               </Button>
             </div>
             <div className="form-action text-center m-5 pt-5">
@@ -164,15 +143,15 @@ const FreelancerProfile = () => {
                 className="btn-round btn-submit p -3 w-100"
                 onClick={updateUser}
               >
-                {" "}
-                Profile Settings{" "}
+                {' '}
+                Profile Settings{' '}
               </Button>
             </div>
           </div>
           <div className="d-flex flex-row">
             <div className="border-left border-dark ms-5 rounded ">
               <h2 className="mb-3">
-                Rate per hour{" "}
+                Rate per hour{' '}
                 <button
                   onClick={() => setModal(true)}
                   className="border rounded-circle"
@@ -198,7 +177,7 @@ const FreelancerProfile = () => {
                     type="text"
                     className="form-control profile-description mt-4"
                     value={hourlyRate}
-                    onChange={(e) => {
+                    onChange={e => {
                       setrate(e.target.value);
                     }}
                   />
@@ -208,17 +187,17 @@ const FreelancerProfile = () => {
                     className="m-5 font-lg profile-description p-3 border rounded-pill btn btn-success"
                     onClick={updateProfile}
                   >
-                    {" "}
+                    {' '}
                     Update
                   </button>
                 </ModalFooter>
               </Modal>
               <p className="profile-description">
-                {" "}
-                {profileDetail?.hourlyRate}$ per hour{" "}
+                {' '}
+                {profileDetail?.hourlyRate}$ per hour{' '}
               </p>
               <h2 className="mb-3">
-                Languages{" "}
+                Languages{' '}
                 <button
                   onClick={() => setModal1(true)}
                   className="border rounded-circle"
@@ -239,7 +218,7 @@ const FreelancerProfile = () => {
                     type="text"
                     className="form-control profile-description mt-4"
                     value={language}
-                    onChange={(e) => {
+                    onChange={e => {
                       setlanguage(e.target.value);
                     }}
                   />
@@ -249,16 +228,16 @@ const FreelancerProfile = () => {
                     className="m-5 font-lg profile-description p-3 border rounded-pill btn btn-success"
                     onClick={updateProfile}
                   >
-                    {" "}
+                    {' '}
                     Update
                   </button>
                 </ModalFooter>
               </Modal>
               <p className="profile-description">
-                {profileDetail?.preferences.language}{" "}
+                {profileDetail?.preferences.language}{' '}
               </p>
               <h2 className="mb-3 mt-5">
-                Education{" "}
+                Education{' '}
                 <button
                   onClick={() => setModal2(true)}
                   className="border rounded-circle"
@@ -298,13 +277,13 @@ const FreelancerProfile = () => {
                     className="m-5 font-lg profile-description p-3 border rounded-pill btn btn-success"
                     onClick={updateProfile}
                   >
-                    {" "}
+                    {' '}
                     Update
                   </button>
                 </ModalFooter>
               </Modal>
               <h4 className="profile-description">
-                {" "}
+                {' '}
                 {profileDetail?.educationDetails[0].schoolName}
               </h4>
               <p className="profile-description">
@@ -314,8 +293,8 @@ const FreelancerProfile = () => {
                 {profileDetail?.educationDetails[0].studyField}
               </p>
               <h5 className="mb-5">
-                {profileDetail?.educationDetails[0].attendedDate} to{" "}
-                {profileDetail?.educationDetails[0].endDate}{" "}
+                {profileDetail?.educationDetails[0].attendedDate} to{' '}
+                {profileDetail?.educationDetails[0].endDate}{' '}
               </h5>
             </div>
             <div className="me-5 ms-5 ps-5 border-right border-success  ">
@@ -330,22 +309,22 @@ const FreelancerProfile = () => {
                 {profileDetail?.workExperiences[0].companyName}
               </h4>
               <h4 className="profile-description">
-                {profileDetail?.workExperiences[0].companyCity}{" "}
+                {profileDetail?.workExperiences[0].companyCity}{' '}
                 {profileDetail?.workExperiences[0].companyCountry}
               </h4>
               <h6 className="profile-description">
-                from: {profileDetail?.workExperiences[0].workStartDate}{" "}
+                from: {profileDetail?.workExperiences[0].workStartDate}{' '}
                 <br></br> To: {profileDetail?.workExperiences[0].workEndDate}
               </h6>
               <div className="border-bottom  border-$grey2-100 rounded"></div>
               <h1 className="mt-5">
-                Skills{" "}
+                Skills{' '}
                 <button>
                   <MdEdit className="heart-icon  border  border-$primary-tint-1 rounded-circle" />
-                </button>{" "}
+                </button>{' '}
               </h1>
               <div className="d-flex align-items-center skills-container">
-                {profileDetail.skills.map((skill) => (
+                {profileDetail.skills.map(skill => (
                   <span key={skill.id}>{skill.label}</span>
                 ))}
               </div>
