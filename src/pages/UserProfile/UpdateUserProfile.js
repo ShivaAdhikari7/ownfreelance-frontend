@@ -14,6 +14,7 @@ const UpdateProfile = () =>{
     const[lastName, setLn] = useState('');
     const[email, setemail] = useState('');
 
+
     const config ={
         headers:{
             Authorization:'Bearer ' + localStorage.getItem('__token__')
@@ -65,18 +66,18 @@ const UpdateProfile = () =>{
             <form>
                 <div className="form-group">
                     <label className="profile-description mt-4">First name:</label>
-                    <input type="text" className="form-control" value={firstName} onChange={(e) =>{setFn(e.target.value)}}/>
+                    <input type="text" className="form-control profile-description p-2" value={firstName} onChange={(e) =>{setFn(e.target.value)}}/>
                 </div>
                 <div className="form-group">
                     <label className="profile-description mt-4">Last name:</label>
-                    <input type="text" className="form-control" value={lastName} onChange={(e) =>{setLn(e.target.value)}}/>
+                    <input type="text" className="form-control profile-description p-2" value={lastName} onChange={(e) =>{setLn(e.target.value)}}/>
                 </div>
                
                 <div className="form-group">
                     <label className="profile-description mt-4">Email:</label>
-                    <input type="email" className="form-control" value={email} onChange={(e) =>{setemail(e.target.value)}}/>
+                    <input type="email" className="form-control profile-description p-2" value={email} onChange={(e) =>{setemail(e.target.value)}}/>
                 </div>         
-                <button type="submit" className="btn btn-primary mt-3" onClick={updateProfile}> Update</button>
+                <button type="submit" className="m-5 font-lg profile-description pe-5 ps-5 pt-3 pb-3 border rounded-pill btn btn-success" onClick={updateProfile}> Update</button>
             </form>
             </div>
             <div>

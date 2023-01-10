@@ -9,7 +9,7 @@ import { MdSettings } from 'react-icons/md';
 
 import userIcon from 'assets/images/user-icon.png';
 import { Button } from 'react-bootstrap';
-
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { USER_TYPE } from 'constants/utils';
 import { useEffect } from 'react';
@@ -17,6 +17,7 @@ import { useEffect } from 'react';
 const Navbar = () => {
   const isLoggedIn = localStorage.getItem('__token__');
   const [profileDetail, setProfileDetail] = useState(null);
+  const navigate = useNavigate();
 
 
   const [displayUserModal, setDisplayUserModal] = useState(false);
@@ -48,18 +49,8 @@ const Navbar = () => {
   const myProfile=()=>{
 
   };
-  const deleteUser =()=>{
-    const res = axios.delete("http://localhost:90/user/delete/")
-    .then(result => {
-        console.log(result)
-        
-            window.location= "/";
-        
-    })
-    .catch(e=>{
-        console.log(e)
-    })
-}
+  const updateUser=()=>{
+    navigate('/update/profile')}
 
   return (
     <nav className="py-3 navbar navbar-expand-lg bg-custom navbar-custom">
@@ -231,7 +222,7 @@ const Navbar = () => {
                         <NavLink
                           
                           className="d-flex align-items-center justify-content-between text-decoration-none"
-                        onClick={deleteUser}
+                          to={'/update/profile'}
                         >
                           
                           <MdSettings />

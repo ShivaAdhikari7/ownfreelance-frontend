@@ -25,18 +25,15 @@ import HomePage from "pages/HomePage/HomePage";
 import Search from "pages/Search/Search";
 import ClientProfile from "pages/UserProfile/clientProfile";
 import FreelancerProfile from "pages/UserProfile/freelancerProfile";
-import Forgot from "pages/ForgotPassword/forgotPassword";
 import Detail from "pages/Detail/Detail";
-import UpdateProfile from "pages/UserProfile/updateFreelancerProfile";
+import UpdateProfile from "pages/UserProfile/UpdateUserProfile";
 import ProtectedRoute from "routes/ProtectedRoute";
-
 import AuthContext from "context/AuthContext/auth-context";
-
 import { USER_TYPE } from "constants/utils";
 
 const App = () => {
   const authCtx = useContext(AuthContext);
-
+  console.log(authCtx)
   console.log(authCtx.isLoggedIn);
 
   return (
@@ -196,7 +193,6 @@ const App = () => {
       />
       <Route path="/update/profile" element={<ProtectedRoute><UpdateProfile /></ProtectedRoute>} />
       
-      <Route path="/client/profile" element={<ProtectedRoute><ClientProfile /></ProtectedRoute>} />
 
       <Route
         path="/search"
@@ -214,9 +210,6 @@ const App = () => {
           </ProtectedRoute>
         }
       />
-
-
-      <Route path="/forgot/password" element={<Forgot />} />
       
     </Routes>
   );
