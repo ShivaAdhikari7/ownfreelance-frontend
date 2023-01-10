@@ -7,13 +7,16 @@ const AuthContext = createContext({
   userType: '',
   setUserType: userType => {},
   token: '',
-  setToken: () => {},
+  setToken: token => {},
+  userId: '',
+  setUserId: userId => {},
 });
 
 export const AuthContextProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userType, setUserType] = useState('');
   const [token, setToken] = useState('');
+  const [userId, setUserId] = useState('');
 
   useEffect(() => {
     if (IS_LOGGED_IN) {
@@ -32,6 +35,8 @@ export const AuthContextProvider = ({ children }) => {
         setUserType,
         token,
         setToken,
+        userId,
+        setUserId,
       }}
     >
       {children}

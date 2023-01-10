@@ -5,9 +5,14 @@ import Button from 'components/Button/Button';
 import { FiDollarSign, FiHeart } from 'react-icons/fi';
 import { FiCalendar } from 'react-icons/fi';
 import { BiBrain } from 'react-icons/bi';
+import { useNavigate } from 'react-router-dom';
 
 const JobDetail = ({ jobDetail }) => {
-  console.log(jobDetail);
+  const navigate = useNavigate();
+
+  const submitProposal = () => {
+    navigate('/proposal/submit', { state: { jobDetail } });
+  };
 
   return jobDetail ? (
     <>
@@ -58,7 +63,10 @@ const JobDetail = ({ jobDetail }) => {
             </div>
           </div>
           <div className="col-3 client-actions d-flex flex-column align-items-center">
-            <Button className="btn-primary btn-round btn-apply p-3">
+            <Button
+              onClick={submitProposal}
+              className="btn-primary btn-round btn-apply p-3"
+            >
               Apply Now
             </Button>
             <Button className="d-flex align-items-center justify-content-center btn-round btn-save p-3">

@@ -31,6 +31,9 @@ import UpdateProfile from 'pages/UserProfile/updateFreelancerProfile';
 import ProtectedRoute from 'routes/ProtectedRoute';
 
 import AuthContext from 'context/AuthContext/auth-context';
+import ProposalSubmit from 'pages/ProposalSubmit/ProposalSubmit';
+import ProposalSubmitSuccess from 'pages/ProposalSubmit/ProposalSubmitSuccess';
+import ApplicantProposal from 'pages/ApplicantProposal/ApplicantProposal';
 
 const App = () => {
   const { isLoggedIn, userType } = useContext(AuthContext);
@@ -238,6 +241,31 @@ const App = () => {
       />
 
       <Route path="/forgot/password" element={<Forgot />} />
+
+      <Route
+        path="/proposal/submit"
+        element={
+          <ProtectedRoute>
+            <ProposalSubmit />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/proposal/submit/success"
+        element={
+          <ProtectedRoute>
+            <ProposalSubmitSuccess />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/applicant/proposal"
+        element={
+          <ProtectedRoute>
+            <ApplicantProposal />
+          </ProtectedRoute>
+        }
+      />
     </Routes>
   );
 };

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import Button from 'components/Button/Button';
@@ -8,12 +8,14 @@ import axios from 'axios';
 
 import Spinner from 'components/Spinner/Spinner';
 
-import { TOKEN } from 'constants/utils';
+import AuthContext from 'context/AuthContext/auth-context';
 
 const VerifyOtp = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
   const email = state?.email;
+
+  const { token } = useContext(AuthContext);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -51,6 +53,8 @@ const VerifyOtp = () => {
 
     const otp = +`${otpVal1}${otpVal2}${otpVal3}${otpVal4}`;
 
+    console.log(otp);
+
     try {
       setIsLoading(true);
       const res = await axios.post(
@@ -58,10 +62,12 @@ const VerifyOtp = () => {
         { otp },
         {
           headers: {
-            Authorization: `Bearer ${TOKEN}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
+
+      console.log(res);
 
       if (res.data.verified) {
         navigate('/otp/success');
@@ -73,9 +79,7 @@ const VerifyOtp = () => {
     }
   };
 
-  return isLoading ? (
-    <Spinner />
-  ) : (
+  return (
     <>
       <Navbar />
       <div className="verify-otp-container text-center">
@@ -118,9 +122,15 @@ const VerifyOtp = () => {
             />
           </div>
 
-          <Button type="submit" className="btn-validate-otp mb-5">
-            Validate OTP
-          </Button>
+          <div className="d-flex align-items-center justify-content-center w-100">
+            <Button
+              onClick={otpCodeSubmitHandler}
+              type="submit"
+              className="btn-validate-otp mb-5 d-flex align-items-center justify-content-center"
+            >
+              {isLoading ? <Spinner /> : 'Validate OTP'}
+            </Button>
+          </div>
         </form>
 
         <p className="otp-not-received-text">

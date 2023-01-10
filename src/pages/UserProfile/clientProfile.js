@@ -1,4 +1,7 @@
+import { useContext } from 'react';
+
 import { useNavigate } from 'react-router-dom';
+
 import Navbar from 'components/Navbar/Navbar';
 import Button from 'components/Button/Button';
 import Img from 'assets/images/client4.jpg';
@@ -8,10 +11,14 @@ import I2 from 'assets/images/I2.png';
 import I3 from 'assets/images/I3.png';
 import I4 from 'assets/images/I4.png';
 
+import AuthContext from 'context/AuthContext/auth-context';
+
 import axios from 'axios';
+
 import { useEffect, useState } from 'react';
 
 const ClientProfile = () => {
+  const { setUserId, token } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [profileDetail, setProfileDetail] = useState(null);
@@ -20,15 +27,19 @@ const ClientProfile = () => {
     const getProfileDetails = async () => {
       const res = await axios.get('http://localhost:90/user/me', {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('__token__')}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
+      console.log(res.data);
+      setUserId(res.data.user.userId._id);
+
+      console.log(res.data.user);
       setProfileDetail(res.data.user);
     };
 
     getProfileDetails();
-  }, []);
+  }, [setUserId, token]);
 
   const postNew = () => {
     navigate('/add/client/headline');

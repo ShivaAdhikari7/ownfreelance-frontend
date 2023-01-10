@@ -3,14 +3,13 @@ import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 
-import { TOKEN } from 'constants/utils';
-
 import Input from 'components/Input/Input';
 import Button from 'components/Button/Button';
 import Navbar from 'components/Navbar/Navbar';
 import TextArea from 'components/TextArea/TextArea';
 
 import ClientRegistrationContext from 'context/ClientRegistration/client-context';
+import AuthContext from 'context/AuthContext/auth-context';
 
 const Description = () => {
   const navigate = useNavigate();
@@ -18,6 +17,7 @@ const Description = () => {
   const { headline, budget, scope, skills } = useContext(
     ClientRegistrationContext
   );
+  const { token, setIsLoggedIn } = useContext(AuthContext);
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -69,13 +69,13 @@ const Description = () => {
 
     const res = await axios.post('http://localhost:90/client/add', data, {
       headers: {
-        Authorization: `Bearer ${TOKEN}`,
+        Authorization: `Bearer ${token}`,
       },
     });
 
-    console.log(res);
-
     if (res.status === 200) {
+      setIsLoggedIn(true);
+
       navigate('/verification_successful', {
         state: {
           dashboard: { label: 'Visit my dashboard' },

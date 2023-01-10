@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import { NavLink } from 'react-router-dom';
 
@@ -8,42 +8,82 @@ import { IoMdPaperPlane } from 'react-icons/io';
 import { BiUserCircle, BiLogOut } from 'react-icons/bi';
 import { MdSettings } from 'react-icons/md';
 
-import { useEffect, useContext } from 'react';
 import axios from 'axios';
 
 import userIcon from 'assets/images/user-icon.png';
 import Button from 'components/Button/Button';
+import Notification from 'components/Notification/Notification';
 
 import AuthContext from 'context/AuthContext/auth-context';
+import NotificationCounter from 'components/Notification/NotificationCounter';
 
 const Navbar = () => {
-  const { userType, isLoggedIn } = useContext(AuthContext);
+  const { userType, isLoggedIn, token } = useContext(AuthContext);
 
   const [profileDetail, setProfileDetail] = useState(null);
+  const [notifications, setNotifications] = useState([]);
+  const [notificationsLength, setNotificationsLength] = useState(0);
 
   const [displayUserModal, setDisplayUserModal] = useState(false);
+  const [displayNotifications, setDisplayNotifications] = useState(false);
 
   useEffect(() => {
     const getProfileDetails = async () => {
       const res = await axios.get('http://localhost:90/user/me', {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('__token__')}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
       setProfileDetail(res.data.user);
     };
 
-    getProfileDetails();
-  }, []);
+    isLoggedIn && getProfileDetails();
+  }, [token, isLoggedIn]);
 
   const userModalToggleHandler = () => {
     setDisplayUserModal(prevState => !prevState);
   };
 
+  const notificationToggleHandler = () => {
+    setDisplayNotifications(prevState => !prevState);
+  };
+
   const handleLogout = () => {
     localStorage.clear('__token__').clear('userType');
   };
+
+  useEffect(() => {
+    document.body.addEventListener('click', e => {
+      if (
+        !e.target.closest('.nav-icon') &&
+        (displayNotifications || displayUserModal)
+      ) {
+        setDisplayNotifications(false);
+        setDisplayUserModal(false);
+      }
+    });
+  }, [displayNotifications, displayUserModal]);
+
+  useEffect(() => {
+    const getNotifications = async () => {
+      const res = await axios.get(
+        'http://localhost:90/proposal/all/notifications',
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const notRead = res.data.filter(({ notification }) => !notification.read);
+
+      setNotificationsLength(notRead.length);
+      setNotifications(res.data);
+    };
+
+    token && isLoggedIn && getNotifications();
+  }, [token, isLoggedIn, setNotificationsLength]);
 
   return (
     <nav className="py-3 navbar navbar-expand-lg bg-custom navbar-custom">
@@ -157,13 +197,18 @@ const Navbar = () => {
                   </NavLink>
                 </li>
 
-                <li className="nav-item mx-3">
-                  <NavLink
-                    to="/login"
+                <li className="nav-item mx-3 position-relative">
+                  <Button
+                    onClick={notificationToggleHandler}
                     className="nav-link nav-link-login my-2 px-3 py-3 nav-icon"
                   >
                     <IoMdNotificationsOutline />
-                  </NavLink>
+                  </Button>
+
+                  {displayNotifications && (
+                    <Notification notifications={notifications} />
+                  )}
+                  {<NotificationCounter count={notificationsLength} />}
                 </li>
 
                 <li className="nav-item mx-3">
@@ -206,14 +251,15 @@ const Navbar = () => {
                         <NavLink
                           onClick={handleLogout}
                           to="/login"
-                          className="d-flex align-items-center justify-content-between text-decoration-none"
+                          className="d-flex align-items-center gap-3 text-decoration-none"
                         >
                           <BiLogOut />
                           Logout
                         </NavLink>
 
                         <NavLink
-                          className="d-flex align-items-center justify-content-between text-decoration-none"
+                          className="d-flex align-items-center 
+                          gap-3 text-decoration-none"
                           to="/"
                         >
                           <MdSettings />

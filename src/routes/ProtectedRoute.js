@@ -4,17 +4,17 @@ import { useNavigate } from 'react-router-dom';
 import AuthContext from 'context/AuthContext/auth-context';
 
 const ProtectedRoute = ({ children }) => {
-  const { isLoggedIn } = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (!token) {
       navigate('/');
 
       return;
     }
-  }, [navigate, isLoggedIn]);
+  }, [navigate, token]);
 
   return children;
 };

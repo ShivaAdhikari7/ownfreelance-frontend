@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -9,8 +9,12 @@ import Button from 'components/Button/Button';
 import signUpImg from 'assets/images/sign_up_page_img.jpg';
 import Spinner from 'components/Spinner/Spinner';
 
+import PasswordEye from 'components/PasswordEye/PasswordEye';
+import AuthContext from 'context/AuthContext/auth-context';
+
 const Signup = () => {
   const navigate = useNavigate();
+  const { setToken, setIsLoggedIn } = useContext(AuthContext);
 
   const [isLoading, setIsLoading] = useState(false);
   const [isPrivacyChecked, setIsPrivacyChecked] = useState(false);
@@ -29,6 +33,10 @@ const Signup = () => {
   const [confirmPasswordHasError, setConfirmPasswordHasError] = useState(false);
   const [countryHasError, setCountryHasError] = useState(false);
   const [passwordMatchHasError, setPasswordMatchHasError] = useState(false);
+
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
+    useState(false);
 
   const formIsInvalid =
     firstName.trim().length === 0 ||
@@ -116,7 +124,10 @@ const Signup = () => {
       setIsLoading(true);
 
       const res = await axios.post('http://localhost:90/user/register', data);
+
       localStorage.setItem('__token__', res.data.token);
+      setToken(res.data.token);
+      // setIsLoggedIn(true);
 
       await axios.post('http://localhost:90/otp/send', null, {
         headers: {
@@ -132,9 +143,15 @@ const Signup = () => {
     }
   };
 
-  return isLoading ? (
-    <Spinner isVisible={isLoading} />
-  ) : (
+  const passwordVisibilityChangeHandler = () => {
+    setIsPasswordVisible(prevState => !prevState);
+  };
+
+  const confirmPasswordVisibilityChangeHandler = () => {
+    setIsConfirmPasswordVisible(prevState => !prevState);
+  };
+
+  return (
     <>
       <Navbar />
       <div className="container overflow-hidden section-signup">
@@ -203,11 +220,17 @@ const Signup = () => {
                   <Input
                     id="password"
                     label="Password"
-                    type="password"
+                    type={isPasswordVisible ? 'text' : 'password'}
                     placeholder="Enter Password"
                     name="password"
                     onChange={passwordChangeHandler}
                     autoComplete="on"
+                    render={() => (
+                      <PasswordEye
+                        isPasswordVisible={isPasswordVisible}
+                        onClick={passwordVisibilityChangeHandler}
+                      />
+                    )}
                   />
                   {passwordHasError && (
                     <p className="error-msg mt-3">Password can not be empty.</p>
@@ -218,11 +241,17 @@ const Signup = () => {
                   <Input
                     id="confirmPassword"
                     label="Confirm password"
-                    type="password"
+                    type={isConfirmPasswordVisible ? 'text' : 'password'}
                     placeholder="Enter your password again"
                     name="confirmPassword"
                     onChange={confirmPasswordChangeHandler}
                     autoComplete="on"
+                    render={() => (
+                      <PasswordEye
+                        isPasswordVisible={isConfirmPasswordVisible}
+                        onClick={confirmPasswordVisibilityChangeHandler}
+                      />
+                    )}
                   />
                   {confirmPasswordHasError && (
                     <p className="error-msg mt-3">
@@ -267,14 +296,14 @@ const Signup = () => {
                 </p>
               </div>
 
-              <div className="form-action text-center">
+              <div className="form-action text-center d-flex align-items-center justify-content-center">
                 <Button
-                  className={`btn-round btn-submit ${
+                  className={`btn-round btn-submit text-center d-flex align-items-center justify-content-center ${
                     isPrivacyChecked ? '' : 'disabled'
                   }`}
                   type="submit"
                 >
-                  Create my account
+                  {isLoading ? <Spinner /> : 'Create my account'}
                 </Button>
               </div>
             </form>

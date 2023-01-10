@@ -80,6 +80,8 @@ const Search = () => {
           setIsLoading(false);
           setTotalResults(res.data.data.result);
 
+          console.log(userType);
+
           userType === 'Client'
             ? setSearchResults(res.data.data.freelancers)
             : setSearchResults(res.data.data.clients);

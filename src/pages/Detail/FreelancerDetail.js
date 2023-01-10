@@ -6,7 +6,7 @@ import { AiOutlineHeart } from 'react-icons/ai';
 import { MdLocationOn } from 'react-icons/md';
 import { MdStar } from 'react-icons/md';
 
-const FreelancerDetail = ({ freelancerDetail }) => {
+const FreelancerDetail = ({ freelancerDetail, render }) => {
   return (
     <>
       <Navbar />
@@ -35,12 +35,13 @@ const FreelancerDetail = ({ freelancerDetail }) => {
 
               <div className="d-flex align-items-center">
                 <Button className="btn-hire btn-round btn-primary me-4 px-4">
-                  Hire
+                  Hire Freelancer
                 </Button>
                 <AiOutlineHeart className="heart-icon" />
               </div>
             </div>
           </div>
+          {render && render()}
           <div className="row">
             <div className="col-4 left-sidebar">
               <div className="d-flex flex-column stats-section mb-5 pb-4 border-bottom">

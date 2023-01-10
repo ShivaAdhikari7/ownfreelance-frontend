@@ -1,0 +1,36 @@
+.terms-detail {
+  strong {
+    font-size: 1.6rem;
+    font-weight: $font-weight-bold;
+  }
+
+  p {
+    font-size: 1.4rem;
+  }
+
+  span {
+    font-size: 1.4rem;
+  }
+}
+
+.hourly-rate-detail {
+  border-bottom: 0.1rem solid $grey1-600;
+}
+
+.submit-cover-letter {
+  border: 0.1rem solid $grey1-600;
+  border-radius: 1rem;
+  font-size: 1.4rem;
+
+  h4 {
+    font-size: 2rem;
+  }
+
+  p {
+    line-height: 1.6;
+  }
+
+  .attachment {
+    color: $primary-color;
+  }
+}

@@ -1,0 +1,158 @@
+.submit-proposal {
+  width: 65%;
+
+  .section-job-detail {
+    border: 0.1rem solid $grey1-600;
+    border-radius: 1rem;
+
+    h3 {
+      font-size: 2rem;
+    }
+
+    .job-title {
+      font-size: 1.8rem;
+    }
+
+    .required-job-title {
+      font-size: 1.2rem;
+      background-color: $primary-tint-9;
+      border-radius: 10rem;
+    }
+
+    .posted-date {
+      font-size: 1.2rem;
+      color: $grey2-700;
+    }
+
+    .job-description {
+      font-size: 1.4rem;
+      line-height: 1.6;
+    }
+
+    .job-info {
+      border-bottom: 0.1rem solid $grey1-600;
+    }
+
+    .project-detail {
+      border-left: 0.1rem solid $grey1-600;
+      font-size: 1.4rem;
+
+      strong {
+        font-weight: $font-weight-mid-bold;
+      }
+
+      .brain-icon {
+        font-size: 1.8rem;
+        fill: $primary-color;
+      }
+
+      .job-info-icon {
+        font-size: 1.8rem;
+        stroke: $primary-color;
+      }
+
+      .job-info-icon-size {
+        fill: $primary-color;
+        font-size: 2rem;
+      }
+    }
+  }
+
+  .section-terms {
+    border: 0.1rem solid $grey1-600;
+    border-radius: 1rem;
+
+    h3 {
+      font-size: 2rem;
+    }
+
+    .bid-heading {
+      font-size: 1.6rem;
+    }
+
+    .rate-info {
+      font-size: 1.2rem;
+      color: $grey2-800;
+      font-weight: $font-weight-bold;
+    }
+
+    .shield-img {
+      width: 55%;
+    }
+
+    .inputs {
+      strong {
+        font-size: 1.4rem;
+        font-weight: $font-weight-bold;
+      }
+
+      p {
+        font-size: 1.2rem;
+      }
+
+      span {
+        font-size: 1.4rem;
+      }
+    }
+  }
+
+  .section-impressions {
+    border: 0.1rem solid $grey1-600;
+    border-radius: 1rem;
+
+    .impression-heading {
+      font-size: 1.8rem;
+    }
+
+    .dragged-file-name {
+      font-size: 1.4rem;
+      font-weight: $font-weight-bold;
+      color: $primary-color;
+
+      .icon-delete {
+        font-size: 1.8rem;
+        cursor: pointer;
+      }
+    }
+
+    .dropzone {
+      height: 8rem;
+      background-color: $primary-tint-10;
+      border-radius: 1rem;
+
+      p {
+        font-size: 1.6rem;
+        font-weight: $font-weight-bold;
+
+        .upload {
+          color: $primary-color;
+          cursor: pointer;
+        }
+      }
+
+      .file-drop-input {
+        top: 0;
+        left: 0;
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+      }
+    }
+
+    .tip-para {
+      font-size: 1.4rem;
+      color: $grey2-700;
+      line-height: 1.4;
+
+      strong {
+        font-weight: $font-weight-mid-bold;
+        font-style: italic;
+      }
+    }
+
+    .btn-submit-proposal {
+      font-size: 1.6rem;
+    }
+  }
+}

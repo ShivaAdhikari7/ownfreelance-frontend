@@ -49,15 +49,17 @@ const TitleAdd = () => {
           <div>
             <Input
               onChange={titleChangeHandler}
-              className="mb-5"
+              className="mb-2"
               type="text"
               placeholder="Example: Full stack developer | React developer"
             />
-            {titleHasError && (
-              <p className="mt-3 error-msg">Title can not be empty.</p>
-            )}
+            {
+              <p className="error-msg">
+                {titleHasError && 'Title can not be empty.'}
+              </p>
+            }
           </div>
-          <div className="text-end">
+          <div className="text-end mt-5">
             <Button type="submit" className="btn btn-registration btn-round">
               Next
             </Button>

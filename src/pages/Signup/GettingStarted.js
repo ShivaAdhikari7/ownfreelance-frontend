@@ -65,17 +65,6 @@ const GettingStarted = () => {
             </p>
           </div>
         </div>
-        <div className="text-center choice-btn">
-          <Button className="btn-round" type="submit">
-            Create my account
-          </Button>
-        </div>
-        <div className="login-display text-center d-flex mt-5 justify-content-center">
-          <p className="login-text">Already have an account?</p>
-          <a href="/" className="login-link">
-            Login
-          </a>
-        </div>
       </div>
     </>
   );
