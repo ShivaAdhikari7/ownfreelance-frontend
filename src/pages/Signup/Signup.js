@@ -1,30 +1,30 @@
-import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-import Navbar from 'components/Navbar/Navbar';
-import Input from 'components/Input/Input';
-import Button from 'components/Button/Button';
+import Navbar from "components/Navbar/Navbar";
+import Input from "components/Input/Input";
+import Button from "components/Button/Button";
 
-import signUpImg from 'assets/images/sign_up_page_img.jpg';
-import Spinner from 'components/Spinner/Spinner';
+import signUpImg from "assets/images/sign_up_page_img.jpg";
+import Spinner from "components/Spinner/Spinner";
 
-import PasswordEye from 'components/PasswordEye/PasswordEye';
-import AuthContext from 'context/AuthContext/auth-context';
+import PasswordEye from "components/PasswordEye/PasswordEye";
+import AuthContext from "context/AuthContext/auth-context";
 
 const Signup = () => {
   const navigate = useNavigate();
-  const { setToken, setIsLoggedIn } = useContext(AuthContext);
+  const { setToken, setUser } = useContext(AuthContext);
 
   const [isLoading, setIsLoading] = useState(false);
   const [isPrivacyChecked, setIsPrivacyChecked] = useState(false);
 
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [country, setCountry] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [country, setCountry] = useState("");
 
   const [firstNameHasError, setFirstNameHasError] = useState(false);
   const [lastNameHasError, setLastNameHasError] = useState(false);
@@ -48,38 +48,38 @@ const Signup = () => {
     !isPrivacyChecked ||
     password !== confirmPassword;
 
-  const firstNameChangeHandler = e => {
+  const firstNameChangeHandler = (e) => {
     setFirstNameHasError(e.target.value.trim().length === 0);
     setFirstName(e.target.value);
   };
 
-  const lastNameChangeHandler = e => {
+  const lastNameChangeHandler = (e) => {
     setLastNameHasError(e.target.value.trim().length === 0);
     setLastName(e.target.value);
   };
 
-  const emailChangeHandler = e => {
+  const emailChangeHandler = (e) => {
     setEmailHasError(e.target.value.trim().length === 0);
     setEmail(e.target.value);
   };
 
-  const passwordChangeHandler = e => {
+  const passwordChangeHandler = (e) => {
     setPasswordHasError(e.target.value.trim().length === 0);
     setPassword(e.target.value);
   };
 
-  const confirmPasswordChangeHandler = e => {
+  const confirmPasswordChangeHandler = (e) => {
     setConfirmPasswordHasError(e.target.value.trim().length === 0);
     setPasswordMatchHasError(e.target.value !== password);
     setConfirmPassword(e.target.value);
   };
 
-  const countryChangeHandler = e => {
+  const countryChangeHandler = (e) => {
     setCountryHasError(e.target.value.trim().length === 0);
     setCountry(e.target.value);
   };
 
-  const formSubmitHandler = async e => {
+  const formSubmitHandler = async (e) => {
     e.preventDefault();
 
     if (firstName.trim().length === 0) {
@@ -123,19 +123,21 @@ const Signup = () => {
     try {
       setIsLoading(true);
 
-      const res = await axios.post('http://localhost:90/user/register', data);
+      const res = await axios.post("http://localhost:90/user/register", data);
 
-      localStorage.setItem('__token__', res.data.token);
+      localStorage.setItem("__token__", res.data.token);
       setToken(res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+      setUser(res.data.user);
       // setIsLoggedIn(true);
 
-      await axios.post('http://localhost:90/otp/send', null, {
+      await axios.post("http://localhost:90/otp/send", null, {
         headers: {
           Authorization: `Bearer ${res.data.token}`,
         },
       });
 
-      navigate('/otp/verify', { state: { email } });
+      navigate("/otp/verify", { state: { email } });
 
       setIsLoading(false);
     } catch (err) {
@@ -144,11 +146,11 @@ const Signup = () => {
   };
 
   const passwordVisibilityChangeHandler = () => {
-    setIsPasswordVisible(prevState => !prevState);
+    setIsPasswordVisible((prevState) => !prevState);
   };
 
   const confirmPasswordVisibilityChangeHandler = () => {
-    setIsConfirmPasswordVisible(prevState => !prevState);
+    setIsConfirmPasswordVisible((prevState) => !prevState);
   };
 
   return (
@@ -220,7 +222,7 @@ const Signup = () => {
                   <Input
                     id="password"
                     label="Password"
-                    type={isPasswordVisible ? 'text' : 'password'}
+                    type={isPasswordVisible ? "text" : "password"}
                     placeholder="Enter Password"
                     name="password"
                     onChange={passwordChangeHandler}
@@ -241,7 +243,7 @@ const Signup = () => {
                   <Input
                     id="confirmPassword"
                     label="Confirm password"
-                    type={isConfirmPasswordVisible ? 'text' : 'password'}
+                    type={isConfirmPasswordVisible ? "text" : "password"}
                     placeholder="Enter your password again"
                     name="confirmPassword"
                     onChange={confirmPasswordChangeHandler}
@@ -284,7 +286,7 @@ const Signup = () => {
 
               <div className="privacy-terms-check w-75 m-auto d-flex align-items-start mt-5">
                 <input
-                  onChange={e => {
+                  onChange={(e) => {
                     setIsPrivacyChecked(e.target.checked);
                   }}
                   type="checkbox"
@@ -299,11 +301,11 @@ const Signup = () => {
               <div className="form-action text-center d-flex align-items-center justify-content-center">
                 <Button
                   className={`btn-round btn-submit text-center d-flex align-items-center justify-content-center ${
-                    isPrivacyChecked ? '' : 'disabled'
+                    isPrivacyChecked ? "" : "disabled"
                   }`}
                   type="submit"
                 >
-                  {isLoading ? <Spinner /> : 'Create my account'}
+                  {isLoading ? <Spinner /> : "Create my account"}
                 </Button>
               </div>
             </form>

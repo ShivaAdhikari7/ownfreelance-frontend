@@ -1,21 +1,21 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from "react";
 
-import { NavLink } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 
-import { BiSearch } from 'react-icons/bi';
-import { IoMdNotificationsOutline } from 'react-icons/io';
-import { IoMdPaperPlane } from 'react-icons/io';
-import { BiUserCircle, BiLogOut } from 'react-icons/bi';
-import { MdSettings } from 'react-icons/md';
+import { BiSearch } from "react-icons/bi";
+import { IoMdNotificationsOutline } from "react-icons/io";
+import { IoMdPaperPlane } from "react-icons/io";
+import { BiUserCircle, BiLogOut } from "react-icons/bi";
+import { MdSettings } from "react-icons/md";
 
-import axios from 'axios';
+import axios from "axios";
 
-import userIcon from 'assets/images/user-icon.png';
-import Button from 'components/Button/Button';
-import Notification from 'components/Notification/Notification';
+import userIcon from "assets/images/user-icon.png";
+import Button from "components/Button/Button";
+import Notification from "components/Notification/Notification";
 
-import AuthContext from 'context/AuthContext/auth-context';
-import NotificationCounter from 'components/Notification/NotificationCounter';
+import AuthContext from "context/AuthContext/auth-context";
+import NotificationCounter from "components/Notification/NotificationCounter";
 
 const Navbar = () => {
   const { userType, isLoggedIn, token } = useContext(AuthContext);
@@ -29,7 +29,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const getProfileDetails = async () => {
-      const res = await axios.get('http://localhost:90/user/me', {
+      const res = await axios.get("http://localhost:90/user/me", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -42,21 +42,21 @@ const Navbar = () => {
   }, [token, isLoggedIn]);
 
   const userModalToggleHandler = () => {
-    setDisplayUserModal(prevState => !prevState);
+    setDisplayUserModal((prevState) => !prevState);
   };
 
   const notificationToggleHandler = () => {
-    setDisplayNotifications(prevState => !prevState);
+    setDisplayNotifications((prevState) => !prevState);
   };
 
   const handleLogout = () => {
-    localStorage.clear('__token__').clear('userType');
+    localStorage.clear("__token__").clear("userType");
   };
 
   useEffect(() => {
-    document.body.addEventListener('click', e => {
+    document.body.addEventListener("click", (e) => {
       if (
-        !e.target.closest('.nav-icon') &&
+        !e.target.closest(".nav-icon") &&
         (displayNotifications || displayUserModal)
       ) {
         setDisplayNotifications(false);
@@ -68,7 +68,7 @@ const Navbar = () => {
   useEffect(() => {
     const getNotifications = async () => {
       const res = await axios.get(
-        'http://localhost:90/proposal/all/notifications',
+        "http://localhost:90/proposal/all/notifications",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -155,9 +155,9 @@ const Navbar = () => {
                   <li>
                     <NavLink
                       className="dropdown-item text-decoration-none mb-3"
-                      to="/"
+                      to="/payment"
                     >
-                      Discover Talents
+                      Payment
                     </NavLink>
                   </li>
                   <li>
@@ -232,7 +232,7 @@ const Navbar = () => {
 
                     <div
                       className={`d-flex flex-column align-items-center user-info-box py-5 px-5 position-absolute ${
-                        displayUserModal ? '' : 'hidden'
+                        displayUserModal ? "" : "hidden"
                       }`}
                     >
                       <img
@@ -244,7 +244,7 @@ const Navbar = () => {
 
                       <div className="user-info d-flex flex-column align-items-center mb-3">
                         <span className="user-name">
-                          {profileDetail?.userId.firstName}{' '}
+                          {profileDetail?.userId.firstName}{" "}
                           {profileDetail?.userId.lastName}
                         </span>
                         <span className="user-type">{userType}</span>
@@ -262,7 +262,7 @@ const Navbar = () => {
 
                         <NavLink
                           className="d-flex align-items-center justify-content-between text-decoration-none"
-                          to={'/update/profile'}
+                          to={"/update/profile"}
                         >
                           <MdSettings />
                           Settings
@@ -276,7 +276,7 @@ const Navbar = () => {
             {!isLoggedIn && (
               <li className="nav-item mx-3">
                 <NavLink
-                  to={'/login'}
+                  to={"/login"}
                   className="nav-link nav-link-login my-2 px-3 py-3"
                 >
                   Login
@@ -287,7 +287,7 @@ const Navbar = () => {
             {!isLoggedIn && (
               <li className="nav-item">
                 <NavLink
-                  to={'/signup'}
+                  to={"/signup"}
                   className={`nav-link custom-nav-link nav-link-signup my-2 px-3 py-3`}
                 >
                   Sign Up
